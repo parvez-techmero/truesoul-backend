@@ -45,6 +45,7 @@ import { UserAnswerCreate } from "./routes/user-answer-endpoints/userAnswerCreat
 import { UserAnswerUpdate } from "./routes/user-answer-endpoints/userAnswerUpdate";
 import { UserAnswerDelete } from "./routes/user-answer-endpoints/userAnswerDelete";
 import { UserCreate } from "./routes/user-endpoints/userCreate";
+import { RelationshipCreateWithInviteCode } from "./routes/relationship-endpoints/relationshipCreateWithInviteCode";
 
 export function setUpOpenAPI(app) {
     const openapi = fromHono(app, {
@@ -69,6 +70,7 @@ export function setUpOpenAPI(app) {
     openapi.get(`/api/relationships`, RelationshipList);
     openapi.get(`/api/relationships/:id`, RelationshipGet);
     openapi.post(`/api/relationships`, RelationshipCreate);
+    openapi.post(`/api/relationships/invite`, RelationshipCreateWithInviteCode);
     openapi.put(`/api/relationships/:id`, RelationshipUpdate);
     openapi.delete(`/api/relationships/:id`, RelationshipDelete);
 

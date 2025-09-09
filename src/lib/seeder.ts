@@ -1,8 +1,59 @@
+// Utility to empty all main tables in the database
 import { db } from './database';
-import { usersTable, categoriesTable, topicsTable } from '../db/schema';
+import {
+    usersTable,
+    relationshipsTable,
+    categoriesTable,
+    topicsTable,
+    subTopicsTable,
+    questionsTable,
+    answerOptionsTable,
+    userAnswersTable,
+    quizSessionsTable,
+    quizResultsTable,
+    userProgressTable,
+    appSettingsTable,
+    deviceTokensTable
+} from '../db/schema';
+
+export async function emptyDatabase() {
+    // Order matters due to foreign key constraints
+    // await db.delete(deviceTokensTable);
+    // await db.delete(userProgressTable);
+    // await db.delete(quizResultsTable);
+    // await db.delete(quizSessionsTable);
+    // await db.delete(userAnswersTable);
+    // await db.delete(answerOptionsTable);
+    // await db.delete(questionsTable);
+    // await db.delete(subTopicsTable);
+    // await db.delete(topicsTable);
+    // await db.delete(categoriesTable);
+    // await db.delete(relationshipsTable);
+    // await db.delete(usersTable);
+    // await db.delete(appSettingsTable);
+    await db.execute(
+        `TRUNCATE TABLE 
+            device_tokens,
+            user_progress,
+            quiz_results,
+            quiz_sessions,
+            user_answers,
+            answer_options,
+            questions,
+            sub_topics,
+            topics,
+            categories,
+            relationships,
+            users,
+            app_settings
+        CASCADE;`
+    );
+    console.log('All tables emptied.');
+}
 
 async function seed() {
 
+    await emptyDatabase();
     // const userData = {
     //     uuid: "1",
     //     transactionId: "1001",
@@ -26,23 +77,39 @@ async function seed() {
     //     createdAt: new Date(),
     //     updatedAt: new Date(),
     // };
-    const userData = {
-    uuid: "1",
-    transactionId: "1001",
-    socialId: "2001",
-    name: 'Test User',
-    birthDate: new Date('1990-01-01').toISOString().slice(0, 10), // "YYYY-MM-DD"
-    lat: "12.97160000",
-    long: "77.59460000",
-    anniversary: new Date('2020-01-01').toISOString().slice(0, 10), // "YYYY-MM-DD"
-    inviteCode: 'INVITE123',
-    hideContent: false,
-    locationPermission: true,
-    isActive: true,
-    lastActiveAt: null,
-    createdAt: new Date(), // timestamp fields can stay as Date
-    updatedAt: new Date(),
-};
+    const userData = [{
+        uuid: "1",
+        transactionId: "1001",
+        socialId: "2001",
+        name: 'N',
+        birthDate: new Date('1990-01-01').toISOString().slice(0, 10), // "YYYY-MM-DD"
+        lat: "12.97160000",
+        long: "77.59460000",
+        anniversary: new Date('2020-01-01').toISOString().slice(0, 10), // "YYYY-MM-DD"
+        inviteCode: 'INVITE123',
+        hideContent: false,
+        locationPermission: true,
+        isActive: true,
+        lastActiveAt: null,
+        createdAt: new Date(), // timestamp fields can stay as Date
+        updatedAt: new Date(),
+    }, {
+        uuid: "2",
+        transactionId: "1002",
+        socialId: "2002",
+        name: 'P',
+        birthDate: new Date('1990-01-01').toISOString().slice(0, 10), // "YYYY-MM-DD"
+        lat: "22.97160000",
+        long: "87.59460000",
+        anniversary: new Date('2020-01-01').toISOString().slice(0, 10), // "YYYY-MM-DD"
+        inviteCode: 'INVITE124',
+        hideContent: false,
+        locationPermission: true,
+        isActive: true,
+        lastActiveAt: null,
+        createdAt: new Date(), // timestamp fields can stay as Date
+        updatedAt: new Date(),
+    }];
     // Seed users
     await db.insert(usersTable).values(userData);
 
