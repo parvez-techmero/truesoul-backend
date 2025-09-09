@@ -1,0 +1,31 @@
+{
+	"compilerOptions": {
+		/* Base Options: */
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"target": "es2022",
+		"verbatimModuleSyntax": false,
+		"allowJs": true,
+		"resolveJsonModule": true,
+		"moduleDetection": "force",
+		/* Strictness */
+		"noImplicitAny": false,
+		"noImplicitThis": true,
+		"strictNullChecks": false,
+		"strict": true,
+		"noUncheckedIndexedAccess": true,
+		/* Node.js Configuration (updated from Cloudflare Workers) */
+		"moduleResolution": "node",
+		"module": "commonjs",
+		"outDir": "./dist",
+		"rootDir": "./src",
+		"noEmit": false,
+		"incremental": true,
+		"lib": ["es2022"],
+		"types": [
+			"@types/node"
+		]
+	},
+	// "exclude": ["node_modules", "dist", "tests"],
+	"include": ["src/**/*"]
+}
