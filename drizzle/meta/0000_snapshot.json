@@ -1,5 +1,5 @@
 {
-  "id": "7622491a-8fa4-428e-9cd4-4a5d0f9966e5",
+  "id": "2e46e9a8-eae0-4ad9-b669-b2ed121cf344",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -192,7 +192,7 @@
         },
         "color": {
           "name": "color",
-          "type": "varchar(7)",
+          "type": "varchar(50)",
           "primaryKey": false,
           "notNull": false
         },
@@ -337,18 +337,6 @@
             "cycle": false
           }
         },
-        "categoryId": {
-          "name": "categoryId",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "topicId": {
-          "name": "topicId",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
         "subTopicId": {
           "name": "subTopicId",
           "type": "integer",
@@ -407,32 +395,6 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "questions_categoryId_categories_id_fk": {
-          "name": "questions_categoryId_categories_id_fk",
-          "tableFrom": "questions",
-          "tableTo": "categories",
-          "columnsFrom": [
-            "categoryId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "questions_topicId_topics_id_fk": {
-          "name": "questions_topicId_topics_id_fk",
-          "tableFrom": "questions",
-          "tableTo": "topics",
-          "columnsFrom": [
-            "topicId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
         "questions_subTopicId_sub_topics_id_fk": {
           "name": "questions_subTopicId_sub_topics_id_fk",
           "tableFrom": "questions",
@@ -872,6 +834,18 @@
             "cycle": false
           }
         },
+        "topicId": {
+          "name": "topicId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "categoryId": {
+          "name": "categoryId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "name": {
           "name": "name",
           "type": "varchar(255)",
@@ -892,7 +866,7 @@
         },
         "color": {
           "name": "color",
-          "type": "varchar(7)",
+          "type": "varchar(50)",
           "primaryKey": false,
           "notNull": false
         },
@@ -926,7 +900,34 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "sub_topics_topicId_topics_id_fk": {
+          "name": "sub_topics_topicId_topics_id_fk",
+          "tableFrom": "sub_topics",
+          "tableTo": "topics",
+          "columnsFrom": [
+            "topicId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "sub_topics_categoryId_categories_id_fk": {
+          "name": "sub_topics_categoryId_categories_id_fk",
+          "tableFrom": "sub_topics",
+          "tableTo": "categories",
+          "columnsFrom": [
+            "categoryId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
@@ -974,7 +975,7 @@
         },
         "color": {
           "name": "color",
-          "type": "varchar(7)",
+          "type": "varchar(50)",
           "primaryKey": false,
           "notNull": false
         },

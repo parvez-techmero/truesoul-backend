@@ -53,7 +53,7 @@ export const categoriesTable = pgTable("categories", {
   name: varchar({ length: 255 }).notNull(),
   description: text(),
   icon: varchar({ length: 100 }),
-  color: varchar({ length: 7 }), // Hex color code
+  color: varchar({ length: 50 }), // Hex color code
   sortOrder: integer().notNull().default(0),
   isActive: boolean().notNull().default(true),
   createdAt: timestamp().notNull().defaultNow(),
@@ -67,7 +67,7 @@ export const topicsTable = pgTable("topics", {
   name: varchar({ length: 255 }).notNull(),
   description: text(),
   icon: varchar({ length: 100 }),
-  color: varchar({ length: 7 }),
+  color: varchar({ length: 50 }),
   sortOrder: integer().notNull().default(0),
   isActive: boolean().notNull().default(true),
   createdAt: timestamp().notNull().defaultNow(),
@@ -77,11 +77,12 @@ export const topicsTable = pgTable("topics", {
 // Sub-topics within topics (Daily Life, Our Intimate Life, etc.)
 export const subTopicsTable = pgTable("sub_topics", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  // topicId: integer().notNull().references(() => topicsTable.id, { onDelete: 'cascade' }),
+  topicId: integer().references(() => topicsTable.id, { onDelete: 'cascade' }),
+  categoryId: integer().references(() => categoriesTable.id, { onDelete: 'cascade' }),
   name: varchar({ length: 255 }).notNull(),
   description: text(),
   icon: varchar({ length: 100 }),
-  color: varchar({ length: 7 }),
+  color: varchar({ length: 50 }),
   sortOrder: integer().notNull().default(0),
   isActive: boolean().notNull().default(true),
   createdAt: timestamp().notNull().defaultNow(),
@@ -91,8 +92,6 @@ export const subTopicsTable = pgTable("sub_topics", {
 // Questions
 export const questionsTable = pgTable("questions", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  categoryId: integer().references(() => categoriesTable.id),
-  topicId: integer().references(() => topicsTable.id),
   subTopicId: integer().references(() => subTopicsTable.id),
   questionText: text().notNull(),
   questionType: questionTypeEnum().notNull().default('yes_no'),

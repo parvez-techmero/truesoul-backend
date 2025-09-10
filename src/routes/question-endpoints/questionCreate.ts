@@ -1,7 +1,7 @@
 import { OpenAPIRoute } from "chanfana";
 import { z } from "zod";
 import { questionsTable } from '../../db/schema';
-import { questionTypeEnum } from '../../types';
+import { createQuestionSchema, questionTypeEnum } from '../../types';
 
 export class QuestionCreate extends OpenAPIRoute {
   schema = {
@@ -11,15 +11,18 @@ export class QuestionCreate extends OpenAPIRoute {
       body: {
         content: {
           "application/json": {
-            schema: z.object({
-              text: z.string(),
-              type: questionTypeEnum,
-              subTopicId: z.number(),
-              explanation: z.string().optional(),
-              difficulty: z.number().min(1).max(5).optional(),
-              sortOrder: z.number().optional(),
-              isActive: z.boolean().optional(),
-            }),
+            schema: createQuestionSchema
+            // z.object({
+            //   text: z.string(),
+            //   type: questionTypeEnum,
+            //   subTopicId: z.number(),
+            //   subTopicId: z.number(),
+            //   subTopicId: z.number(),
+            //   explanation: z.string().optional(),
+            //   difficulty: z.number().min(1).max(5).optional(),
+            //   sortOrder: z.number().optional(),
+            //   isActive: z.boolean().optional(),
+            // }),
           },
         },
       },
@@ -43,6 +46,8 @@ export class QuestionCreate extends OpenAPIRoute {
     const { body } = await this.getValidatedData<typeof this.schema>();
     const db = c.get('db');
     try {
+      console.log('Creating question with data:', body);
+      
       const question = await db.insert(questionsTable).values(body).returning();
       return c.json({ success: true, question: question[0] });
     } catch (err) {

@@ -45,7 +45,7 @@ export async function emptyDatabase() {
             categories,
             relationships,
             users,
-            app_settings
+            app_settings RESTART IDENTITY
         CASCADE;`
     );
     console.log('All tables emptied.');
@@ -111,11 +111,15 @@ async function seed() {
         updatedAt: new Date(),
     }];
     // Seed users
-    await db.insert(usersTable).values(userData);
-
+    let user = await db.insert(usersTable).values(userData).returning();
+    let payload = {
+        user1Id: user[0].id,
+        user2Id: user[1].id,
+    };
+    const relationship = await db.insert(relationshipsTable).values(payload).returning();
     // Seed categories
     await db.insert(categoriesTable).values({
-        name: 'General',
+        name: 'This or That',
         description: 'General category',
         icon: 'icon-general',
         color: '#FF0000',
@@ -127,7 +131,7 @@ async function seed() {
 
     // Seed topics
     await db.insert(topicsTable).values({
-        name: 'Introduction',
+        name: 'Intimacy',
         description: 'Intro topic',
         icon: 'icon-intro',
         color: '#00FF00',
@@ -137,6 +141,25 @@ async function seed() {
         updatedAt: new Date(),
     });
 
+        // Seed sub topics
+    await db.insert(subTopicsTable).values({
+        name: 'Get to Know',
+        topicId: 1,
+        color: '#1500ffff',
+        sortOrder: 1,
+        isActive: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    });
+
+    await db.insert(questionsTable).values({
+        // categoryId: null,
+        subTopicId: 1,
+        questionText: 'Do you prefer coffee or tea?',
+        questionType: 'yes_no',
+        difficultyLevel: 1,
+    });
+    
     console.log('Seeding complete!');
 }
 

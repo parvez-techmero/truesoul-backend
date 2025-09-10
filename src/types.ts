@@ -97,9 +97,9 @@ export const relationshipWithUsersSchema = relationshipSchema.extend({
 
 export const createCategorySchema = z.object({
   name: z.string().min(1, "Category name is required").max(255),
-  description: z.string().optional(),
-  icon: z.string().max(100).optional(),
-  color: z.string().regex(/^#[0-9A-F]{6}$/i, "Invalid hex color").optional(),
+  description: z.string().nullable().optional(),
+  icon: z.string().max(100).nullable().optional(),
+  color: z.string().regex(/^#[0-9A-F]{6}$/i, "Invalid hex color").nullable().optional(),
   sortOrder: z.number().int().min(0).default(0),
   isActive: z.boolean().default(true),
 });
@@ -185,9 +185,9 @@ export const subTopicWithProgressSchema = subTopicSchema.extend({
 // ===============================
 
 export const createQuestionSchema = z.object({
-  categoryId: idSchema.optional(),
-  topicId: idSchema.optional(),
-  subTopicId: idSchema.optional(),
+  categoryId: idSchema.nullable().optional(),
+  topicId: idSchema.nullable().optional(),
+  subTopicId: idSchema.nullable().optional(),
   questionText: z.string().min(1, "Question text is required"),
   questionType: questionTypeEnum.default('yes_no'),
   difficultyLevel: z.number().int().min(1).max(5).default(1),

@@ -28,7 +28,7 @@ CREATE TABLE "categories" (
 	"name" varchar(255) NOT NULL,
 	"description" text,
 	"icon" varchar(100),
-	"color" varchar(7),
+	"color" varchar(50),
 	"sortOrder" integer DEFAULT 0 NOT NULL,
 	"isActive" boolean DEFAULT true NOT NULL,
 	"createdAt" timestamp DEFAULT now() NOT NULL,
@@ -47,8 +47,6 @@ CREATE TABLE "device_tokens" (
 --> statement-breakpoint
 CREATE TABLE "questions" (
 	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "questions_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
-	"categoryId" integer,
-	"topicId" integer,
 	"subTopicId" integer,
 	"questionText" text NOT NULL,
 	"questionType" "question_type" DEFAULT 'yes_no' NOT NULL,
@@ -100,10 +98,12 @@ CREATE TABLE "relationships" (
 --> statement-breakpoint
 CREATE TABLE "sub_topics" (
 	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "sub_topics_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
+	"topicId" integer,
+	"categoryId" integer,
 	"name" varchar(255) NOT NULL,
 	"description" text,
 	"icon" varchar(100),
-	"color" varchar(7),
+	"color" varchar(50),
 	"sortOrder" integer DEFAULT 0 NOT NULL,
 	"isActive" boolean DEFAULT true NOT NULL,
 	"createdAt" timestamp DEFAULT now() NOT NULL,
@@ -115,7 +115,7 @@ CREATE TABLE "topics" (
 	"name" varchar(255) NOT NULL,
 	"description" text,
 	"icon" varchar(100),
-	"color" varchar(7),
+	"color" varchar(50),
 	"sortOrder" integer DEFAULT 0 NOT NULL,
 	"isActive" boolean DEFAULT true NOT NULL,
 	"createdAt" timestamp DEFAULT now() NOT NULL,
@@ -179,8 +179,6 @@ CREATE TABLE "users" (
 --> statement-breakpoint
 ALTER TABLE "answer_options" ADD CONSTRAINT "answer_options_questionId_questions_id_fk" FOREIGN KEY ("questionId") REFERENCES "public"."questions"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "device_tokens" ADD CONSTRAINT "device_tokens_userId_users_id_fk" FOREIGN KEY ("userId") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "questions" ADD CONSTRAINT "questions_categoryId_categories_id_fk" FOREIGN KEY ("categoryId") REFERENCES "public"."categories"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "questions" ADD CONSTRAINT "questions_topicId_topics_id_fk" FOREIGN KEY ("topicId") REFERENCES "public"."topics"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "questions" ADD CONSTRAINT "questions_subTopicId_sub_topics_id_fk" FOREIGN KEY ("subTopicId") REFERENCES "public"."sub_topics"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "quiz_results" ADD CONSTRAINT "quiz_results_quizSessionId_quiz_sessions_id_fk" FOREIGN KEY ("quizSessionId") REFERENCES "public"."quiz_sessions"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "quiz_results" ADD CONSTRAINT "quiz_results_questionId_questions_id_fk" FOREIGN KEY ("questionId") REFERENCES "public"."questions"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
@@ -192,6 +190,8 @@ ALTER TABLE "quiz_sessions" ADD CONSTRAINT "quiz_sessions_topicId_topics_id_fk" 
 ALTER TABLE "quiz_sessions" ADD CONSTRAINT "quiz_sessions_subTopicId_sub_topics_id_fk" FOREIGN KEY ("subTopicId") REFERENCES "public"."sub_topics"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "relationships" ADD CONSTRAINT "relationships_user1Id_users_id_fk" FOREIGN KEY ("user1Id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "relationships" ADD CONSTRAINT "relationships_user2Id_users_id_fk" FOREIGN KEY ("user2Id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "sub_topics" ADD CONSTRAINT "sub_topics_topicId_topics_id_fk" FOREIGN KEY ("topicId") REFERENCES "public"."topics"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "sub_topics" ADD CONSTRAINT "sub_topics_categoryId_categories_id_fk" FOREIGN KEY ("categoryId") REFERENCES "public"."categories"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "user_answers" ADD CONSTRAINT "user_answers_userId_users_id_fk" FOREIGN KEY ("userId") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "user_answers" ADD CONSTRAINT "user_answers_questionId_questions_id_fk" FOREIGN KEY ("questionId") REFERENCES "public"."questions"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "user_answers" ADD CONSTRAINT "user_answers_answerOptionId_answer_options_id_fk" FOREIGN KEY ("answerOptionId") REFERENCES "public"."answer_options"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint

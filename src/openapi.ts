@@ -46,6 +46,7 @@ import { UserAnswerUpdate } from "./routes/user-answer-endpoints/userAnswerUpdat
 import { UserAnswerDelete } from "./routes/user-answer-endpoints/userAnswerDelete";
 import { UserCreate } from "./routes/user-endpoints/userCreate";
 import { RelationshipCreateWithInviteCode } from "./routes/relationship-endpoints/relationshipCreateWithInviteCode";
+import { SubTopicWithQuestionsList } from "./routes/sub-topic-endpoints/subTopicWithQuestionsList";
 
 export function setUpOpenAPI(app) {
     const openapi = fromHono(app, {
@@ -90,6 +91,7 @@ export function setUpOpenAPI(app) {
 
     // SubTopic endpoints
     openapi.get(`/api/sub-topics`, SubTopicList);
+    openapi.get(`/api/sub-topics/with-questions`, SubTopicWithQuestionsList);
     openapi.get(`/api/sub-topics/:id`, SubTopicGet);
     openapi.post(`/api/sub-topics`, SubTopicCreate);
     openapi.put(`/api/sub-topics/:id`, SubTopicUpdate);

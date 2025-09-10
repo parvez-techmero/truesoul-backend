@@ -1,6 +1,7 @@
 import { OpenAPIRoute } from "chanfana";
 import { z } from "zod";
 import { categoriesTable } from '../../db/schema';
+import { createCategorySchema } from "../../types";
 
 export class CategoryCreate extends OpenAPIRoute {
   schema = {
@@ -10,14 +11,15 @@ export class CategoryCreate extends OpenAPIRoute {
       body: {
         content: {
           "application/json": {
-            schema: z.object({
-              name: z.string(),
-              description: z.string().optional(),
-              icon: z.string().optional(),
-              color: z.string().optional(),
-              sortOrder: z.number().optional(),
-              isActive: z.boolean().optional(),
-            }),
+            schema: createCategorySchema
+            // z.object({
+            //   name: z.string(),
+            //   description: z.string().optional(),
+            //   icon: z.string().optional(),
+            //   color: z.string().optional(),
+            //   sortOrder: z.number().optional(),
+            //   isActive: z.boolean().optional(),
+            // }),
           },
         },
       },
