@@ -1,6 +1,7 @@
 import { OpenAPIRoute } from "chanfana";
 import { z } from "zod";
 import { subTopicsTable } from '../../db/schema';
+import { createSubTopicSchema } from "../../types";
 
 export class SubTopicCreate extends OpenAPIRoute {
   schema = {
@@ -10,15 +11,16 @@ export class SubTopicCreate extends OpenAPIRoute {
       body: {
         content: {
           "application/json": {
-            schema: z.object({
-              name: z.string(),
-              description: z.string().optional(),
-              topicId: z.number(),
-              icon: z.string().optional(),
-              color: z.string().optional(),
-              sortOrder: z.number().optional(),
-              isActive: z.boolean().optional(),
-            }),
+            schema: createSubTopicSchema
+            // z.object({
+            //   name: z.string(),
+            //   description: z.string().optional(),
+            //   topicId: z.number(),
+            //   icon: z.string().optional(),
+            //   color: z.string().optional(),
+            //   sortOrder: z.number().optional(),
+            //   isActive: z.boolean().optional(),
+            // }),
           },
         },
       },

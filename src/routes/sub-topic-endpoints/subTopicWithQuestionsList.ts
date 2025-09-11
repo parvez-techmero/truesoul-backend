@@ -32,7 +32,6 @@ export class SubTopicWithQuestionsList extends OpenAPIRoute {
         const db = c.get('db');
         const { query } = await this.getValidatedData<typeof this.schema>();
         const { topicId, categoryId } = query;
-        console.log(topicId, categoryId, "asda");
 
         try {
             const conditions = [];
