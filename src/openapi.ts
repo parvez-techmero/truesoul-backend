@@ -1,3 +1,4 @@
+import { ResultGetByRelationshipAndSubtopic } from "./routes/result-endpoints/resultGet";
 import { fromHono } from "chanfana";
 import { UserList } from "./routes/user-endpoints/userList";
 import { UserGet } from "./routes/user-endpoints/userGet";
@@ -33,11 +34,11 @@ import { QuestionCreate } from "./routes/question-endpoints/questionCreate";
 import { QuestionUpdate } from "./routes/question-endpoints/questionUpdate";
 import { QuestionDelete } from "./routes/question-endpoints/questionDelete";
 
-import { AnswerOptionList } from "./routes/answer-option-endpoints/answerOptionList";
-import { AnswerOptionGet } from "./routes/answer-option-endpoints/answerOptionGet";
-import { AnswerOptionCreate } from "./routes/answer-option-endpoints/answerOptionCreate";
-import { AnswerOptionUpdate } from "./routes/answer-option-endpoints/answerOptionUpdate";
-import { AnswerOptionDelete } from "./routes/answer-option-endpoints/answerOptionDelete";
+// import { AnswerOptionList } from "./routes/answer-option-endpoints/answerOptionList";
+// import { AnswerOptionGet } from "./routes/answer-option-endpoints/answerOptionGet";
+// import { AnswerOptionCreate } from "./routes/answer-option-endpoints/answerOptionCreate";
+// import { AnswerOptionUpdate } from "./routes/answer-option-endpoints/answerOptionUpdate";
+// import { AnswerOptionDelete } from "./routes/answer-option-endpoints/answerOptionDelete";
 
 import { UserAnswerList } from "./routes/user-answer-endpoints/userAnswerList";
 import { UserAnswerGet } from "./routes/user-answer-endpoints/userAnswerGet";
@@ -105,11 +106,11 @@ export function setUpOpenAPI(app) {
     openapi.delete(`/api/questions/:id`, QuestionDelete);
 
     // Answer Option endpoints
-    openapi.get(`/api/answer-options`, AnswerOptionList);
-    openapi.get(`/api/answer-options/:id`, AnswerOptionGet);
-    openapi.post(`/api/answer-options`, AnswerOptionCreate);
-    openapi.put(`/api/answer-options/:id`, AnswerOptionUpdate);
-    openapi.delete(`/api/answer-options/:id`, AnswerOptionDelete);
+    // openapi.get(`/api/answer-options`, AnswerOptionList);
+    // openapi.get(`/api/answer-options/:id`, AnswerOptionGet);
+    // openapi.post(`/api/answer-options`, AnswerOptionCreate);
+    // openapi.put(`/api/answer-options/:id`, AnswerOptionUpdate);
+    // openapi.delete(`/api/answer-options/:id`, AnswerOptionDelete);
 
     // User Answer endpoints
     openapi.get(`/api/user-answers`, UserAnswerList);
@@ -117,6 +118,10 @@ export function setUpOpenAPI(app) {
     openapi.post(`/api/user-answers`, UserAnswerCreate);
     openapi.put(`/api/user-answers/:id`, UserAnswerUpdate);
     openapi.delete(`/api/user-answers/:id`, UserAnswerDelete);
+
+    // Result endpoints
+    openapi.get(`/api/results/by-relationship-and-subtopic`, ResultGetByRelationshipAndSubtopic);
+
 
     return openapi;
 }

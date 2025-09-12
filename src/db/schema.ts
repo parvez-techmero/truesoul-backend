@@ -7,8 +7,8 @@ export const relationshipStatusEnum = pgEnum('relationship_status', [
 ]);
 export const languageEnum = pgEnum('language', ['en', 'es', 'fr', 'de', 'it', 'pt', 'zh', 'ja', 'ko']);
 export const distanceUnitEnum = pgEnum('distance_unit', ['km', 'miles']);
-export const questionTypeEnum = pgEnum('question_type', ['yes_no', 'multiple_choice', 'scale', 'text']);
-export const answerStatusEnum = pgEnum('answer_status', ['correct', 'incorrect', 'skipped']);
+export const questionTypeEnum = pgEnum('question_type', ['yes_no', 'multiple_choice', 'photo', 'text']);
+export const answerStatusEnum = pgEnum('answer_status', ['complete', 'skipped']);
 
 export const usersTable = pgTable("users", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
@@ -95,7 +95,8 @@ export const questionsTable = pgTable("questions", {
   subTopicId: integer().references(() => subTopicsTable.id),
   questionText: text().notNull(),
   questionType: questionTypeEnum().notNull().default('yes_no'),
-  difficultyLevel: integer().notNull().default(1), // 1-5 scale
+  optionText: varchar({ length: 500 }),
+  optionImg: text(),
   sortOrder: integer().notNull().default(0),
   isActive: boolean().notNull().default(true),
   createdAt: timestamp().notNull().defaultNow(),
@@ -103,59 +104,26 @@ export const questionsTable = pgTable("questions", {
 });
 
 // Answer options for multiple choice questions
-export const answerOptionsTable = pgTable("answer_options", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  questionId: integer().notNull().references(() => questionsTable.id, { onDelete: 'cascade' }),
-  optionText: varchar({ length: 500 }).notNull(),
-  sortOrder: integer().notNull().default(0),
-  isCorrect: boolean().notNull().default(false),
-  createdAt: timestamp().notNull().defaultNow(),
-});
+// export const answerOptionsTable = pgTable("answer_options", {
+//   id: integer().primaryKey().generatedAlwaysAsIdentity(),
+//   questionId: integer().notNull().references(() => questionsTable.id, { onDelete: 'cascade' }),
+//   optionText: varchar({ length: 500 }),
+//   optionImg: text(), // URL to image if applicable
+//   sortOrder: integer().notNull().default(0),
+//   isCorrect: boolean().notNull().default(false),
+//   createdAt: timestamp().notNull().defaultNow(),
+// });
 
 // User answers to questions
 export const userAnswersTable = pgTable("user_answers", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   userId: integer().notNull().references(() => usersTable.id, { onDelete: 'cascade' }),
   questionId: integer().notNull().references(() => questionsTable.id, { onDelete: 'cascade' }),
-  answerOptionId: integer().references(() => answerOptionsTable.id),
   answerText: text(), // For text-based answers
-  answerValue: integer(), // For scale answers (1-10)
-  isCorrect: boolean(),
-  answerStatus: answerStatusEnum().notNull().default('correct'),
-  timeSpentSeconds: integer(),
+  answerStatus: answerStatusEnum().notNull().default('complete'),
   answeredAt: timestamp().notNull().defaultNow(),
 });
 
-// Quiz sessions (when users take quizzes together)
-export const quizSessionsTable = pgTable("quiz_sessions", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  relationshipId: integer().notNull().references(() => relationshipsTable.id, { onDelete: 'cascade' }),
-  categoryId: integer().references(() => categoriesTable.id),
-  topicId: integer().references(() => topicsTable.id),
-  subTopicId: integer().references(() => subTopicsTable.id),
-  totalQuestions: integer().notNull().default(0),
-  completedQuestions: integer().notNull().default(0),
-  user1Score: integer().notNull().default(0),
-  user2Score: integer().notNull().default(0),
-  status: varchar({ length: 50 }).notNull().default('active'), // active, completed, abandoned
-  startedAt: timestamp().notNull().defaultNow(),
-  completedAt: timestamp(),
-  createdAt: timestamp().notNull().defaultNow(),
-  updatedAt: timestamp().notNull().defaultNow(),
-});
-
-// Individual question results within quiz sessions
-export const quizResultsTable = pgTable("quiz_results", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  quizSessionId: integer().notNull().references(() => quizSessionsTable.id, { onDelete: 'cascade' }),
-  questionId: integer().notNull().references(() => questionsTable.id),
-  user1AnswerId: integer().references(() => userAnswersTable.id),
-  user2AnswerId: integer().references(() => userAnswersTable.id),
-  user1Correct: boolean(),
-  user2Correct: boolean(),
-  bothCorrect: boolean().notNull().default(false),
-  createdAt: timestamp().notNull().defaultNow(),
-});
 
 // User progress tracking
 export const userProgressTable = pgTable("user_progress", {

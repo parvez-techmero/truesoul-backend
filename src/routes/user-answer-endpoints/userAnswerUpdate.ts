@@ -15,11 +15,8 @@ export class UserAnswerUpdate extends OpenAPIRoute {
             schema: z.object({
               userId: z.number().optional(),
               questionId: z.number().optional(),
-              answerOptionId: z.number().optional(),
               answerText: z.string().optional(),
-              status: answerStatusEnum.optional(),
-              timeTaken: z.number().optional(),
-              isSkipped: z.boolean().optional(),
+              answerStatus: answerStatusEnum.optional(),
             }),
           },
         },

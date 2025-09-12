@@ -7,10 +7,7 @@ import {
     topicsTable,
     subTopicsTable,
     questionsTable,
-    answerOptionsTable,
     userAnswersTable,
-    quizSessionsTable,
-    quizResultsTable,
     userProgressTable,
     appSettingsTable,
     deviceTokensTable
@@ -20,10 +17,7 @@ export async function emptyDatabase() {
     // Order matters due to foreign key constraints
     // await db.delete(deviceTokensTable);
     // await db.delete(userProgressTable);
-    // await db.delete(quizResultsTable);
-    // await db.delete(quizSessionsTable);
     // await db.delete(userAnswersTable);
-    // await db.delete(answerOptionsTable);
     // await db.delete(questionsTable);
     // await db.delete(subTopicsTable);
     // await db.delete(topicsTable);
@@ -35,10 +29,7 @@ export async function emptyDatabase() {
         `TRUNCATE TABLE 
             device_tokens,
             user_progress,
-            quiz_results,
-            quiz_sessions,
             user_answers,
-            answer_options,
             questions,
             sub_topics,
             topics,
@@ -152,13 +143,18 @@ async function seed() {
         updatedAt: new Date(),
     });
 
-    await db.insert(questionsTable).values({
+    await db.insert(questionsTable).values(
+        [{
         // categoryId: null,
         subTopicId: 1,
         questionText: 'Do you prefer coffee or tea?',
         questionType: 'yes_no',
-        difficultyLevel: 1,
-    });
+    },{
+        subTopicId: 1,
+        questionText: 'What is your favorite season?',
+        questionType: 'multiple_choice',
+        optionText: '[Spring, Summer, Autumn, Winter]',
+    }]);
     
     console.log('Seeding complete!');
 }

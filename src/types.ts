@@ -14,7 +14,7 @@ export const relationshipStatusEnum = z.enum([
 export const languageEnum = z.enum(['en', 'es', 'fr', 'de', 'it', 'pt', 'zh', 'ja', 'ko']);
 export const distanceUnitEnum = z.enum(['km', 'miles']);
 export const questionTypeEnum = z.enum(['yes_no', 'multiple_choice', 'scale', 'text']);
-export const answerStatusEnum = z.enum(['correct', 'incorrect', 'skipped']);
+export const answerStatusEnum = z.enum(['complete', 'skipped']);
 export const quizStatusEnum = z.enum(['active', 'completed', 'abandoned']);
 export const relationshipConnectionStatusEnum = z.enum(['pending', 'accepted', 'blocked', 'declined']);
 
@@ -40,7 +40,7 @@ export const createUserSchema = z.object({
   locationPermission: z.boolean().default(false),
   mood: z.string().max(100).optional(),
   inviteCode: z.string(),
-    isActive: z.boolean().default(true),
+  isActive: z.boolean().default(true),
 });
 
 export const updateUserSchema = createUserSchema.partial();
@@ -123,7 +123,7 @@ export const categoryWithProgressSchema = categorySchema.extend({
 // ===============================
 
 export const createTopicSchema = z.object({
-//   categoryId: idSchema,
+  //   categoryId: idSchema,
   name: z.string().min(1, "Topic name is required").max(255),
   description: z.string().optional(),
   icon: z.string().max(100).optional(),
@@ -156,7 +156,7 @@ export const topicWithCategorySchema = topicSchema.extend({
 // ===============================
 
 export const createSubTopicSchema = z.object({
-//   topicId: idSchema,
+  //   topicId: idSchema,
   categoryId: idSchema.nullable().optional(),
   topicId: idSchema.nullable().optional(),
   name: z.string().min(1, "Sub-topic name is required").max(255),
@@ -192,7 +192,8 @@ export const createQuestionSchema = z.object({
   subTopicId: idSchema.nullable().optional(),
   questionText: z.string().min(1, "Question text is required"),
   questionType: questionTypeEnum.default('yes_no'),
-  difficultyLevel: z.number().int().min(1).max(5).default(1),
+  optionText: z.string().max(500).nullable().optional(),
+  optionImg: z.string().nullable().optional(),
   sortOrder: z.number().int().min(0).default(0),
   isActive: z.boolean().default(true),
 });
@@ -205,25 +206,27 @@ export const questionSchema = createQuestionSchema.extend({
   updatedAt: timestampSchema,
 });
 
-export const answerOptionSchema = z.object({
-  id: idSchema,
-  questionId: idSchema,
-  optionText: z.string().max(500),
-  sortOrder: z.number().int().min(0).default(0),
-  isCorrect: z.boolean().default(false),
-  createdAt: timestampSchema,
-});
+// export const answerOptionSchema = z.object({
+//   id: idSchema,
+//   questionId: idSchema,
+//   optionText: z.string().max(500).nullable().optional(),
+//   optionImg: z.string().nullable().optional(), // URL to image if applicable
+//   sortOrder: z.number().int().min(0).default(0),
+//   isCorrect: z.boolean().default(false),
+//   createdAt: timestampSchema,
+// });
 
-export const createAnswerOptionSchema = z.object({
-  questionId: idSchema,
-  optionText: z.string().min(1, "Option text is required").max(500),
-  sortOrder: z.number().int().min(0).default(0),
-  isCorrect: z.boolean().default(false),
-});
+// export const createAnswerOptionSchema = z.object({
+//   questionId: idSchema,
+//   optionText: z.string().min(1, "Option text is required").max(500).nullable().optional(),
+//   optionImg: z.string().nullable().optional(),
+//   sortOrder: z.number().int().min(0).default(0),
+//   isCorrect: z.boolean().default(false),
+// });
 
-export const questionWithOptionsSchema = questionSchema.extend({
-  answerOptions: z.array(answerOptionSchema).optional(),
-});
+// export const questionWithOptionsSchema = questionSchema.extend({
+//   answerOptions: z.array(answerOptionSchema).optional(),
+// });
 
 // ===============================
 // QUIZ SESSION SCHEMAS
@@ -272,24 +275,21 @@ export const createUserAnswerSchema = z.object({
   userId: idSchema,
   questionId: idSchema,
   quizSessionId: idSchema.optional(),
-  answerOptionId: idSchema.optional(),
   answerText: z.string().optional(),
-  answerValue: z.number().int().min(1).max(10).optional(), // For scale answers
   timeSpentSeconds: z.number().int().min(0).optional(),
 });
 
 export const userAnswerSchema = createUserAnswerSchema.extend({
   id: idSchema,
-  isCorrect: z.boolean().optional(),
-  answerStatus: answerStatusEnum.default('correct'),
+  answerStatus: answerStatusEnum.default('complete'),
   answeredAt: timestampSchema,
 });
 
-export const userAnswerWithDetailsSchema = userAnswerSchema.extend({
-  user: userSchema.optional(),
-  question: questionWithOptionsSchema.optional(),
-  answerOption: answerOptionSchema.optional(),
-});
+// export const userAnswerWithDetailsSchema = userAnswerSchema.extend({
+//   user: userSchema.optional(),
+//   question: questionWithOptionsSchema.optional(),
+//   answerOption: answerOptionSchema.optional(),
+// });
 
 // ===============================
 // QUIZ RESULT SCHEMAS
@@ -308,7 +308,7 @@ export const quizResultSchema = z.object({
 });
 
 export const quizResultWithDetailsSchema = quizResultSchema.extend({
-  question: questionWithOptionsSchema.optional(),
+  // question: questionWithOptionsSchema.optional(),
   user1Answer: userAnswerSchema.optional(),
   user2Answer: userAnswerSchema.optional(),
 });
@@ -372,7 +372,6 @@ export const questionQuerySchema = z.object({
   topicId: idSchema.optional(),
   subTopicId: idSchema.optional(),
   questionType: questionTypeEnum.optional(),
-  difficultyLevel: z.coerce.number().int().min(1).max(5).optional(),
   isActive: z.coerce.boolean().optional(),
   userId: idSchema.optional(), // To exclude answered questions
   randomize: z.coerce.boolean().default(false),
@@ -391,7 +390,6 @@ export const userAnswerQuerySchema = z.object({
   userId: idSchema.optional(),
   questionId: idSchema.optional(),
   quizSessionId: idSchema.optional(),
-  isCorrect: z.coerce.boolean().optional(),
   startDate: z.coerce.date().optional(),
   endDate: z.coerce.date().optional(),
 }).merge(paginationSchema);
@@ -500,7 +498,7 @@ export const createDeviceTokenSchema = z.object({
 export const validateId = (id: unknown) => idSchema.parse(id);
 export const validateUuid = (uuid: unknown) => uuidSchema.parse(uuid);
 export const validateEmail = (email: string) => z.string().email().parse(email);
-export const validateHexColor = (color: string) => 
+export const validateHexColor = (color: string) =>
   z.string().regex(/^#[0-9A-F]{6}$/i, "Invalid hex color format").parse(color);
 export const validateCoordinates = (lat: number, long: number) => {
   z.number().min(-90).max(90).parse(lat);
@@ -547,9 +545,9 @@ export type SubTopicWithProgress = z.infer<typeof subTopicWithProgressSchema>;
 export type Question = z.infer<typeof questionSchema>;
 export type CreateQuestion = z.infer<typeof createQuestionSchema>;
 export type UpdateQuestion = z.infer<typeof updateQuestionSchema>;
-export type QuestionWithOptions = z.infer<typeof questionWithOptionsSchema>;
-export type AnswerOption = z.infer<typeof answerOptionSchema>;
-export type CreateAnswerOption = z.infer<typeof createAnswerOptionSchema>;
+// export type QuestionWithOptions = z.infer<typeof questionWithOptionsSchema>;
+// export type AnswerOption = z.infer<typeof answerOptionSchema>;
+// export type CreateAnswerOption = z.infer<typeof createAnswerOptionSchema>;
 
 // Quiz session types
 export type QuizSession = z.infer<typeof quizSessionSchema>;
@@ -560,7 +558,7 @@ export type QuizSessionWithDetails = z.infer<typeof quizSessionWithDetailsSchema
 // Answer types
 export type UserAnswer = z.infer<typeof userAnswerSchema>;
 export type CreateUserAnswer = z.infer<typeof createUserAnswerSchema>;
-export type UserAnswerWithDetails = z.infer<typeof userAnswerWithDetailsSchema>;
+// export type UserAnswerWithDetails = z.infer<typeof userAnswerWithDetailsSchema>;
 
 // Quiz result types
 export type QuizResult = z.infer<typeof quizResultSchema>;
