@@ -8,7 +8,6 @@ import {
     subTopicsTable,
     questionsTable,
     userAnswersTable,
-    userProgressTable,
     appSettingsTable,
     deviceTokensTable
 } from '../db/schema';
@@ -16,7 +15,6 @@ import {
 export async function emptyDatabase() {
     // Order matters due to foreign key constraints
     // await db.delete(deviceTokensTable);
-    // await db.delete(userProgressTable);
     // await db.delete(userAnswersTable);
     // await db.delete(questionsTable);
     // await db.delete(subTopicsTable);
@@ -28,7 +26,6 @@ export async function emptyDatabase() {
     await db.execute(
         `TRUNCATE TABLE 
             device_tokens,
-            user_progress,
             user_answers,
             questions,
             sub_topics,

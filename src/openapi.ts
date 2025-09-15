@@ -48,6 +48,8 @@ import { UserAnswerDelete } from "./routes/user-answer-endpoints/userAnswerDelet
 import { UserCreate } from "./routes/user-endpoints/userCreate";
 import { RelationshipCreateWithInviteCode } from "./routes/relationship-endpoints/relationshipCreateWithInviteCode";
 import { SubTopicWithQuestionsList } from "./routes/sub-topic-endpoints/subTopicWithQuestionsList";
+import { UserProgressBySubtopic } from "./routes/user-progress/userProgressBySubtopic";
+import { UserProgressByTopic, UserProgressByCategory } from "./routes/user-progress/userProgressByTopicAndCategory";
 
 export function setUpOpenAPI(app) {
     const openapi = fromHono(app, {
@@ -98,6 +100,11 @@ export function setUpOpenAPI(app) {
     openapi.put(`/api/sub-topics/:id`, SubTopicUpdate);
     openapi.delete(`/api/sub-topics/:id`, SubTopicDelete);
 
+    // User Progress endpoints
+    openapi.get(`/api/user-progress/by-subtopic`, UserProgressBySubtopic);
+    openapi.get(`/api/user-progress/by-topic`, UserProgressByTopic);
+    openapi.get(`/api/user-progress/by-category`, UserProgressByCategory);
+
     // Question endpoints
     openapi.get(`/api/questions`, QuestionList);
     openapi.get(`/api/questions/:id`, QuestionGet);
@@ -105,12 +112,6 @@ export function setUpOpenAPI(app) {
     openapi.put(`/api/questions/:id`, QuestionUpdate);
     openapi.delete(`/api/questions/:id`, QuestionDelete);
 
-    // Answer Option endpoints
-    // openapi.get(`/api/answer-options`, AnswerOptionList);
-    // openapi.get(`/api/answer-options/:id`, AnswerOptionGet);
-    // openapi.post(`/api/answer-options`, AnswerOptionCreate);
-    // openapi.put(`/api/answer-options/:id`, AnswerOptionUpdate);
-    // openapi.delete(`/api/answer-options/:id`, AnswerOptionDelete);
 
     // User Answer endpoints
     openapi.get(`/api/user-answers`, UserAnswerList);

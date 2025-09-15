@@ -12,8 +12,7 @@ export class RelationshipCreate extends OpenAPIRoute {
           "application/json": {
             schema: z.object({
               user1Id: Num(),
-              user2Id: Num(),
-              status: z.string().default('pending'),
+              user2Id: Num()
             }),
           },
         },

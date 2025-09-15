@@ -35,13 +35,11 @@ export const usersTable = pgTable("users", {
   updatedAt: timestamp().notNull().defaultNow(),
 });
 
-
 // Relationships between users (couples)
 export const relationshipsTable = pgTable("relationships", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   user1Id: integer().notNull().references(() => usersTable.id, { onDelete: 'cascade' }),
   user2Id: integer().notNull().references(() => usersTable.id, { onDelete: 'cascade' }),
-  status: varchar({ length: 50 }).notNull().default('pending'), // pending, accepted, blocked
   startedAt: timestamp(),
   createdAt: timestamp().notNull().defaultNow(),
   updatedAt: timestamp().notNull().defaultNow(),
@@ -124,23 +122,6 @@ export const userAnswersTable = pgTable("user_answers", {
   answeredAt: timestamp().notNull().defaultNow(),
 });
 
-
-// User progress tracking
-export const userProgressTable = pgTable("user_progress", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  userId: integer().notNull().references(() => usersTable.id, { onDelete: 'cascade' }),
-  categoryId: integer().references(() => categoriesTable.id),
-  topicId: integer().references(() => topicsTable.id),
-  subTopicId: integer().references(() => subTopicsTable.id),
-  totalQuestions: integer().notNull().default(0),
-  answeredQuestions: integer().notNull().default(0),
-  correctAnswers: integer().notNull().default(0),
-  completionPercentage: decimal({ precision: 5, scale: 2 }).notNull().default('0.00'),
-  lastAnsweredAt: timestamp(),
-  createdAt: timestamp().notNull().defaultNow(),
-  updatedAt: timestamp().notNull().defaultNow(),
-});
-
 // App settings/configuration
 export const appSettingsTable = pgTable("app_settings", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
@@ -161,7 +142,6 @@ export const deviceTokensTable = pgTable("device_tokens", {
   createdAt: timestamp().notNull().defaultNow(),
   updatedAt: timestamp().notNull().defaultNow(),
 });
-
 
 // export type Task = typeof tasks.$inferSelect;
 // export type NewTask = typeof tasks.$inferInsert;

@@ -16,7 +16,7 @@ export const distanceUnitEnum = z.enum(['km', 'miles']);
 export const questionTypeEnum = z.enum(['yes_no', 'multiple_choice', 'scale', 'text']);
 export const answerStatusEnum = z.enum(['complete', 'skipped']);
 export const quizStatusEnum = z.enum(['active', 'completed', 'abandoned']);
-export const relationshipConnectionStatusEnum = z.enum(['pending', 'accepted', 'blocked', 'declined']);
+// export const relationshipConnectionStatusEnum = z.enum(['pending', 'accepted', 'blocked', 'declined']);
 
 // ===============================
 // USER SCHEMAS
@@ -72,15 +72,14 @@ export const createRelationshipSchema = z.object({
   inviteCode: z.string().min(1, "Invite code is required"),
 });
 
-export const updateRelationshipSchema = z.object({
-  status: relationshipConnectionStatusEnum,
-});
+// export const updateRelationshipSchema = z.object({
+//   status: relationshipConnectionStatusEnum,
+// });
 
 export const relationshipSchema = z.object({
   id: idSchema,
   user1Id: idSchema,
   user2Id: idSchema,
-  status: relationshipConnectionStatusEnum.default('pending'),
   startedAt: timestampSchema.optional(),
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
@@ -519,7 +518,7 @@ export type UserAuthResponse = z.infer<typeof userAuthResponseSchema>;
 // Relationship types
 export type Relationship = z.infer<typeof relationshipSchema>;
 export type CreateRelationship = z.infer<typeof createRelationshipSchema>;
-export type UpdateRelationship = z.infer<typeof updateRelationshipSchema>;
+// export type UpdateRelationship = z.infer<typeof updateRelationshipSchema>;
 export type RelationshipWithUsers = z.infer<typeof relationshipWithUsersSchema>;
 
 // Category types
