@@ -36,6 +36,29 @@ CREATE TABLE "device_tokens" (
 	"updatedAt" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
+CREATE TABLE "journal_comments" (
+	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "journal_comments_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
+	"journalId" integer NOT NULL,
+	"userId" integer NOT NULL,
+	"comment" text NOT NULL,
+	"createdAt" timestamp DEFAULT now() NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE "journal" (
+	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "journal_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
+	"relationshipId" integer NOT NULL,
+	"type" varchar(20) NOT NULL,
+	"title" text,
+	"colorCode" varchar(50),
+	"dateTime" timestamp DEFAULT now() NOT NULL,
+	"lat" numeric(10, 8),
+	"long" numeric(11, 8),
+	"images" text,
+	"description" text,
+	"createdAt" timestamp DEFAULT now() NOT NULL,
+	"updatedAt" timestamp DEFAULT now() NOT NULL
+);
+--> statement-breakpoint
 CREATE TABLE "questions" (
 	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "questions_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
 	"subTopicId" integer,
@@ -121,6 +144,9 @@ CREATE TABLE "users" (
 );
 --> statement-breakpoint
 ALTER TABLE "device_tokens" ADD CONSTRAINT "device_tokens_userId_users_id_fk" FOREIGN KEY ("userId") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "journal_comments" ADD CONSTRAINT "journal_comments_journalId_journal_id_fk" FOREIGN KEY ("journalId") REFERENCES "public"."journal"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "journal_comments" ADD CONSTRAINT "journal_comments_userId_users_id_fk" FOREIGN KEY ("userId") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "journal" ADD CONSTRAINT "journal_relationshipId_relationships_id_fk" FOREIGN KEY ("relationshipId") REFERENCES "public"."relationships"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "questions" ADD CONSTRAINT "questions_subTopicId_sub_topics_id_fk" FOREIGN KEY ("subTopicId") REFERENCES "public"."sub_topics"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "relationships" ADD CONSTRAINT "relationships_user1Id_users_id_fk" FOREIGN KEY ("user1Id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "relationships" ADD CONSTRAINT "relationships_user2Id_users_id_fk" FOREIGN KEY ("user2Id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint

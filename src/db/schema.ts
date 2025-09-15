@@ -1,3 +1,4 @@
+import { desc } from 'drizzle-orm';
 import { pgTable, integer, varchar, text, boolean, timestamp, decimal, uuid, date, pgEnum } from 'drizzle-orm/pg-core';
 
 // Enums for better data consistency
@@ -120,6 +121,31 @@ export const userAnswersTable = pgTable("user_answers", {
   answerText: text(), // For text-based answers
   answerStatus: answerStatusEnum().notNull().default('complete'),
   answeredAt: timestamp().notNull().defaultNow(),
+});
+
+// Journal entries for couples
+export const journalTable = pgTable("journal", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  relationshipId: integer().notNull().references(() => relationshipsTable.id, { onDelete: 'cascade' }),
+  type: varchar({ length: 20 }).notNull(), // "memory" or "special_day"
+  title: text(),
+  colorCode: varchar({ length: 50 }), // Hex color code
+  dateTime: timestamp().notNull().defaultNow(),
+  lat: decimal({ precision: 10, scale: 8 }),
+  long: decimal({ precision: 11, scale: 8 }),
+  images: text(), // Comma-separated URLs
+  description: text(),
+  createdAt: timestamp().notNull().defaultNow(),
+  updatedAt: timestamp().notNull().defaultNow(),
+});
+
+// Comments for journal entries (up to 5 per entry, scalable)
+export const journalCommentsTable = pgTable("journal_comments", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  journalId: integer().notNull().references(() => journalTable.id, { onDelete: 'cascade' }),
+  userId: integer().notNull().references(() => usersTable.id, { onDelete: 'cascade' }),
+  comment: text().notNull(),
+  createdAt: timestamp().notNull().defaultNow(),
 });
 
 // App settings/configuration

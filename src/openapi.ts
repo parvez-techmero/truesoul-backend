@@ -1,4 +1,10 @@
 import { ResultGetByRelationshipAndSubtopic } from "./routes/result-endpoints/resultGet";
+import { JournalCreate } from "./routes/journal-endpoints/journalCreate";
+import { JournalGet } from "./routes/journal-endpoints/journalGet";
+import { JournalList } from "./routes/journal-endpoints/journalList";
+import { JournalUpdate } from "./routes/journal-endpoints/journalUpdate";
+import { JournalDelete } from "./routes/journal-endpoints/journalDelete";
+import { JournalAll } from "./routes/journal-endpoints/journalAll";
 import { fromHono } from "chanfana";
 import { UserList } from "./routes/user-endpoints/userList";
 import { UserGet } from "./routes/user-endpoints/userGet";
@@ -120,9 +126,16 @@ export function setUpOpenAPI(app) {
     openapi.put(`/api/user-answers/:id`, UserAnswerUpdate);
     openapi.delete(`/api/user-answers/:id`, UserAnswerDelete);
 
+    // Journal endpoints
+    openapi.post(`/api/journals`, JournalCreate);
+    openapi.get(`/api/journals/:id`, JournalGet);
+    openapi.get(`/api/journals`, JournalList);
+    openapi.get(`/api/journals/all`, JournalAll); // All journals datewise
+    openapi.put(`/api/journals/:id`, JournalUpdate);
+    openapi.delete(`/api/journals/:id`, JournalDelete);
+
     // Result endpoints
     openapi.get(`/api/results/by-relationship-and-subtopic`, ResultGetByRelationshipAndSubtopic);
-
 
     return openapi;
 }
