@@ -105,17 +105,82 @@ async function seed() {
         user2Id: user[1].id,
     };
     const relationship = await db.insert(relationshipsTable).values(payload).returning();
-    // Seed categories
-    await db.insert(categoriesTable).values({
-        name: 'This or That',
-        description: 'General category',
-        icon: 'icon-general',
-        color: '#FF0000',
-        sortOrder: 1,
-        isActive: true,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-    });
+    
+    // Seed categories based on data.csv
+    const categoriesData = [
+        {
+            name: 'Never Have I Ever',
+            description: '',
+            icon: '',
+            color: '',
+            sortOrder: 1,
+            isActive: true,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        },
+        {
+            name: 'This or That',
+            description: '',
+            icon: '',
+            color: '',
+            sortOrder: 2,
+            isActive: true,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        },
+        {
+            name: 'Who Is More Likely To',
+            description: '',
+            icon: '',
+            color: '',
+            sortOrder: 3,
+            isActive: true,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        },
+        {
+            name: 'Would You Rather',
+            description: '',
+            icon: '',
+            color: '',
+            sortOrder: 4,
+            isActive: true,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        },
+        {
+            name: 'Deep Conversations',
+            description: '',
+            icon: '',
+            color: '',
+            sortOrder: 5,
+            isActive: true,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        },
+        {
+            name: 'Discuss Before',
+            description: '',
+            icon: '',
+            color: '',
+            sortOrder: 6,
+            isActive: true,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        },
+        {
+            name: 'Answer With photo',
+            description: '',
+            icon: '',
+            color: '',
+            sortOrder: 7,
+            isActive: true,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        }
+    ];
+
+    await db.insert(categoriesTable).values(categoriesData);
 
     // Seed topics
     await db.insert(topicsTable).values({
