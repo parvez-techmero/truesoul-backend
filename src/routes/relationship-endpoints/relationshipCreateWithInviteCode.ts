@@ -27,7 +27,7 @@ export class RelationshipCreateWithInviteCode extends OpenAPIRoute {
 					"application/json": {
 						schema: z.object({
 							success: z.boolean(),
-							relationship: z.any(),
+							data: z.any(),
 						}),
 					},
 				},
@@ -52,6 +52,7 @@ export class RelationshipCreateWithInviteCode extends OpenAPIRoute {
 		try {
 			// Find user2 by inviteCode
 			const [user2] = await db.select().from(usersTable).where(eq(usersTable.inviteCode, body.inviteCode));
+			const [user1] = await db.select().from(usersTable).where(eq(usersTable.id, body.user1Id));
             
 			if (!user2) {
                 return c.json({ success: false, message: 'User with invite code not found' }, 404);
@@ -61,9 +62,9 @@ export class RelationshipCreateWithInviteCode extends OpenAPIRoute {
 				user2Id: user2.id,
 				// status: body.status,
 			};
-            console.log(relationshipData,"aasd");
-			const relationship = await db.insert(relationshipsTable).values(relationshipData).returning();
-			return c.json({ success: true, relationship: relationship[0] });
+            // console.log(relationshipData,"aasd");
+			const [relationship] = await db.insert(relationshipsTable).values(relationshipData).returning();
+			return c.json({ success: true, data: { ...relationship, user1, user2 } });
 		} catch (err) {
 			return c.json({ error: 'Failed to create relationship', detail: err instanceof Error ? err.message : String(err) }, 500);
 		}

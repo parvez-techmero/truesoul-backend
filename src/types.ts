@@ -24,26 +24,47 @@ export const quizStatusEnum = z.enum(['active', 'completed', 'abandoned']);
 
 export const createUserSchema = z.object({
   uuid: z.string(),
+  // transactionId: z.string(),
+  socialId: z.string().nullable().optional(),
+  // name: z.string().min(1, "Name is required").max(255),
+  // gender: genderEnum.optional(),
+  // birthDate: z.string().transform((str) => new Date(str)).optional(),
+  // lat: z.number().min(-90).max(90).optional(),
+  // long: z.number().min(-180).max(180).optional(),
+  // anniversary: z.string().transform((str) => new Date(str)).optional(),
+  // relationshipStatus: relationshipStatusEnum.optional(),
+  // expectations: z.string().optional(),
+  // lang: languageEnum.default('en'),
+  // distanceUnit: distanceUnitEnum.default('km'),
+  // hideContent: z.boolean().default(false),
+  // locationPermission: z.boolean().default(false),
+  // mood: z.string().max(100).optional(),
+  // inviteCode: z.string(),
+  // isActive: z.boolean().default(true),
+});
+
+// export const updateUserSchema = createUserSchema.partial();
+export const updateUserSchema = z.object({
+  uuid: z.string(),
   transactionId: z.string(),
-  socialId: z.string(),
+  socialId: z.string().nullable().optional(),
   name: z.string().min(1, "Name is required").max(255),
   gender: genderEnum.optional(),
   birthDate: z.string().transform((str) => new Date(str)).optional(),
   lat: z.number().min(-90).max(90).optional(),
   long: z.number().min(-180).max(180).optional(),
   anniversary: z.string().transform((str) => new Date(str)).optional(),
-  relationshipStatus: relationshipStatusEnum.optional(),
-  expectations: z.string().optional(),
+  // relationshipStatus: relationshipStatusEnum.optional(),
+  relationshipStatus: z.string().nullable().optional(),
+  expectations: z.string().nullable().optional(),
   lang: languageEnum.default('en'),
   distanceUnit: distanceUnitEnum.default('km'),
   hideContent: z.boolean().default(false),
   locationPermission: z.boolean().default(false),
   mood: z.string().max(100).optional(),
-  inviteCode: z.string(),
+  // inviteCode: z.string(),
   isActive: z.boolean().default(true),
-});
-
-export const updateUserSchema = createUserSchema.partial();
+}).partial();
 
 export const userSchema = createUserSchema.extend({
   id: idSchema,
@@ -349,7 +370,8 @@ export const paginationSchema = z.object({
 export const userQuerySchema = z.object({
   search: z.string().optional(),
   gender: genderEnum.optional(),
-  relationshipStatus: relationshipStatusEnum.optional(),
+  // relationshipStatus: relationshipStatusEnum.optional(),
+  relationshipStatus: z.string().nullable().optional(),
   isActive: z.coerce.boolean().optional(),
   lang: languageEnum.optional(),
 }).merge(paginationSchema);

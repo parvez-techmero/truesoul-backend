@@ -70,7 +70,7 @@ export function setUpOpenAPI(app) {
     });
 
     // User endpoints
-    openapi.get(`/api/users`, UserList);
+    // openapi.get(`/api/users`, UserList);
     openapi.get(`/api/users/:id`, UserGet);
     openapi.post(`/api/users`, UserCreate);
     openapi.put(`/api/users/:id`, UserUpdate);
