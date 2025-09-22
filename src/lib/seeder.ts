@@ -182,17 +182,111 @@ async function seed() {
 
     await db.insert(categoriesTable).values(categoriesData);
 
-    // Seed topics
-    await db.insert(topicsTable).values({
-        name: 'Intimacy',
-        description: 'Intro topic',
-        icon: 'icon-intro',
-        color: '#00FF00',
-        sortOrder: 1,
-        isActive: true,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-    });
+    // Seed topics based on topic.csv
+    const topicsData = [
+        {
+            name: 'Icebreakers',
+            description: '',
+            icon: '',
+            color: '',
+            sortOrder: 1,
+            isActive: true,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        },
+        {
+            name: 'Us & Love',
+            description: '',
+            icon: '',
+            color: '',
+            sortOrder: 2,
+            isActive: true,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        },
+        {
+            name: 'Intimacy',
+            description: '',
+            icon: '',
+            color: '',
+            sortOrder: 3,
+            isActive: true,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        },
+        {
+            name: 'Moral Values',
+            description: '',
+            icon: '',
+            color: '',
+            sortOrder: 4,
+            isActive: true,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        },
+        {
+            name: 'Money & Finacnces',
+            description: '',
+            icon: '',
+            color: '',
+            sortOrder: 5,
+            isActive: true,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        },
+        {
+            name: 'Get to Know Each Other',
+            description: '',
+            icon: '',
+            color: '',
+            sortOrder: 6,
+            isActive: true,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        },
+        {
+            name: 'Adventures',
+            description: '',
+            icon: '',
+            color: '',
+            sortOrder: 7,
+            isActive: true,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        },
+        {
+            name: 'Family',
+            description: '',
+            icon: '',
+            color: '',
+            sortOrder: 8,
+            isActive: true,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        },
+        {
+            name: 'Work-life',
+            description: '',
+            icon: '',
+            color: '',
+            sortOrder: 9,
+            isActive: true,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        },
+        {
+            name: 'Life Style',
+            description: '',
+            icon: '',
+            color: '',
+            sortOrder: 10,
+            isActive: true,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        }
+    ];
+
+    await db.insert(topicsTable).values(topicsData);
 
         // Seed sub topics
     await db.insert(subTopicsTable).values({
