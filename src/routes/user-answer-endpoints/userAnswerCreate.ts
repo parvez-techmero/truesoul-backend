@@ -1,7 +1,8 @@
 import { OpenAPIRoute } from "chanfana";
 import { z } from "zod";
-import { userAnswersTable } from '../../db/schema';
+import { userAnswersTable, usersTable } from '../../db/schema';
 import { answerStatusEnum } from '../../types';
+import { eq, and } from 'drizzle-orm';
 
 export class UserAnswerCreate extends OpenAPIRoute {
   schema = {
@@ -40,6 +41,21 @@ export class UserAnswerCreate extends OpenAPIRoute {
     const { body } = await this.getValidatedData<typeof this.schema>();
     const db = c.get('db');
     try {
+      // Check if user exists and is not deleted
+      const user = await db.select().from(usersTable).where(
+        and(
+          eq(usersTable.id, body.userId),
+          eq(usersTable.deleted, false)
+        )
+      );
+      
+      if (!user.length) {
+        return c.json({ 
+          success: false, 
+          error: 'User not found' 
+        }, 404);
+      }
+      
       const userAnswer = await db.insert(userAnswersTable).values(body).returning();
       return c.json({ success: true, userAnswer: userAnswer[0] });
     } catch (err) {

@@ -2,7 +2,7 @@
 import { Num, OpenAPIRoute } from "chanfana";
 import { z } from "zod";
 import { usersTable } from '../../db/schema';
-import { eq } from 'drizzle-orm';
+import { eq, and } from 'drizzle-orm';
 import { updateUserSchema, userSchema } from "../../types";
 
 export class UserUpdate extends OpenAPIRoute {
@@ -52,27 +52,49 @@ export class UserUpdate extends OpenAPIRoute {
     const db = c.get('db');
     try {
       // Generate unique invite code
-      let inviteCode: string;
-      let isUnique = false;
-      let attempts = 0;
-      const maxAttempts = 10;
+      // let inviteCode: string;
+      // let isUnique = false;
+      // let attempts = 0;
+      // const maxAttempts = 10;
 
-      do {
-        inviteCode = generateInviteCode(8);
-        const [existingCode] = await db.select().from(usersTable).where(eq(usersTable.inviteCode, inviteCode));
-        isUnique = !existingCode;
-        attempts++;
-      } while (!isUnique && attempts < maxAttempts);
+      // do {
+      //   inviteCode = generateInviteCode(8);
+      //   const [existingCode] = await db.select().from(usersTable).where(eq(usersTable.inviteCode, inviteCode));
+      //   isUnique = !existingCode;
+      //   attempts++;
+      // } while (!isUnique && attempts < maxAttempts);
 
-      if (!isUnique) {
-        return c.json({ success: false, error: "Unable to generate unique invite code" }, 500);
+      // if (!isUnique) {
+      //   return c.json({ success: false, error: "Unable to generate unique invite code" }, 500);
+      // }
+
+      // let userData = {
+      //   ...body,
+      //   inviteCode: inviteCode,
+      // }
+      
+      // First check if user exists and is not deleted
+      const existingUser = await db.select().from(usersTable).where(
+        and(
+          eq(usersTable.id, params.id),
+          eq(usersTable.deleted, false)
+        )
+      );
+      
+      if (!existingUser.length) {
+        return c.json({ success: false, message: 'User not found' }, 404);
       }
-
-      let userData = {
+      
+      const updated = await db.update(usersTable).set({
         ...body,
-        inviteCode: inviteCode,
-      }
-      const updated = await db.update(usersTable).set(userData).where(eq(usersTable.id, params.id)).returning();
+        updatedAt: new Date()
+      }).where(
+        and(
+          eq(usersTable.id, params.id),
+          eq(usersTable.deleted, false)
+        )
+      ).returning();
+      
       if (!updated.length) {
         return c.json({ success: false, message: 'User not found' }, 404);
       }
@@ -83,12 +105,3 @@ export class UserUpdate extends OpenAPIRoute {
   }
 }
 
-// Function to generate unique alphanumeric invite code
-function generateInviteCode(length: number = 8): string {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  let result = '';
-  for (let i = 0; i < length; i++) {
-    result += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return result;
-}

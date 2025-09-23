@@ -62,6 +62,7 @@ export const updateUserSchema = z.object({
   hideContent: z.boolean().default(false),
   locationPermission: z.boolean().default(false),
   mood: z.string().max(100).optional(),
+  profileImg: z.string().nullable().optional(),
   // inviteCode: z.string(),
   isActive: z.boolean().default(true),
 }).partial();
@@ -101,7 +102,9 @@ export const relationshipSchema = z.object({
   id: idSchema,
   user1Id: idSchema,
   user2Id: idSchema,
+  reason: z.string().nullable().optional(),
   startedAt: timestampSchema.optional(),
+  deleted: z.boolean().default(false),
   createdAt: timestampSchema,
   updatedAt: timestampSchema,
 });

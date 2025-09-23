@@ -1,16 +1,15 @@
-
   import { Bool, OpenAPIRoute } from "chanfana";
   import { z } from "zod";
   import { usersTable } from '../../db/schema';
   import { eq } from 'drizzle-orm';
 
-  export class UserList extends OpenAPIRoute {
+  export class UserListDeleted extends OpenAPIRoute {
     schema = {
       tags: ["User"],
-      summary: "List Users",
+      summary: "List Deleted Users (Admin)",
       responses: {
         "200": {
-          description: "Returns a list of Users",
+          description: "Returns a list of deleted Users",
           content: {
             "application/json": {
               schema: z.object({
@@ -26,14 +25,11 @@
     async handle(c) {
       const db = c.get('db');
       try {
-        console.log(db,"Asd");
+        const deletedUsers = await db.select().from(usersTable).where(eq(usersTable.deleted, true));
         
-        const users = await db.select().from(usersTable).where(eq(usersTable.deleted, false));
-        console.log(users,"Ad");
-        
-        return c.json({ success: true, data: users });
+        return c.json({ success: true, data: deletedUsers });
       } catch (err) {
-        return c.json({ error: 'Failed to fetch users', detail: err instanceof Error ? err.message : String(err) }, 500);
+        return c.json({ error: 'Failed to fetch deleted users', detail: err instanceof Error ? err.message : String(err) }, 500);
       }
     }
   }

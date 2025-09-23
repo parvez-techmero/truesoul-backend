@@ -13,7 +13,7 @@ export const answerStatusEnum = pgEnum('answer_status', ['complete', 'skipped'])
 
 export const usersTable = pgTable("users", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  uuid: varchar({ length: 100 }).notNull().unique(),
+  uuid: varchar({ length: 100 }).notNull(),
   transactionId: text(),
   socialId: text(),
   name: varchar({ length: 255 }),
@@ -31,8 +31,10 @@ export const usersTable = pgTable("users", {
   hideContent: boolean().default(false),
   locationPermission: boolean().default(false),
   mood: varchar({ length: 100 }),
+  profileImg: text(), // URL to profile image
   isActive: boolean().default(true),
   lastActiveAt: timestamp(),
+  deleted: boolean().notNull().default(false),
   createdAt: timestamp().defaultNow(),
   updatedAt: timestamp().defaultNow(),
 });
@@ -42,7 +44,9 @@ export const relationshipsTable = pgTable("relationships", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   user1Id: integer().notNull().references(() => usersTable.id, { onDelete: 'cascade' }),
   user2Id: integer().notNull().references(() => usersTable.id, { onDelete: 'cascade' }),
+  reason: text(),
   startedAt: timestamp(),
+  deleted: boolean().notNull().default(false),
   createdAt: timestamp().notNull().defaultNow(),
   updatedAt: timestamp().notNull().defaultNow(),
 });

@@ -77,7 +77,7 @@ export class ResultGetByRelationshipAndSubtopic extends OpenAPIRoute {
 			const [relation] = await db
 				.select()
 				.from(relationshipsTable)
-				.where(eq(relationshipsTable.id, query.relationshipId));
+				.where(and(eq(relationshipsTable.id, query.relationshipId), eq(relationshipsTable.deleted, false)));
 
 			if (!relation) {
 				return c.json({ success: false, message: 'Relationship not found' }, 404);

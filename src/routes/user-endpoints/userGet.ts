@@ -2,7 +2,7 @@
   import { Num, OpenAPIRoute } from "chanfana";
   import { z } from "zod";
   import { usersTable } from '../../db/schema';
-  import { eq } from 'drizzle-orm';
+  import { eq, and } from 'drizzle-orm';
 
   export class UserGet extends OpenAPIRoute {
     schema = {
@@ -43,7 +43,12 @@
       const { params } = await this.getValidatedData<typeof this.schema>();
       const db = c.get('db');
       try {
-        const user = await db.select().from(usersTable).where(eq(usersTable.id, params.id));
+        const user = await db.select().from(usersTable).where(
+          and(
+            eq(usersTable.id, params.id),
+            eq(usersTable.deleted, false)
+          )
+        );
         if (!user.length) {
           return c.json({ success: false, message: 'User not found' }, 404);
         }

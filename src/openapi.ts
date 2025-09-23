@@ -7,9 +7,12 @@ import { JournalDelete } from "./routes/journal-endpoints/journalDelete";
 import { JournalAll } from "./routes/journal-endpoints/journalAll";
 import { fromHono } from "chanfana";
 import { UserList } from "./routes/user-endpoints/userList";
+import { UserListDeleted } from "./routes/user-endpoints/userListDeleted";
 import { UserGet } from "./routes/user-endpoints/userGet";
 import { UserUpdate } from "./routes/user-endpoints/userUpdate";
 import { UserDelete } from "./routes/user-endpoints/userDelete";
+import { UserSoftDelete } from "./routes/user-endpoints/userSoftDelete";
+import { UserRestore } from "./routes/user-endpoints/userRestore";
 import { RelationshipList } from "./routes/relationship-endpoints/relationshipList";
 import { RelationshipGet } from "./routes/relationship-endpoints/relationshipGet";
 import { RelationshipCreate } from "./routes/relationship-endpoints/relationshipCreate";
@@ -52,6 +55,7 @@ import { UserAnswerCreate } from "./routes/user-answer-endpoints/userAnswerCreat
 import { UserAnswerUpdate } from "./routes/user-answer-endpoints/userAnswerUpdate";
 import { UserAnswerDelete } from "./routes/user-answer-endpoints/userAnswerDelete";
 import { UserCreate } from "./routes/user-endpoints/userCreate";
+import { UserProfileImageUpdate } from "./routes/user-endpoints/userProfileUpdate";
 import { RelationshipCreateWithInviteCode } from "./routes/relationship-endpoints/relationshipCreateWithInviteCode";
 import { SubTopicWithQuestionsList } from "./routes/sub-topic-endpoints/subTopicWithQuestionsList";
 import { UserProgressBySubtopic } from "./routes/user-progress/userProgressBySubtopic";
@@ -71,10 +75,14 @@ export function setUpOpenAPI(app) {
 
     // User endpoints
     // openapi.get(`/api/users`, UserList);
+    openapi.get(`/api/users/deleted`, UserListDeleted); // List deleted users (admin)
     openapi.get(`/api/users/:id`, UserGet);
     openapi.post(`/api/users`, UserCreate);
     openapi.put(`/api/users/:id`, UserUpdate);
-    openapi.delete(`/api/users/:id`, UserDelete);
+    openapi.delete(`/api/users/:id`, UserDelete); // Hard delete (permanent)
+    openapi.delete(`/api/users/:id/soft`, UserSoftDelete); // Soft delete (recoverable)
+    openapi.put(`/api/users/:id/restore`, UserRestore); // Restore soft deleted user
+    openapi.post(`/api/users/:id/profile-image`, UserProfileImageUpdate);
 
     // Relationship endpoints
     openapi.get(`/api/relationships`, RelationshipList);

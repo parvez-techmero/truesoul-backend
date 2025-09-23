@@ -1,6 +1,6 @@
 {
-  "id": "4bc2b1c2-b62a-4c09-8bb0-24956519d9c2",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "3feeed47-42da-4d47-8026-9bd00eef1b11",
+  "prevId": "bae36558-cd7e-41cd-8303-1d1f54325182",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -1082,6 +1082,13 @@
           "primaryKey": false,
           "notNull": false
         },
+        "deleted": {
+          "name": "deleted",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
         "createdAt": {
           "name": "createdAt",
           "type": "timestamp",
@@ -1101,13 +1108,6 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "users_uuid_unique": {
-          "name": "users_uuid_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "uuid"
-          ]
-        },
         "users_inviteCode_unique": {
           "name": "users_inviteCode_unique",
           "nullsNotDistinct": false,

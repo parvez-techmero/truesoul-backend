@@ -1,7 +1,7 @@
 import { OpenAPIRoute, Num } from "chanfana";
 import { z } from "zod";
 import { relationshipsTable } from '../../db/schema';
-import { eq } from 'drizzle-orm';
+import { eq, and } from 'drizzle-orm';
 
 export class RelationshipDelete extends OpenAPIRoute {
   schema = {
@@ -11,6 +11,15 @@ export class RelationshipDelete extends OpenAPIRoute {
       params: z.object({
         id: Num(),
       }),
+      body: {
+        content: {
+          "application/json": {
+            schema: z.object({
+              reason: z.string().min(1, "Reason is required"),
+            }),
+          },
+        },
+      },
     },
     responses: {
       "200": {
@@ -39,14 +48,24 @@ export class RelationshipDelete extends OpenAPIRoute {
   };
 
   async handle(c) {
-    const { params } = await this.getValidatedData<typeof this.schema>();
+    const data = await this.getValidatedData<typeof this.schema>();
+    const params = data?.params;
+  // body will be under data.body?.reason
+  const body = data?.body;
     const db = c.get('db');
     try {
-      const deleted = await db.delete(relationshipsTable).where(eq(relationshipsTable.id, params.id)).returning();
-      if (!deleted.length) {
+      if (!params || !body) {
+        return c.json({ success: false, message: 'Invalid request' }, 400);
+      }
+      // Soft delete: update the relationship with the reason and set deleted=true
+      const updated = await db.update(relationshipsTable)
+        .set({ reason: body.reason, deleted: true })
+        .where(and(eq(relationshipsTable.id, params.id), eq(relationshipsTable.deleted, false)))
+        .returning();
+      if (!updated.length) {
         return c.json({ success: false, message: 'Relationship not found' }, 404);
       }
-      return c.json({ success: true, message: 'Relationship deleted successfully' });
+      return c.json({ success: true, message: 'Relationship deleted (soft) successfully' });
     } catch (err) {
       return c.json({ error: 'Failed to delete relationship', detail: err instanceof Error ? err.message : String(err) }, 500);
     }

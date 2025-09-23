@@ -103,6 +103,7 @@ async function seed() {
     let payload = {
         user1Id: user[0].id,
         user2Id: user[1].id,
+        deleted: false
     };
     const relationship = await db.insert(relationshipsTable).values(payload).returning();
     
@@ -288,30 +289,63 @@ async function seed() {
 
     await db.insert(topicsTable).values(topicsData);
 
-        // Seed sub topics
-    await db.insert(subTopicsTable).values({
-        name: 'Get to Know',
-        topicId: 1,
-        color: '#1500ffff',
-        sortOrder: 1,
+    // Import required modules for CSV processing
+    const fs = require('fs');
+    const path = require('path');
+    const parse = require('csv-parse/sync').parse;
+
+    // Seed sub topics from CSV
+    const subTopicCsvFilePath = path.join(__dirname, 'sub-topic.csv');
+    const subTopicCsvData = fs.readFileSync(subTopicCsvFilePath, 'utf8');
+    const subTopicRecords = parse(subTopicCsvData, {
+        columns: true,
+        skip_empty_lines: true
+    });
+
+    const subTopicsData = subTopicRecords.map((row: any) => ({
+        topicId: row.topicId && row.topicId !== '' ? Number(row.topicId) : null,
+        categoryId: row.categoryId && row.categoryId !== '' ? Number(row.categoryId) : null,
+        name: row.name,
+        description: row.description && row.description !== '' ? row.description : null,
+        icon: row.icon && row.icon !== '' ? row.icon : null,
+        color: row.color && row.color !== '' ? row.color : null,
+        sortOrder: row.id ? Number(row.id) : 0,
         isActive: true,
         createdAt: new Date(),
         updatedAt: new Date(),
+    }));
+
+    await db.insert(subTopicsTable).values(subTopicsData);
+    console.log('Seeded', subTopicsData.length, 'sub-topics!');
+
+    // Seed questions from CSV (850 entries)
+    const csvFilePath = path.join(__dirname, 'Relationship App - questions.csv');
+    const csvData = fs.readFileSync(csvFilePath, 'utf8');
+    const records = parse(csvData, {
+        columns: true,
+        skip_empty_lines: true,
+        trim: true,
     });
 
-    await db.insert(questionsTable).values(
-        [{
-        // categoryId: null,
-        subTopicId: 1,
-        questionText: 'Do you prefer coffee or tea?',
-        questionType: 'yes_no',
-    },{
-        subTopicId: 1,
-        questionText: 'What is your favorite season?',
-        questionType: 'multiple_choice',
-        optionText: '[Spring, Summer, Autumn, Winter]',
-    }]);
-    
+    // Map CSV columns to questionsTable fields
+    const questions = records.map((row) => ({
+        subTopicId: row.subTopicId ? Number(row.subTopicId) : null,
+        questionText: row.questionText,
+        questionType: row.questionType === 'this_that' ? 'multiple_choice' : (row.questionType === 'he_she' ? 'multiple_choice' : (row.questionType === 'user_image' ? 'photo' : (row.questionType === 'user_text' ? 'text' : row.questionType))),
+        optionText: row.optionText && row.optionText !== '' ? row.optionText : null,
+        optionImg: row.optionImg && row.optionImg !== '' ? row.optionImg : null,
+        sortOrder: row.id ? Number(row.id) : 0,
+        isActive: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    }));
+
+    if (questions.length !== 850) {
+        throw new Error(`Expected 850 questions, found ${questions.length}`);
+    }
+
+    await db.insert(questionsTable).values(questions);
+    console.log('Seeded', questions.length, 'questions!');
     console.log('Seeding complete!');
 }
 

@@ -1,7 +1,8 @@
 
 import { OpenAPIRoute, Str, Num } from "chanfana";
 import { z } from "zod";
-import { journalTable } from '../../db/schema';
+import { journalTable, relationshipsTable } from '../../db/schema';
+import { eq, and } from 'drizzle-orm';
 
 export class JournalCreate extends OpenAPIRoute {
   schema = {
@@ -38,6 +39,17 @@ export class JournalCreate extends OpenAPIRoute {
           },
         },
       },
+      "404": {
+        description: "Relationship not found",
+        content: {
+          "application/json": {
+            schema: z.object({
+              success: z.boolean(),
+              message: z.string(),
+            }),
+          },
+        },
+      },
     },
   };
 
@@ -45,6 +57,12 @@ export class JournalCreate extends OpenAPIRoute {
     const { body } = await this.getValidatedData<typeof this.schema>();
     const db = c.get('db');
     try {
+      // Validate relationship exists and is not deleted
+      const relationship = await db.select().from(relationshipsTable).where(and(eq(relationshipsTable.id, body.relationshipId), eq(relationshipsTable.deleted, false)));
+      if (!relationship.length) {
+        return c.json({ success: false, message: 'Relationship not found' }, 404);
+      }
+
       const journal = await db.insert(journalTable).values(body).returning();
       return c.json({ success: true, journal: journal[0] });
     } catch (err) {

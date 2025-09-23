@@ -1,6 +1,7 @@
 import { OpenAPIRoute, Bool } from "chanfana";
 import { z } from "zod";
 import { relationshipsTable } from '../../db/schema';
+import { eq } from 'drizzle-orm';
 
 export class RelationshipList extends OpenAPIRoute {
   schema = {
@@ -24,7 +25,7 @@ export class RelationshipList extends OpenAPIRoute {
   async handle(c) {
     const db = c.get('db');
     try {
-      const relationships = await db.select().from(relationshipsTable);
+      const relationships = await db.select().from(relationshipsTable).where(eq(relationshipsTable.deleted, false));
       return c.json({ success: true, data: relationships });
     } catch (err) {
       return c.json({ error: 'Failed to fetch relationships', detail: err instanceof Error ? err.message : String(err) }, 500);

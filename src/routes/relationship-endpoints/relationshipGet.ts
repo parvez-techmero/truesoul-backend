@@ -1,7 +1,7 @@
 import { OpenAPIRoute, Num } from "chanfana";
 import { z } from "zod";
 import { relationshipsTable } from '../../db/schema';
-import { eq } from 'drizzle-orm';
+import { eq, and } from 'drizzle-orm';
 
 export class RelationshipGet extends OpenAPIRoute {
   schema = {
@@ -42,7 +42,7 @@ export class RelationshipGet extends OpenAPIRoute {
     const { params } = await this.getValidatedData<typeof this.schema>();
     const db = c.get('db');
     try {
-      const relationship = await db.select().from(relationshipsTable).where(eq(relationshipsTable.id, params.id));
+      const relationship = await db.select().from(relationshipsTable).where(and(eq(relationshipsTable.id, params.id), eq(relationshipsTable.deleted, false)));
       if (!relationship.length) {
         return c.json({ success: false, message: 'Relationship not found' }, 404);
       }

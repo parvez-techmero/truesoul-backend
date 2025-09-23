@@ -1,6 +1,7 @@
 import { fromHono } from "chanfana";
 import { Hono } from "hono";
 import { serve } from "@hono/node-server";
+import { serveStatic } from '@hono/node-server/serve-static';
 import { setUpOpenAPI } from "./openapi";
 import 'dotenv/config'
 import { dbMiddleware } from "./middleware/dbMiddleware";
@@ -8,6 +9,9 @@ import { dbMiddleware } from "./middleware/dbMiddleware";
 
 // Start a Hono app (remove Cloudflare Workers Env binding)
 const app = new Hono();
+
+// Serve static files from public directory
+app.use('/profile-images/*', serveStatic({ root: './public' }));
 
 app.use('*', dbMiddleware);
 setUpOpenAPI(app);

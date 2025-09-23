@@ -1,7 +1,7 @@
 import { OpenAPIRoute, Num } from "chanfana";
 import { z } from "zod";
 import { relationshipsTable, usersTable } from '../../db/schema';
-import { eq } from 'drizzle-orm';
+import { eq, sql } from 'drizzle-orm';
 
 export class RelationshipCreateWithInviteCode extends OpenAPIRoute {
 	schema = {
@@ -50,8 +50,8 @@ export class RelationshipCreateWithInviteCode extends OpenAPIRoute {
 		const { body } = await this.getValidatedData<typeof this.schema>();
 		const db = c.get('db');
 		try {
-			// Find user2 by inviteCode
-			const [user2] = await db.select().from(usersTable).where(eq(usersTable.inviteCode, body.inviteCode));
+			// Find user2 by inviteCode (case-insensitive)
+			const [user2] = await db.select().from(usersTable).where(sql`UPPER(${usersTable.inviteCode}) = UPPER(${body.inviteCode})`);
 			const [user1] = await db.select().from(usersTable).where(eq(usersTable.id, body.user1Id));
             
 			if (!user2) {

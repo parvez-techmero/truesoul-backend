@@ -76,7 +76,9 @@ CREATE TABLE "relationships" (
 	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "relationships_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
 	"user1Id" integer NOT NULL,
 	"user2Id" integer NOT NULL,
+	"reason" text,
 	"startedAt" timestamp,
+	"deleted" boolean DEFAULT false NOT NULL,
 	"createdAt" timestamp DEFAULT now() NOT NULL,
 	"updatedAt" timestamp DEFAULT now() NOT NULL
 );
@@ -135,6 +137,7 @@ CREATE TABLE "users" (
 	"hideContent" boolean DEFAULT false,
 	"locationPermission" boolean DEFAULT false,
 	"mood" varchar(100),
+	"profileImg" text,
 	"isActive" boolean DEFAULT true,
 	"lastActiveAt" timestamp,
 	"createdAt" timestamp DEFAULT now(),
