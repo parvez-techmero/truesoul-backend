@@ -66,6 +66,7 @@ export class UserProgressByTopic extends OpenAPIRoute {
           return {
             topicId: topic.id,
             topicName: topic.name,
+            topicIcon: topic.icon,
             totalQuestions,
             answeredCount,
             percent,
@@ -143,6 +144,7 @@ export class UserProgressByCategory extends OpenAPIRoute {
           return {
             categoryId: category.id,
             categoryName: category.name,
+            categoryIcon: category.icon,
             totalQuestions,
             answeredCount,
             percent,

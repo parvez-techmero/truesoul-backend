@@ -63,7 +63,7 @@ CREATE TABLE "questions" (
 	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "questions_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
 	"subTopicId" integer,
 	"questionText" text NOT NULL,
-	"questionType" "question_type" DEFAULT 'yes_no' NOT NULL,
+	"questionType" text DEFAULT 'yes_no' NOT NULL,
 	"optionText" varchar(500),
 	"optionImg" text,
 	"sortOrder" integer DEFAULT 0 NOT NULL,
@@ -140,9 +140,9 @@ CREATE TABLE "users" (
 	"profileImg" text,
 	"isActive" boolean DEFAULT true,
 	"lastActiveAt" timestamp,
+	"deleted" boolean DEFAULT false NOT NULL,
 	"createdAt" timestamp DEFAULT now(),
 	"updatedAt" timestamp DEFAULT now(),
-	CONSTRAINT "users_uuid_unique" UNIQUE("uuid"),
 	CONSTRAINT "users_inviteCode_unique" UNIQUE("inviteCode")
 );
 --> statement-breakpoint

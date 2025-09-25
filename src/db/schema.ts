@@ -98,7 +98,7 @@ export const questionsTable = pgTable("questions", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   subTopicId: integer().references(() => subTopicsTable.id),
   questionText: text().notNull(),
-  questionType: questionTypeEnum().notNull().default('yes_no'),
+  questionType: text().notNull().default('yes_no'),
   optionText: varchar({ length: 500 }),
   optionImg: text(),
   sortOrder: integer().notNull().default(0),

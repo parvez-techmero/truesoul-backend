@@ -1,6 +1,6 @@
 import { OpenAPIRoute, Num } from "chanfana";
 import { z } from "zod";
-import { subTopicsTable } from '../../db/schema';
+import { subTopicsTable, questionsTable } from '../../db/schema';
 import { eq } from 'drizzle-orm';
 
 export class SubTopicGet extends OpenAPIRoute {
@@ -46,7 +46,9 @@ export class SubTopicGet extends OpenAPIRoute {
       if (!subTopic.length) {
         return c.json({ success: false, message: 'SubTopic not found' }, 404);
       }
-      return c.json({ success: true, subTopic: subTopic[0] });
+  // Fetch questions for this subtopic
+  const questions = await db.select().from(questionsTable).where(eq(questionsTable.subTopicId, params.id));
+  return c.json({ success: true, data: {...subTopic[0],questions} });
     } catch (err) {
       return c.json({ error: 'Failed to fetch sub-topic', detail: err instanceof Error ? err.message : String(err) }, 500);
     }

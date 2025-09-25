@@ -11,6 +11,9 @@ import {
     appSettingsTable,
     deviceTokensTable
 } from '../db/schema';
+import { parse } from 'csv-parse';
+import fs from 'fs';
+import path from 'path';
 
 export async function emptyDatabase() {
     // Order matters due to foreign key constraints
@@ -39,80 +42,174 @@ export async function emptyDatabase() {
     console.log('All tables emptied.');
 }
 
-async function seed() {
+// Function to read users from CSV file
+export async function readUsersFromCSV(): Promise<any[]> {
+    return new Promise((resolve, reject) => {
+        const users: any[] = [];
+        const csvFilePath = path.join(__dirname, 'users.csv');
+        
+        if (!fs.existsSync(csvFilePath)) {
+            console.log('users.csv not found, using default user data');
+            resolve([]);
+            return;
+        }
 
-    await emptyDatabase();
-    // const userData = {
-    //     uuid: "1",
-    //     transactionId: "1001",
-    //     socialId: "2001",
-    //     name: 'Test User',
-    //     gender: 'male',
-    //     birthDate: new Date('1990-01-01').toISOString().slice(0, 10),
-    //     lat: "12.97160000", // 8 decimal places for precision 10, scale 8
-    //     long: "77.59460000", // 8 decimal places for precision 11, scale 8
-    //     anniversary: new Date('2020-01-01').toISOString().slice(0, 10),
-    //     relationshipStatus: 'single',
-    //     expectations: 'Just testing',
-    //     inviteCode: 'INVITE123',
-    //     lang: 'en',
-    //     distanceUnit: 'km',
-    //     hideContent: false,
-    //     locationPermission: true,
-    //     mood: 'happy',
-    //     isActive: true,
-    //     lastActiveAt: null,
-    //     createdAt: new Date(),
-    //     updatedAt: new Date(),
-    // };
-    const userData = [{
+        const stream = fs.createReadStream(csvFilePath)
+            .pipe(parse({ 
+                delimiter: ',',
+                columns: true,
+                skip_empty_lines: true,
+                trim: true
+            }));
+
+        stream.on('data', (row) => {
+            // Convert CSV row to user data format
+            const userData = {
+                uuid: row.uuid || null,
+                transactionId: row.transactionId || null,
+                socialId: row.socialId || null,
+                name: row.name || null,
+                gender: row.gender && row.gender.toLowerCase() !== 'null' ? row.gender : null,
+                birthDate: row.birthDate && row.birthDate !== 'NULL' ? row.birthDate : null,
+                lat: row.lat && row.lat !== 'NULL' ? row.lat : null,
+                long: row.long && row.long !== 'NULL' ? row.long : null,
+                anniversary: row.anniversary && row.anniversary !== 'NULL' ? row.anniversary : null,
+                relationshipStatus: row.relationshipStatus && row.relationshipStatus !== 'NULL' ? row.relationshipStatus : null,
+                expectations: row.expectations && row.expectations !== 'NULL' ? row.expectations : null,
+                inviteCode: row.inviteCode || null,
+                lang: row.lang || 'en',
+                distanceUnit: row.distanceUnit || 'km',
+                hideContent: row.hideContent === 'True' || row.hideContent === 'true',
+                locationPermission: row.locationPermission === 'True' || row.locationPermission === 'true',
+                mood: row.mood && row.mood !== 'NULL' ? row.mood : null,
+                profileImg: row.profileImg && row.profileImg !== 'NULL' ? row.profileImg : null,
+                isActive: row.isActive === 'True' || row.isActive === 'true',
+                lastActiveAt: row.lastActiveAt && row.lastActiveAt !== 'NULL' ? new Date(row.lastActiveAt) : null,
+                deleted: row.deleted === 'True' || row.deleted === 'true',
+                createdAt: row.createdAt ? new Date(row.createdAt) : new Date(),
+                updatedAt: row.updatedAt ? new Date(row.updatedAt) : new Date(),
+            };
+            
+            // Only add if not marked as deleted
+            if (!userData.deleted) {
+                users.push(userData);
+            }
+        });
+
+        stream.on('end', () => {
+            console.log(`Successfully read ${users.length} users from CSV`);
+            resolve(users);
+        });
+
+        stream.on('error', (error) => {
+            console.error('Error reading CSV file:', error);
+            reject(error);
+        });
+    });
+}
+
+// Function to seed users
+export async function seedUsers() {
+    try {
+        console.log('Seeding users...');
+        
+        // Try to read from CSV first
+        let usersData = await readUsersFromCSV();
+        
+        // If no CSV data, use default users
+        if (usersData.length === 0) {
+            usersData = getDefaultUsers();
+        }
+        
+        console.log(`Seeding ${usersData.length} users...`);
+        
+        // Insert users in batches to handle large datasets
+        const batchSize = 50;
+        const insertedUsers = [];
+        
+        for (let i = 0; i < usersData.length; i += batchSize) {
+            const batch = usersData.slice(i, i + batchSize);
+            const result = await db.insert(usersTable).values(batch).returning();
+            insertedUsers.push(...result);
+            console.log(`Inserted batch ${Math.floor(i / batchSize) + 1}: ${batch.length} users`);
+        }
+        
+        console.log(`✅ Successfully seeded ${insertedUsers.length} users`);
+        return insertedUsers;
+        
+    } catch (error) {
+        console.error('Error seeding users:', error);
+        throw error;
+    }
+}
+
+// Default users data (fallback)
+export function getDefaultUsers() {
+    return [{
         uuid: "1",
         transactionId: "1001",
         socialId: "2001",
         name: 'N',
-        birthDate: new Date('1990-01-01').toISOString().slice(0, 10), // "YYYY-MM-DD"
+        birthDate: '1990-01-01',
         lat: "12.97160000",
         long: "77.59460000",
-        anniversary: new Date('2020-01-01').toISOString().slice(0, 10), // "YYYY-MM-DD"
+        anniversary: '2020-01-01',
         inviteCode: 'INVITE123',
+        lang: 'en',
+        distanceUnit: 'km',
         hideContent: false,
         locationPermission: true,
         isActive: true,
         lastActiveAt: null,
-        createdAt: new Date(), // timestamp fields can stay as Date
+        deleted: false,
+        createdAt: new Date(),
         updatedAt: new Date(),
     }, {
         uuid: "2",
         transactionId: "1002",
         socialId: "2002",
         name: 'P',
-        birthDate: new Date('1990-01-01').toISOString().slice(0, 10), // "YYYY-MM-DD"
+        birthDate: '1990-01-01',
         lat: "22.97160000",
         long: "87.59460000",
-        anniversary: new Date('2020-01-01').toISOString().slice(0, 10), // "YYYY-MM-DD"
+        anniversary: '2020-01-01',
         inviteCode: 'INVITE124',
+        lang: 'en',
+        distanceUnit: 'km',
         hideContent: false,
         locationPermission: true,
         isActive: true,
         lastActiveAt: null,
-        createdAt: new Date(), // timestamp fields can stay as Date
+        deleted: false,
+        createdAt: new Date(),
         updatedAt: new Date(),
     }];
-    // Seed users
-    let user = await db.insert(usersTable).values(userData).returning();
-    let payload = {
-        user1Id: user[0].id,
-        user2Id: user[1].id,
-        deleted: false
-    };
-    const relationship = await db.insert(relationshipsTable).values(payload).returning();
+}
+
+async function seed() {
+
+    await emptyDatabase();
+    
+    // Seed users from CSV
+    const users = await seedUsers();
+    
+    // Create relationships for first two users (if available)
+    if (users.length >= 2) {
+        const payload = {
+            user1Id: users[0].id,
+            user2Id: users[1].id,
+            deleted: false
+        };
+        const relationship = await db.insert(relationshipsTable).values(payload).returning();
+        console.log(`✅ Created relationship between users ${users[0].id} and ${users[1].id}`);
+    }
     
     // Seed categories based on data.csv
     const categoriesData = [
         {
             name: 'Never Have I Ever',
             description: '',
-            icon: '',
+            icon: 'https://truesoul.b-cdn.net/icons/Categories/1.png',
             color: '',
             sortOrder: 1,
             isActive: true,
@@ -122,7 +219,7 @@ async function seed() {
         {
             name: 'This or That',
             description: '',
-            icon: '',
+            icon: 'https://truesoul.b-cdn.net/icons/Categories/2.png',
             color: '',
             sortOrder: 2,
             isActive: true,
@@ -132,7 +229,7 @@ async function seed() {
         {
             name: 'Who Is More Likely To',
             description: '',
-            icon: '',
+            icon: 'https://truesoul.b-cdn.net/icons/Categories/3.png',
             color: '',
             sortOrder: 3,
             isActive: true,
@@ -142,7 +239,7 @@ async function seed() {
         {
             name: 'Would You Rather',
             description: '',
-            icon: '',
+            icon: 'https://truesoul.b-cdn.net/icons/Categories/4.png',
             color: '',
             sortOrder: 4,
             isActive: true,
@@ -152,7 +249,7 @@ async function seed() {
         {
             name: 'Deep Conversations',
             description: '',
-            icon: '',
+            icon: 'https://truesoul.b-cdn.net/icons/Categories/5.png',
             color: '',
             sortOrder: 5,
             isActive: true,
@@ -162,7 +259,7 @@ async function seed() {
         {
             name: 'Discuss Before',
             description: '',
-            icon: '',
+            icon: 'https://truesoul.b-cdn.net/icons/Categories/6.png',
             color: '',
             sortOrder: 6,
             isActive: true,
@@ -172,7 +269,7 @@ async function seed() {
         {
             name: 'Answer With photo',
             description: '',
-            icon: '',
+            icon: 'https://truesoul.b-cdn.net/icons/Categories/7.png',
             color: '',
             sortOrder: 7,
             isActive: true,
@@ -188,7 +285,7 @@ async function seed() {
         {
             name: 'Icebreakers',
             description: '',
-            icon: '',
+            icon: 'https://truesoul.b-cdn.net/icons/Discover/1.png',
             color: '',
             sortOrder: 1,
             isActive: true,
@@ -198,7 +295,7 @@ async function seed() {
         {
             name: 'Us & Love',
             description: '',
-            icon: '',
+            icon: 'https://truesoul.b-cdn.net/icons/Discover/2.png',
             color: '',
             sortOrder: 2,
             isActive: true,
@@ -208,7 +305,7 @@ async function seed() {
         {
             name: 'Intimacy',
             description: '',
-            icon: '',
+            icon: 'https://truesoul.b-cdn.net/icons/Discover/3.png',
             color: '',
             sortOrder: 3,
             isActive: true,
@@ -218,7 +315,7 @@ async function seed() {
         {
             name: 'Moral Values',
             description: '',
-            icon: '',
+            icon: 'https://truesoul.b-cdn.net/icons/Discover/4.png',
             color: '',
             sortOrder: 4,
             isActive: true,
@@ -226,9 +323,9 @@ async function seed() {
             updatedAt: new Date(),
         },
         {
-            name: 'Money & Finacnces',
+            name: 'Money & Finances',
             description: '',
-            icon: '',
+            icon: 'https://truesoul.b-cdn.net/icons/Discover/5.png',
             color: '',
             sortOrder: 5,
             isActive: true,
@@ -238,7 +335,7 @@ async function seed() {
         {
             name: 'Get to Know Each Other',
             description: '',
-            icon: '',
+            icon: 'https://truesoul.b-cdn.net/icons/Discover/6.png',
             color: '',
             sortOrder: 6,
             isActive: true,
@@ -248,7 +345,7 @@ async function seed() {
         {
             name: 'Adventures',
             description: '',
-            icon: '',
+            icon: 'https://truesoul.b-cdn.net/icons/Discover/7.png',
             color: '',
             sortOrder: 7,
             isActive: true,
@@ -258,7 +355,7 @@ async function seed() {
         {
             name: 'Family',
             description: '',
-            icon: '',
+            icon: 'https://truesoul.b-cdn.net/icons/Discover/8.png',
             color: '',
             sortOrder: 8,
             isActive: true,
@@ -268,7 +365,7 @@ async function seed() {
         {
             name: 'Work-life',
             description: '',
-            icon: '',
+            icon: 'https://truesoul.b-cdn.net/icons/Discover/9.png',
             color: '',
             sortOrder: 9,
             isActive: true,
@@ -278,7 +375,7 @@ async function seed() {
         {
             name: 'Life Style',
             description: '',
-            icon: '',
+            icon: 'https://truesoul.b-cdn.net/icons/Discover/10.png',
             color: '',
             sortOrder: 10,
             isActive: true,
@@ -331,7 +428,7 @@ async function seed() {
     const questions = records.map((row) => ({
         subTopicId: row.subTopicId ? Number(row.subTopicId) : null,
         questionText: row.questionText,
-        questionType: row.questionType === 'this_that' ? 'multiple_choice' : (row.questionType === 'he_she' ? 'multiple_choice' : (row.questionType === 'user_image' ? 'photo' : (row.questionType === 'user_text' ? 'text' : row.questionType))),
+        questionType: row.questionType,
         optionText: row.optionText && row.optionText !== '' ? row.optionText : null,
         optionImg: row.optionImg && row.optionImg !== '' ? row.optionImg : null,
         sortOrder: row.id ? Number(row.id) : 0,

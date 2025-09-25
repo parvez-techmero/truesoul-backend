@@ -15,7 +15,7 @@ export class RelationshipDelete extends OpenAPIRoute {
         content: {
           "application/json": {
             schema: z.object({
-              reason: z.string().min(1, "Reason is required"),
+              reason: z.string().nullable().optional(),
             }),
           },
         },

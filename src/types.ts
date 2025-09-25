@@ -214,7 +214,7 @@ export const createQuestionSchema = z.object({
   // topicId: idSchema.nullable().optional(),
   subTopicId: idSchema.nullable().optional(),
   questionText: z.string().min(1, "Question text is required"),
-  questionType: questionTypeEnum.default('yes_no'),
+  questionType: z.string().default('yes_no'),
   optionText: z.string().max(500).nullable().optional(),
   optionImg: z.string().nullable().optional(),
   sortOrder: z.number().int().min(0).default(0),
@@ -395,7 +395,7 @@ export const questionQuerySchema = z.object({
   categoryId: idSchema.optional(),
   topicId: idSchema.optional(),
   subTopicId: idSchema.optional(),
-  questionType: questionTypeEnum.optional(),
+  questionType: z.string().optional(),
   isActive: z.coerce.boolean().optional(),
   userId: idSchema.optional(), // To exclude answered questions
   randomize: z.coerce.boolean().default(false),

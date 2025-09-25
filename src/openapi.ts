@@ -60,6 +60,8 @@ import { RelationshipCreateWithInviteCode } from "./routes/relationship-endpoint
 import { SubTopicWithQuestionsList } from "./routes/sub-topic-endpoints/subTopicWithQuestionsList";
 import { UserProgressBySubtopic } from "./routes/user-progress/userProgressBySubtopic";
 import { UserProgressByTopic, UserProgressByCategory } from "./routes/user-progress/userProgressByTopicAndCategory";
+import { UserProgressDivisions } from "./routes/user-progress/userProgressDivisions";
+import { UserProgressSubtopicDivisions } from "./routes/user-progress/userProgressSubtopicDivisions";
 
 export function setUpOpenAPI(app) {
     const openapi = fromHono(app, {
@@ -118,6 +120,8 @@ export function setUpOpenAPI(app) {
     openapi.get(`/api/user-progress/by-subtopic`, UserProgressBySubtopic);
     openapi.get(`/api/user-progress/by-topic`, UserProgressByTopic);
     openapi.get(`/api/user-progress/by-category`, UserProgressByCategory);
+    openapi.get(`/api/user-progress/divisions`, UserProgressDivisions);
+    openapi.get(`/api/user-progress/subtopic-divisions`, UserProgressSubtopicDivisions);
 
     // Question endpoints
     openapi.get(`/api/questions`, QuestionList);

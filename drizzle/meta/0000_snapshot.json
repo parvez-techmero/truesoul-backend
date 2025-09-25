@@ -1,5 +1,5 @@
 {
-  "id": "4bc2b1c2-b62a-4c09-8bb0-24956519d9c2",
+  "id": "5190c3fe-63a6-45c1-9057-b711c141ef4c",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -469,8 +469,7 @@
         },
         "questionType": {
           "name": "questionType",
-          "type": "question_type",
-          "typeSchema": "public",
+          "type": "text",
           "primaryKey": false,
           "notNull": true,
           "default": "'yes_no'"
@@ -1082,6 +1081,13 @@
           "primaryKey": false,
           "notNull": false
         },
+        "deleted": {
+          "name": "deleted",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
         "createdAt": {
           "name": "createdAt",
           "type": "timestamp",
@@ -1101,13 +1107,6 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "users_uuid_unique": {
-          "name": "users_uuid_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "uuid"
-          ]
-        },
         "users_inviteCode_unique": {
           "name": "users_inviteCode_unique",
           "nullsNotDistinct": false,
