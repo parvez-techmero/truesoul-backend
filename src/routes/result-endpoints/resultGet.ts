@@ -100,7 +100,7 @@ export class ResultGetByRelationshipAndSubtopic extends OpenAPIRoute {
 			if (!questions.length) {
 				return c.json({ success: true, results: [] });
 			}
-
+			
 			const userIds = [relation.user1Id, relation.user2Id].filter(Boolean);
 
 			const answers = await db
@@ -121,9 +121,13 @@ export class ResultGetByRelationshipAndSubtopic extends OpenAPIRoute {
 			for (const a of answers) {
 				answersMap.set(`${a.userId}-${a.questionId}`, a.answerText);
 			}
-
+			
 			const results = questions.map(q => ({
+				questionId: q.id,
 				question: q.questionText,
+				questionType: q.questionType,
+				optionText: q.optionText,
+				optionImg: q.optionImg,
 				user1Answer: relation.user1Id
 					? answersMap.get(`${relation.user1Id}-${q.id}`) ?? null
 					: null,
@@ -151,7 +155,13 @@ export class ResultGetByRelationshipAndSubtopic extends OpenAPIRoute {
 			const similarityPercent =
 				totalCompared > 0 ? (matches / totalCompared) * 100 : 0;
 
-			return c.json({ success: true, match : similarityPercent.toFixed(2), results });
+			return c.json({
+				success: true,
+				match: similarityPercent.toFixed(2),
+				data: results,
+				// subTopicTitle: subtopic.name, // always include as subTopicTitle
+				subtopic: subtopic.name // keep for backward compatibility if frontend expects 'subtopic'
+			});
 
 
 		} catch (err) {

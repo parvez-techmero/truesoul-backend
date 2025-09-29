@@ -52,6 +52,7 @@ import { QuestionDelete } from "./routes/question-endpoints/questionDelete";
 import { UserAnswerList } from "./routes/user-answer-endpoints/userAnswerList";
 import { UserAnswerGet } from "./routes/user-answer-endpoints/userAnswerGet";
 import { UserAnswerCreate } from "./routes/user-answer-endpoints/userAnswerCreate";
+import { UserAnswerBulkCreate } from "./routes/user-answer-endpoints/userAnswerBulkCreate";
 import { UserAnswerUpdate } from "./routes/user-answer-endpoints/userAnswerUpdate";
 import { UserAnswerDelete } from "./routes/user-answer-endpoints/userAnswerDelete";
 import { UserCreate } from "./routes/user-endpoints/userCreate";
@@ -135,6 +136,7 @@ export function setUpOpenAPI(app) {
     openapi.get(`/api/user-answers`, UserAnswerList);
     openapi.get(`/api/user-answers/:id`, UserAnswerGet);
     openapi.post(`/api/user-answers`, UserAnswerCreate);
+    openapi.post(`/api/user-answers/bulk`, UserAnswerBulkCreate);
     openapi.put(`/api/user-answers/:id`, UserAnswerUpdate);
     openapi.delete(`/api/user-answers/:id`, UserAnswerDelete);
 
