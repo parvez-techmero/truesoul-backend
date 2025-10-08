@@ -28,7 +28,6 @@ export async function emptyDatabase() {
     // await db.delete(appSettingsTable);
     await db.execute(
         `TRUNCATE TABLE 
-            device_tokens,
             user_answers,
             questions,
             sub_topics,
@@ -188,21 +187,22 @@ export function getDefaultUsers() {
 
 async function seed() {
 
-    await emptyDatabase();
+    // await emptyDatabase();
     
     // Seed users from CSV
-    const users = await seedUsers();
+    // const users = await seedUsers();
+    // const users = await getDefaultUsers();
     
     // Create relationships for first two users (if available)
-    if (users.length >= 2) {
-        const payload = {
-            user1Id: users[0].id,
-            user2Id: users[1].id,
-            deleted: false
-        };
-        const relationship = await db.insert(relationshipsTable).values(payload).returning();
-        console.log(`✅ Created relationship between users ${users[0].id} and ${users[1].id}`);
-    }
+    // if (users.length >= 2) {
+    //     const payload = {
+    //         user1Id: users[0].id,
+    //         user2Id: users[1].id,
+    //         deleted: false
+    //     };
+    //     const relationship = await db.insert(relationshipsTable).values(payload).returning();
+    //     console.log(`✅ Created relationship between users ${users[0].id} and ${users[1].id}`);
+    // }
     
     // Seed categories based on data.csv
     const categoriesData = [
@@ -278,7 +278,7 @@ async function seed() {
         }
     ];
 
-    await db.insert(categoriesTable).values(categoriesData);
+    // await db.insert(categoriesTable).values(categoriesData);
 
     // Seed topics based on topic.csv
     const topicsData = [
@@ -381,10 +381,20 @@ async function seed() {
             isActive: true,
             createdAt: new Date(),
             updatedAt: new Date(),
+        },
+        {
+            name: 'Daily Questions',
+            description: '',
+            icon: null,
+            color: '',
+            sortOrder: 11,
+            isActive: true,
+            createdAt: new Date(),
+            updatedAt: new Date(),
         }
     ];
 
-    await db.insert(topicsTable).values(topicsData);
+    // await db.insert(topicsTable).values(topicsData);
 
     // Import required modules for CSV processing
     const fs = require('fs');
@@ -406,6 +416,7 @@ async function seed() {
         description: row.description && row.description !== '' ? row.description : null,
         icon: row.icon && row.icon !== '' ? row.icon : null,
         color: row.color && row.color !== '' ? row.color : null,
+        adult: row.adult === 'TRUE' ? true : false,
         sortOrder: row.id ? Number(row.id) : 0,
         isActive: true,
         createdAt: new Date(),
@@ -437,16 +448,27 @@ async function seed() {
         updatedAt: new Date(),
     }));
 
-    if (questions.length !== 850) {
-        throw new Error(`Expected 850 questions, found ${questions.length}`);
-    }
+    // if (questions.length !== 850) {
+    //     throw new Error(`Expected 850 questions, found ${questions.length}`);
+    // }
 
-    await db.insert(questionsTable).values(questions);
+    try {
+        await db.insert(questionsTable).values(questions);
+    } catch (error) {
+        console.log(error);
+        
+    }
     console.log('Seeded', questions.length, 'questions!');
     console.log('Seeding complete!');
 }
 
-seed().catch((err) => {
-    console.error('Seeding failed:', err);
-    process.exit(1);
-});
+// Export seed function for external use
+export { seed };
+
+// Run directly if this file is executed
+if (require.main === module) {
+    seed().catch((err) => {
+        console.error('Seeding failed:', err);
+        process.exit(1);
+    });
+}

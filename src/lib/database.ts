@@ -21,7 +21,7 @@ import 'dotenv/config'
 
 // Create PostgreSQL connection pool
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL || "postgresql://postgres:12345678@localhost:5432/truesoul",
+  connectionString: process.env.DATABASE_URL || "postgresql://postgres:12345678@localhost:5432/school_kys",
 });
 
 // Create Drizzle instance with all tables

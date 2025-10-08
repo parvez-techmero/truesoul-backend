@@ -12,7 +12,10 @@ export class RelationshipUpdate extends OpenAPIRoute {
         content: {
           "application/json": {
             schema: z.object({
-              status: z.string(),
+              status: z.string().optional(),
+              deleted: z.boolean().optional(),
+              reason: z.string().optional(),
+              startedAt: z.string().optional(),
             }),
           },
         },
@@ -51,11 +54,35 @@ export class RelationshipUpdate extends OpenAPIRoute {
     const { body, params } = await this.getValidatedData<typeof this.schema>();
     const db = c.get('db');
     try {
-      const updated = await db.update(relationshipsTable).set(body).where(and(eq(relationshipsTable.id, params.id), eq(relationshipsTable.deleted, false))).returning();
-      if (!updated.length) {
+      // Check if relationship exists (allow updating even deleted ones)
+      const existing = await db.select().from(relationshipsTable).where(eq(relationshipsTable.id, params.id));
+      if (!existing.length) {
         return c.json({ success: false, message: 'Relationship not found' }, 404);
       }
-      return c.json({ success: true, relationship: updated[0] });
+
+      // Prepare update data
+      const updateData: any = {
+        ...body,
+        updatedAt: new Date().toISOString()
+      };
+
+      // If reconnecting (setting deleted to false), reset startedAt
+      if (body.deleted === false && existing[0].deleted === true) {
+        updateData.startedAt = new Date().toISOString();
+      }
+
+      const updated = await db.update(relationshipsTable)
+        .set(updateData)
+        .where(eq(relationshipsTable.id, params.id))
+        .returning();
+      
+      return c.json({ 
+        success: true, 
+        relationship: updated[0],
+        message: body.deleted === false && existing[0].deleted === true 
+          ? 'Relationship reconnected successfully' 
+          : 'Relationship updated successfully'
+      });
     } catch (err) {
       return c.json({ error: 'Failed to update relationship', detail: err instanceof Error ? err.message : String(err) }, 500);
     }

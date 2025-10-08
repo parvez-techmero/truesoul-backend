@@ -9,15 +9,9 @@ export class JournalDelete extends OpenAPIRoute {
     tags: ["Journal"],
     summary: "Delete Journal Entry",
     request: {
-      body: {
-        content: {
-          "application/json": {
-            schema: z.object({
-              id: Num(),
-            }),
-          },
-        },
-      },
+      params: z.object({
+        id: Num(),
+      }),
     },
     responses: {
       "200": {
@@ -34,11 +28,11 @@ export class JournalDelete extends OpenAPIRoute {
   };
 
   async handle(c) {
-    const { body } = await this.getValidatedData<typeof this.schema>();
+    const { params } = await this.getValidatedData<typeof this.schema>();
     const db = c.get('db');
     try {
-      await db.delete(journalTable).where(eq(journalTable.id, body.id));
-      return c.json({ success: true });
+      await db.delete(journalTable).where(eq(journalTable.id, params.id));
+      return c.json({ success: true, message: 'Journal deleted successfully' });
     } catch (err) {
       return c.json({ success: false, error: err instanceof Error ? err.message : String(err) }, 500);
     }

@@ -5,6 +5,8 @@ import { JournalList } from "./routes/journal-endpoints/journalList";
 import { JournalUpdate } from "./routes/journal-endpoints/journalUpdate";
 import { JournalDelete } from "./routes/journal-endpoints/journalDelete";
 import { JournalAll } from "./routes/journal-endpoints/journalAll";
+import { JournalCommentCreate } from "./routes/journal-endpoints/journalCommentCreate";
+import { JournalCommentList } from "./routes/journal-endpoints/journalCommentList";
 import { fromHono } from "chanfana";
 import { UserList } from "./routes/user-endpoints/userList";
 import { UserListDeleted } from "./routes/user-endpoints/userListDeleted";
@@ -55,6 +57,7 @@ import { UserAnswerCreate } from "./routes/user-answer-endpoints/userAnswerCreat
 import { UserAnswerBulkCreate } from "./routes/user-answer-endpoints/userAnswerBulkCreate";
 import { UserAnswerUpdate } from "./routes/user-answer-endpoints/userAnswerUpdate";
 import { UserAnswerDelete } from "./routes/user-answer-endpoints/userAnswerDelete";
+import { UserAnswerWithImage } from "./routes/user-answer-endpoints/userAnswerWithImage";
 import { UserCreate } from "./routes/user-endpoints/userCreate";
 import { UserProfileImageUpdate } from "./routes/user-endpoints/userProfileUpdate";
 import { RelationshipCreateWithInviteCode } from "./routes/relationship-endpoints/relationshipCreateWithInviteCode";
@@ -63,6 +66,14 @@ import { UserProgressBySubtopic } from "./routes/user-progress/userProgressBySub
 import { UserProgressByTopic, UserProgressByCategory } from "./routes/user-progress/userProgressByTopicAndCategory";
 import { UserProgressDivisions } from "./routes/user-progress/userProgressDivisions";
 import { UserProgressSubtopicDivisions } from "./routes/user-progress/userProgressSubtopicDivisions";
+import { HomeGet } from "./routes/home-endpoints/home";
+
+import { DailyQuestionsGet } from "./routes/home-endpoints/dailyQuestions";
+
+import { RandomSubTopicsGet } from "./routes/home-endpoints/randomSubTopic";
+import { StreakSingleUserGet } from "./routes/streak-endpoints/streakSingleUser";
+import { RecordAppOpenPost } from "./routes/streak-endpoints/recordAppOpen";
+import { StreakRelationshipGet } from "./routes/streak-endpoints/streakRelationship";
 
 export function setUpOpenAPI(app) {
     const openapi = fromHono(app, {
@@ -89,7 +100,7 @@ export function setUpOpenAPI(app) {
 
     // Relationship endpoints
     openapi.get(`/api/relationships`, RelationshipList);
-    openapi.get(`/api/relationships/:id`, RelationshipGet);
+    openapi.get(`/api/relationships/get`, RelationshipGet);
     openapi.post(`/api/relationships`, RelationshipCreate);
     openapi.post(`/api/relationships/invite`, RelationshipCreateWithInviteCode);
     openapi.put(`/api/relationships/:id`, RelationshipUpdate);
@@ -131,25 +142,43 @@ export function setUpOpenAPI(app) {
     openapi.put(`/api/questions/:id`, QuestionUpdate);
     openapi.delete(`/api/questions/:id`, QuestionDelete);
 
+    // Streak endpoints
+    openapi.get(`/api/streak/single-user`, StreakSingleUserGet);
+    openapi.get(`/api/streak/relationship`, StreakRelationshipGet);
+    openapi.post(`/api/streak/record-app-open`, RecordAppOpenPost);
+
 
     // User Answer endpoints
     openapi.get(`/api/user-answers`, UserAnswerList);
     openapi.get(`/api/user-answers/:id`, UserAnswerGet);
     openapi.post(`/api/user-answers`, UserAnswerCreate);
     openapi.post(`/api/user-answers/bulk`, UserAnswerBulkCreate);
+    openapi.post(`/api/user-answers/with-image`, UserAnswerWithImage);
     openapi.put(`/api/user-answers/:id`, UserAnswerUpdate);
     openapi.delete(`/api/user-answers/:id`, UserAnswerDelete);
 
     // Journal endpoints
-    openapi.post(`/api/journals`, JournalCreate);
+    openapi.get(`/api/journals/all`, JournalAll); // All journals datewise
+    openapi.post(`/api/journal-create`, JournalCreate);
     openapi.get(`/api/journals/:id`, JournalGet);
     openapi.get(`/api/journals`, JournalList);
-    openapi.get(`/api/journals/all`, JournalAll); // All journals datewise
-    openapi.put(`/api/journals/:id`, JournalUpdate);
+    openapi.post(`/api/journals`, JournalUpdate);
     openapi.delete(`/api/journals/:id`, JournalDelete);
+    openapi.post(`/api/journals/:id/comment`, JournalCommentCreate);
+    openapi.get(`/api/journals/:id/comments`, JournalCommentList);
 
     // Result endpoints
     openapi.get(`/api/results/by-relationship-and-subtopic`, ResultGetByRelationshipAndSubtopic);
+    openapi.get(`/api/results/single-question`, require('./routes/result-endpoints/resultSingle').ResultSingleQuestion);
+
+    // Home endpoints
+    openapi.get(`/api/home`, HomeGet);
+
+    // Random Subtopics endpoint
+    openapi.get(`/api/home/random-subtopics`, RandomSubTopicsGet);
+
+    // Daily Questions endpoint
+    openapi.get(`/api/daily-questions`, DailyQuestionsGet);
 
     return openapi;
 }

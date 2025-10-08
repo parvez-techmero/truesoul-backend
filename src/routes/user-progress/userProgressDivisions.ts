@@ -1,6 +1,6 @@
 import { OpenAPIRoute, Bool } from "chanfana";
 import { z } from "zod";
-import { categoriesTable, topicsTable, subTopicsTable, questionsTable, userAnswersTable } from '../../db/schema';
+import { categoriesTable, topicsTable, subTopicsTable, questionsTable, userAnswersTable, usersTable } from '../../db/schema';
 import { eq, or, and } from "drizzle-orm";
 
 const divisionEnum = z.enum(['all', 'your_turn', 'answered', 'completed']);
@@ -143,8 +143,18 @@ export class UserProgressDivisions extends OpenAPIRoute {
   }
 
   private async getSubtopics(db, userId: number, categoryId?: string, topicId?: string) {
+    // Get user's hideContent setting
+    const [user] = await db.select({ hideContent: usersTable.hideContent })
+      .from(usersTable)
+      .where(eq(usersTable.id, userId));
+    
     // Build subtopic filter conditions
     const conditions = [eq(subTopicsTable.isActive, true)];
+    
+    // Filter adult content if user has hideContent enabled
+    if (user?.hideContent) {
+      conditions.push(eq(subTopicsTable.adult, false));
+    }
     
     if (categoryId) {
       conditions.push(eq(subTopicsTable.categoryId, parseInt(categoryId)));

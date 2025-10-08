@@ -186,6 +186,7 @@ export const createSubTopicSchema = z.object({
   description: z.string().nullable().optional(),
   icon: z.string().max(100).nullable().optional(),
   color: z.string().regex(/^#[0-9A-F]{6}$/i, "Invalid hex color").nullable().optional(),
+  adult: z.boolean().default(false),
   sortOrder: z.number().int().min(0).default(0),
   isActive: z.boolean().default(true),
 });
@@ -297,8 +298,8 @@ export const quizSessionWithDetailsSchema = quizSessionSchema.extend({
 export const createUserAnswerSchema = z.object({
   userId: idSchema,
   questionId: idSchema,
-  quizSessionId: idSchema.optional(),
-  answerText: z.string().optional(),
+  answerText: z.string().nullable().optional(),
+  answerImage: z.string().nullable().optional(), // URL to image if applicable
   timeSpentSeconds: z.number().int().min(0).optional(),
 });
 
@@ -314,27 +315,6 @@ export const userAnswerSchema = createUserAnswerSchema.extend({
 //   answerOption: answerOptionSchema.optional(),
 // });
 
-// ===============================
-// QUIZ RESULT SCHEMAS
-// ===============================
-
-export const quizResultSchema = z.object({
-  id: idSchema,
-  quizSessionId: idSchema,
-  questionId: idSchema,
-  user1AnswerId: idSchema.optional(),
-  user2AnswerId: idSchema.optional(),
-  user1Correct: z.boolean().optional(),
-  user2Correct: z.boolean().optional(),
-  bothCorrect: z.boolean().default(false),
-  createdAt: timestampSchema,
-});
-
-export const quizResultWithDetailsSchema = quizResultSchema.extend({
-  // question: questionWithOptionsSchema.optional(),
-  user1Answer: userAnswerSchema.optional(),
-  user2Answer: userAnswerSchema.optional(),
-});
 
 // ===============================
 // USER PROGRESS SCHEMAS
@@ -413,7 +393,6 @@ export const quizSessionQuerySchema = z.object({
 export const userAnswerQuerySchema = z.object({
   userId: idSchema.optional(),
   questionId: idSchema.optional(),
-  quizSessionId: idSchema.optional(),
   startDate: z.coerce.date().optional(),
   endDate: z.coerce.date().optional(),
 }).merge(paginationSchema);
@@ -516,6 +495,29 @@ export const createDeviceTokenSchema = z.object({
 });
 
 // ===============================
+// JOURNAL SCHEMAS
+// ===============================
+
+export const journalSchema = z.object({
+  id: z.number(),
+  relationshipId: z.number().nullable().optional(),
+  createdByUserId: z.number().nullable().optional(),
+  type: z.string(),
+  title: z.string().nullable(),
+  colorCode: z.string().nullable(),
+  dateTime: z.string().nullable(),
+  location: z.string().nullable(),
+  lat: z.string().nullable(),
+  long: z.string().nullable(),
+  images: z.string().nullable(),
+  description: z.string().nullable(),
+  createdAt: z.string().nullable(),
+  updatedAt: z.string().nullable(),
+});
+
+export const createJournalSchema = journalSchema.omit({ id: true, createdAt: true, updatedAt: true });
+
+// ===============================
 // VALIDATION HELPER FUNCTIONS
 // ===============================
 
@@ -584,9 +586,6 @@ export type UserAnswer = z.infer<typeof userAnswerSchema>;
 export type CreateUserAnswer = z.infer<typeof createUserAnswerSchema>;
 // export type UserAnswerWithDetails = z.infer<typeof userAnswerWithDetailsSchema>;
 
-// Quiz result types
-export type QuizResult = z.infer<typeof quizResultSchema>;
-export type QuizResultWithDetails = z.infer<typeof quizResultWithDetailsSchema>;
 
 // Progress types
 export type UserProgress = z.infer<typeof userProgressSchema>;
@@ -616,3 +615,7 @@ export type UpdateAppSetting = z.infer<typeof updateAppSettingSchema>;
 // Device token types
 export type DeviceToken = z.infer<typeof deviceTokenSchema>;
 export type CreateDeviceToken = z.infer<typeof createDeviceTokenSchema>;
+
+// Journal types
+export type Journal = z.infer<typeof journalSchema>;
+export type CreateJournal = z.infer<typeof createJournalSchema>;

@@ -49,56 +49,56 @@ id,subTopicId,questionText,questionType,optionText,optionImg
 48,5,Never have I ever avoided serious conversations about the future of a project or relationship,yes_no,,
 49,5,Never have I ever broken a streak or habit I was trying to build,yes_no,,
 50,5,"Never have I ever felt unsure about committing long-term to a person, goal, or brand",yes_no,,
-51,6,Beach vacation 🏖️ or Mountain getaway ⛰️?,thisthatImage,"['Beach vacation', 'Mountain getaway']","['images/Beach vacation', 'images/Mountain getaway']"
-52,6,Road trip 🚗 or Flight ✈️?,thisthatImage,"['Road trip', 'Flight']","['images/Road trip', 'images/Flight']"
-53,6,Camping ⛺ or Luxury hotel 🏨?,thisthatImage,"['Camping', 'Luxury hotel']","['images/Camping', 'images/Luxury hotel']"
-54,6,Adventure travel 🧗 or Relaxation trip 🛶?,thisthatImage,"['Adventure travel', 'Relaxation trip']","['images/Adventure travel', 'images/Relaxation trip']"
-55,6,Solo travel 👤 or Group travel 👥?,thisthatImage,"['Solo travel', 'Group travel']","['images/Solo travel', 'images/Group travel']"
-56,6,Backpacking 🎒 or Cruise ship 🚢?,thisthatImage,"['Backpacking', 'Cruise ship']","['images/Backpacking', 'images/Cruise ship']"
-57,6,Winter holiday ❄️ or Summer holiday ☀️?,thisthatImage,"['Winter holiday', 'Summer holiday']","['images/Winter holiday', 'images/Summer holiday']"
-58,6,Sunrise 🌅 or Sunset 🌇?,thisthatImage,"['Sunrise', 'Sunset']","['images/Sunrise', 'images/Sunset']"
-59,6,Airbnb 🏡 or Hotel 🏨?,thisthatImage,"['Airbnb', 'Hotel']","['images/Airbnb', 'images/Hotel']"
-60,6,Shopping trip 🛍️ or Adventure trip 🚴?,thisthatImage,"['Shopping trip', 'Adventure trip']","['images/Shopping trip', 'images/Adventure trip']"
-61,7,Pizza 🍕 or Burger 🍔?,thisthatImage,"['Pizza', 'Burger']","['images/Pizza', 'images/Burger']"
-62,7,Ice cream 🍨 or Cake 🎂?,thisthatImage,"['Ice cream', 'Cake']","['images/Ice cream', 'images/Cake']"
-63,7,Sweet snacks 🍬 or Savory snacks 🧂?,thisthatImage,"['Sweet snacks', 'Savory snacks']","['images/Sweet snacks', 'images/Savory snacks']"
-64,7,Coke 🥤 or Glass of juice 🧃?,thisthatImage,"['Coke', 'Glass of juice']","['images/Coke', 'images/Glass of juice']"
-65,7,Crispy fries 🍟 or Crunchy onion rings 🧅?,thisthatImage,"['Crispy fries', 'Crunchy onion rings']","['images/Crispy fries', 'images/Crunchy onion rings']"
-66,7,Pasta 🍝 or Noodles 🍜?,thisthatImage,"['Pasta', 'Noodles']","['images/Pasta', 'images/Noodles']"
-67,7,Wine 🍷 or Beer 🍺?,thisthatImage,"['Wine', 'Beer']","['images/Wine', 'images/Beer']"
-68,7,Indian curries 🍛 or Mediterranean dishes 🥙?,thisthatImage,"['Indian curries', 'Mediterranean dishes']","['images/Indian curries', 'images/Mediterranean dishes']"
-69,7,Breakfast foods 🍳 or Dinner foods 🍽️?,thisthatImage,"['Breakfast foods', 'Dinner foods']","['images/Breakfast foods', 'images/Dinner foods']"
-70,7,Italian cuisine 🍝 or Mexican cuisine 🌮?,thisthatImage,"['Italian cuisine', 'Mexican cuisine']","['images/Italian cuisine', 'images/Mexican cuisine']"
-71,8,Movies 🎬 or TV Shows 📺,thisthatImage,"[ 'Movies', 'TV Shows' ]","['images/Movies', 'images/TV Shows']"
-72,8,Netflix 🍿 or YouTube ▶️,thisthatImage,"[ 'Netflix', 'YouTube' ]","['images/Netflix', 'images/YouTube']"
-73,8,Comedy 😂 or Horror 👻,thisthatImage,"[ 'Comedy', 'Horror' ]","['images/Comedy', 'images/Horror']"
-74,8,Action 💥 or Romance 💕,thisthatImage,"[ 'Action', 'Romance' ]","['images/Action', 'images/Romance']"
-75,8,Marvel 🦸 or DC 🦇,thisthatImage,"[ 'Marvel', 'DC' ]","['images/Marvel', 'images/DC']"
-76,8,Dancing 💃 or Singing 🎶,thisthatImage,"[ 'Dancing', 'Singing' ]","['images/Dancing', 'images/Singing']"
-77,8,Gaming 🎮 or Reading 📚,thisthatImage,"[ 'Gaming', 'Reading' ]","['images/Gaming', 'images/Reading']"
-78,8,Indoor Games 🏓 or Outdoor Sports ⚽,thisthatImage,"[ 'Indoor Games', 'Outdoor Sports' ]","['images/Indoor Games', 'images/Outdoor Sports']"
-79,8,TikTok 🎥 or Reels 📱,thisthatImage,"[ 'TikTok', 'Reels' ]","['images/TikTok', 'images/Reels']"
-80,8,Reality TV 📺 or Documentaries 🎬,thisthatImage,"[ 'Reality TV', 'Documentaries' ]","['images/Reality TV', 'images/Documentaries']"
-81,9,Night In 🛋️ or Date Night Out 🍷,thisthatImage,"[ 'Night In', 'Date Night Out' ]","['images/Night In', 'images/Date Night Out']"
-82,9,Romantic Texts 💌 or Surprise Calls 📞,thisthatImage,"[ 'Romantic Texts', 'Surprise Calls' ]","['images/Romantic Texts', 'images/Surprise Calls']"
-83,9,Holding Hands ✋❤️✋ or Hugs 🫂,thisthatImage,"[ 'Holding Hands', 'Hugs' ]","['images/Holding Hands', 'images/Hugs']"
-84,9,Love Letters ✍️ or Voice Notes 🎤,thisthatImage,"[ 'Love Letters', 'Voice Notes' ]","['images/Love Letters', 'images/Voice Notes']"
-85,9,Matching Outfits 👕👚 or Secret Symbols 🔑,thisthatImage,"[ 'Matching Outfits', 'Secret Symbols' ]","['images/Matching Outfits', 'images/Secret Symbols']"
-86,9,Sweet Nicknames 🐻 or Inside Jokes 😂,thisthatImage,"[ 'Sweet Nicknames', 'Inside Jokes' ]","['images/Sweet Nicknames', 'images/Inside Jokes']"
-87,9,Movie Marathons 🎬 or Stargazing ✨,thisthatImage,"[ 'Movie Marathons', 'Stargazing' ]","['images/Movie Marathons', 'images/Stargazing']"
-88,9,Adventure Dates 🚴 or Chill Days 🛋️,thisthatImage,"[ 'Adventure Dates', 'Chill Days' ]","['images/Adventure Dates', 'images/Chill Days']"
-89,9,Cooking Together 🍳 or Ordering Takeout 🍱,thisthatImage,"[ 'Cooking Together', 'Ordering Takeout' ]","['images/Cooking Together', 'images/Ordering Takeout']"
-90,9,Compliments 💖 or Teasing 😉,thisthatImage,"[ 'Compliments', 'Teasing' ]","['images/Compliments', 'images/Teasing']"
-91,10,Early Bird 🌅 or Night Owl 🌙,thisthatImage,"['Early Bird', 'Night Owl']","['images/Early Bird', 'images/Night Owl']"
-92,10,Introvert 🤫 or Extrovert 🎉,thisthatImage,"['Introvert', 'Extrovert']","['images/Introvert', 'images/Extrovert']"
-93,10,Talkative 🗣️ or Listener 👂,thisthatImage,"['Talkative', 'Listener']","['images/Talkative', 'images/Listener']"
-94,10,Leader 🦁 or Follower 🐑,thisthatImage,"['Leader', 'Follower']","['images/Leader', 'images/Follower']"
-95,10,Homebody 🏡 or Explorer 🗺️,thisthatImage,"['Homebody', 'Explorer']","['images/Homebody', 'images/Explorer']"
-96,10,Morning Workout 🏋️‍♂️ or Evening Workout 🏃‍♀️,thisthatImage,"['Morning Workout', 'Evening Workout']","['images/Morning Workout', 'images/Evening Workout']"
-97,10,Serious Face 😐 or Funny Face 🤪,thisthatImage,"['Serious Face', 'Funny Face']","['images/Serious Face', 'images/Funny Face']"
-98,10,Stay Up Late 🌌 or Sleep Early 🛏️,thisthatImage,"['Stay Up Late', 'Sleep Early']","['images/Stay Up Late', 'images/Sleep Early']"
-99,10,Spender 💸 or Saver 🏦,thisthatImage,"['Spender', 'Saver']","['images/Spender', 'images/Saver']"
-100,10,Fast Walker 🚶‍♂️💨 or Slow Stroller 🚶‍♀️🌸,thisthatImage,"['Fast Walker', 'Slow Stroller']","['images/Fast Walker', 'images/Slow Stroller']"
+51,6,Beach vacation 🏖️ or Mountain getaway ⛰️?,thisthatImage,"['Beach vacation', 'Mountain getaway']","['https://truesoul.b-cdn.net/images/Beach vacation.png', 'https://truesoul.b-cdn.net/images/Mountain getaway.png']"
+52,6,Road trip 🚗 or Flight ✈️?,thisthatImage,"['Road trip', 'Flight']","['https://truesoul.b-cdn.net/images/Road trip.png', 'https://truesoul.b-cdn.net/images/Flight.png']"
+53,6,Camping ⛺ or Luxury hotel 🏨?,thisthatImage,"['Camping', 'Luxury hotel']","['https://truesoul.b-cdn.net/images/Camping.png', 'https://truesoul.b-cdn.net/images/Luxury hotel.png']"
+54,6,Adventure travel 🧗 or Relaxation trip 🛶?,thisthatImage,"['Adventure travel', 'Relaxation trip']","['https://truesoul.b-cdn.net/images/Adventure travel.png', 'https://truesoul.b-cdn.net/images/Relaxation trip.png']"
+55,6,Solo travel 👤 or Group travel 👥?,thisthatImage,"['Solo travel', 'Group travel']","['https://truesoul.b-cdn.net/images/Solo travel.png', 'https://truesoul.b-cdn.net/images/Group travel.png']"
+56,6,Backpacking 🎒 or Cruise ship 🚢?,thisthatImage,"['Backpacking', 'Cruise ship']","['https://truesoul.b-cdn.net/images/Backpacking.png', 'https://truesoul.b-cdn.net/images/Cruise ship.png']"
+57,6,Winter holiday ❄️ or Summer holiday ☀️?,thisthatImage,"['Winter holiday', 'Summer holiday']","['https://truesoul.b-cdn.net/images/Winter holiday.png', 'https://truesoul.b-cdn.net/images/Summer holiday.png']"
+58,6,Sunrise 🌅 or Sunset 🌇?,thisthatImage,"['Sunrise', 'Sunset']","['https://truesoul.b-cdn.net/images/Sunrise.png', 'https://truesoul.b-cdn.net/images/Sunset.png']"
+59,6,Airbnb 🏡 or Hotel 🏨?,thisthatImage,"['Airbnb', 'Hotel']","['https://truesoul.b-cdn.net/images/Airbnb.png', 'https://truesoul.b-cdn.net/images/Hotel.png']"
+60,6,Shopping trip 🛍️ or Adventure trip 🚴?,thisthatImage,"['Shopping trip', 'Adventure trip']","['https://truesoul.b-cdn.net/images/Shopping trip.png', 'https://truesoul.b-cdn.net/images/Adventure trip.png']"
+61,7,Pizza 🍕 or Burger 🍔?,thisthatImage,"['Pizza', 'Burger']","['https://truesoul.b-cdn.net/images/Pizza.png', 'https://truesoul.b-cdn.net/images/Burger.png']"
+62,7,Ice cream 🍨 or Cake 🎂?,thisthatImage,"['Ice cream', 'Cake']","['https://truesoul.b-cdn.net/images/Ice cream.png', 'https://truesoul.b-cdn.net/images/Cake.png']"
+63,7,Sweet snacks 🍬 or Savory snacks 🧂?,thisthatImage,"['Sweet snacks', 'Savory snacks']","['https://truesoul.b-cdn.net/images/Sweet snacks.png', 'https://truesoul.b-cdn.net/images/Savory snacks.png']"
+64,7,Coke 🥤 or Glass of juice 🧃?,thisthatImage,"['Coke', 'Glass of juice']","['https://truesoul.b-cdn.net/images/Coke.png', 'https://truesoul.b-cdn.net/images/Glass of juice.png']"
+65,7,Crispy fries 🍟 or Crunchy onion rings 🧅?,thisthatImage,"['Crispy fries', 'Crunchy onion rings']","['https://truesoul.b-cdn.net/images/Crispy fries.png', 'https://truesoul.b-cdn.net/images/Crunchy onion rings.png']"
+66,7,Pasta 🍝 or Noodles 🍜?,thisthatImage,"['Pasta', 'Noodles']","['https://truesoul.b-cdn.net/images/Pasta.png', 'https://truesoul.b-cdn.net/images/Noodles.png']"
+67,7,Wine 🍷 or Beer 🍺?,thisthatImage,"['Wine', 'Beer']","['https://truesoul.b-cdn.net/images/Wine.png', 'https://truesoul.b-cdn.net/images/Beer.png']"
+68,7,Indian curries 🍛 or Mediterranean dishes 🥙?,thisthatImage,"['Indian curries', 'Mediterranean dishes']","['https://truesoul.b-cdn.net/images/Indian curries.png', 'https://truesoul.b-cdn.net/images/Mediterranean dishes.png']"
+69,7,Breakfast foods 🍳 or Dinner foods 🍽️?,thisthatImage,"['Breakfast foods', 'Dinner foods']","['https://truesoul.b-cdn.net/images/Breakfast foods.png', 'https://truesoul.b-cdn.net/images/Dinner foods.png']"
+70,7,Italian cuisine 🍝 or Mexican cuisine 🌮?,thisthatImage,"['Italian cuisine', 'Mexican cuisine']","['https://truesoul.b-cdn.net/images/Italian cuisine.png', 'https://truesoul.b-cdn.net/images/Mexican cuisine.png']"
+71,8,Movies 🎬 or TV Shows 📺,thisthatImage,"[ 'Movies', 'TV Shows' ]","['https://truesoul.b-cdn.net/images/Movies.png', 'https://truesoul.b-cdn.net/images/TV Shows.png']"
+72,8,Netflix 🍿 or YouTube ▶️,thisthatImage,"[ 'Netflix', 'YouTube' ]","['https://truesoul.b-cdn.net/images/Netflix.png', 'https://truesoul.b-cdn.net/images/YouTube.png']"
+73,8,Comedy 😂 or Horror 👻,thisthatImage,"[ 'Comedy', 'Horror' ]","['https://truesoul.b-cdn.net/images/Comedy.png', 'https://truesoul.b-cdn.net/images/Horror.png']"
+74,8,Action 💥 or Romance 💕,thisthatImage,"[ 'Action', 'Romance' ]","['https://truesoul.b-cdn.net/images/Action.png', 'https://truesoul.b-cdn.net/images/Romance.png']"
+75,8,Marvel 🦸 or DC 🦇,thisthatImage,"[ 'Marvel', 'DC' ]","['https://truesoul.b-cdn.net/images/Marvel.png', 'https://truesoul.b-cdn.net/images/DC.png']"
+76,8,Dancing 💃 or Singing 🎶,thisthatImage,"[ 'Dancing', 'Singing' ]","['https://truesoul.b-cdn.net/images/Dancing.png', 'https://truesoul.b-cdn.net/images/Singing.png']"
+77,8,Gaming 🎮 or Reading 📚,thisthatImage,"[ 'Gaming', 'Reading' ]","['https://truesoul.b-cdn.net/images/Gaming.png', 'https://truesoul.b-cdn.net/images/Reading.png']"
+78,8,Indoor Games 🏓 or Outdoor Sports ⚽,thisthatImage,"[ 'Indoor Games', 'Outdoor Sports' ]","['https://truesoul.b-cdn.net/images/Indoor Games.png', 'https://truesoul.b-cdn.net/images/Outdoor Sports.png']"
+79,8,TikTok 🎥 or Reels 📱,thisthatImage,"[ 'TikTok', 'Reels' ]","['https://truesoul.b-cdn.net/images/TikTok.png', 'https://truesoul.b-cdn.net/images/Reels.png']"
+80,8,Reality TV 📺 or Documentaries 🎬,thisthatImage,"[ 'Reality TV', 'Documentaries' ]","['https://truesoul.b-cdn.net/images/Reality TV.png', 'https://truesoul.b-cdn.net/images/Documentaries.png']"
+81,9,Night In 🛋️ or Date Night Out 🍷,thisthatImage,"[ 'Night In', 'Date Night Out' ]","['https://truesoul.b-cdn.net/images/Night In.png', 'https://truesoul.b-cdn.net/images/Date Night Out.png']"
+82,9,Romantic Texts 💌 or Surprise Calls 📞,thisthatImage,"[ 'Romantic Texts', 'Surprise Calls' ]","['https://truesoul.b-cdn.net/images/Romantic Texts.png', 'https://truesoul.b-cdn.net/images/Surprise Calls.png']"
+83,9,Holding Hands ✋❤️✋ or Hugs 🫂,thisthatImage,"[ 'Holding Hands', 'Hugs' ]","['https://truesoul.b-cdn.net/images/Holding Hands.png', 'https://truesoul.b-cdn.net/images/Hugs.png']"
+84,9,Love Letters ✍️ or Voice Notes 🎤,thisthatImage,"[ 'Love Letters', 'Voice Notes' ]","['https://truesoul.b-cdn.net/images/Love Letters.png', 'https://truesoul.b-cdn.net/images/Voice Notes.png']"
+85,9,Matching Outfits 👕👚 or Secret Symbols 🔑,thisthatImage,"[ 'Matching Outfits', 'Secret Symbols' ]","['https://truesoul.b-cdn.net/images/Matching Outfits.png', 'https://truesoul.b-cdn.net/images/Secret Symbols.png']"
+86,9,Sweet Nicknames 🐻 or Inside Jokes 😂,thisthatImage,"[ 'Sweet Nicknames', 'Inside Jokes' ]","['https://truesoul.b-cdn.net/images/Sweet Nicknames.png', 'https://truesoul.b-cdn.net/images/Inside Jokes.png']"
+87,9,Movie Marathons 🎬 or Stargazing ✨,thisthatImage,"[ 'Movie Marathons', 'Stargazing' ]","['https://truesoul.b-cdn.net/images/Movie Marathons.png', 'https://truesoul.b-cdn.net/images/Stargazing.png']"
+88,9,Adventure Dates 🚴 or Chill Days 🛋️,thisthatImage,"[ 'Adventure Dates', 'Chill Days' ]","['https://truesoul.b-cdn.net/images/Adventure Dates.png', 'https://truesoul.b-cdn.net/images/Chill Days.png']"
+89,9,Cooking Together 🍳 or Ordering Takeout 🍱,thisthatImage,"[ 'Cooking Together', 'Ordering Takeout' ]","['https://truesoul.b-cdn.net/images/Cooking Together.png', 'https://truesoul.b-cdn.net/images/Ordering Takeout.png']"
+90,9,Compliments 💖 or Teasing 😉,thisthatImage,"[ 'Compliments', 'Teasing' ]","['https://truesoul.b-cdn.net/images/Compliments.png', 'https://truesoul.b-cdn.net/images/Teasing.png']"
+91,10,Early Bird 🌅 or Night Owl 🌙,thisthatImage,"['Early Bird', 'Night Owl']","['https://truesoul.b-cdn.net/images/Early Bird.png', 'https://truesoul.b-cdn.net/images/Night Owl.png']"
+92,10,Introvert 🤫 or Extrovert 🎉,thisthatImage,"['Introvert', 'Extrovert']","['https://truesoul.b-cdn.net/images/Introvert.png', 'https://truesoul.b-cdn.net/images/Extrovert.png']"
+93,10,Talkative 🗣️ or Listener 👂,thisthatImage,"['Talkative', 'Listener']","['https://truesoul.b-cdn.net/images/Talkative.png', 'https://truesoul.b-cdn.net/images/Listener.png']"
+94,10,Leader 🦁 or Follower 🐑,thisthatImage,"['Leader', 'Follower']","['https://truesoul.b-cdn.net/images/Leader.png', 'https://truesoul.b-cdn.net/images/Follower.png']"
+95,10,Homebody 🏡 or Explorer 🗺️,thisthatImage,"['Homebody', 'Explorer']","['https://truesoul.b-cdn.net/images/Homebody.png', 'https://truesoul.b-cdn.net/images/Explorer.png']"
+96,10,Morning Workout 🏋️‍♂️ or Evening Workout 🏃‍♀️,thisthatImage,"['Morning Workout', 'Evening Workout']","['https://truesoul.b-cdn.net/images/Morning Workout.png', 'https://truesoul.b-cdn.net/images/Evening Workout.png']"
+97,10,Serious Face 😐 or Funny Face 🤪,thisthatImage,"['Serious Face', 'Funny Face']","['https://truesoul.b-cdn.net/images/Serious Face.png', 'https://truesoul.b-cdn.net/images/Funny Face.png']"
+98,10,Stay Up Late 🌌 or Sleep Early 🛏️,thisthatImage,"['Stay Up Late', 'Sleep Early']","['https://truesoul.b-cdn.net/images/Stay Up Late.png', 'https://truesoul.b-cdn.net/images/Sleep Early.png']"
+99,10,Spender 💸 or Saver 🏦,thisthatImage,"['Spender', 'Saver']","['https://truesoul.b-cdn.net/images/Spender.png', 'https://truesoul.b-cdn.net/images/Saver.png']"
+100,10,Fast Walker 🚶‍♂️💨 or Slow Stroller 🚶‍♀️🌸,thisthatImage,"['Fast Walker', 'Slow Stroller']","['https://truesoul.b-cdn.net/images/Fast Walker.png', 'https://truesoul.b-cdn.net/images/Slow Stroller.png']"
 101,11,"Who's more likely to overpack for a holiday, bringing three suitcases for a weekend trip?",he_she,"[ 'He', 'She' ]",
 102,11,"Who's more likely to plan every detail of the holiday itinerary, down to the minute?",he_she,"[ 'He', 'She' ]",
 103,11,"Who's more likely to forget something essential like passport, before a trip?",he_she,"[ 'He', 'She' ]",
@@ -149,56 +149,56 @@ id,subTopicId,questionText,questionType,optionText,optionImg
 148,15,Who's more likely to suggest trying something totally new in the bedroom?,he_she,"[ 'He', 'She' ]",
 149,15,Who's more likely to reveal a hidden talent during a cozy night in?,he_she,"[ 'He', 'She' ]",
 150,15,Who's more likely to confess they’ve been keeping a quirky habit from you?,he_she,"[ 'He', 'She' ]",
-151,16,Would you rather go on a candlelight dinner or a cozy movie night at home?,multiple_choice,"['Candlelight dinner', 'Cozy movie night at home']",
-152,16,Would you rather fall asleep every night holding my hand or wake up every morning to my hug?,multiple_choice,"['Fall asleep every night holding my hand', 'Wake up every morning to my hug']",
-153,16,Would you rather cuddle under the stars or dance together in the rain?,multiple_choice,"[ 'Cuddle under the stars', 'Dance together in the rain' ]",
-154,16,Would you rather hold hands everywhere you go or share secret glances in public?,multiple_choice,"[ 'Hold hands everywhere you go', 'Share secret glances in public' ]",
-155,16,Would you rather have breakfast in bed made by your partner or cook dinner together?,multiple_choice,"[ 'Breakfast in bed made by your partner', 'Cook dinner together' ]",
-156,16,Would you rather spend Valentine’s Day traveling or at home with a special setup?,multiple_choice,"[ 'Spend Valentine’s Day traveling', 'At home with a special setup' ]",
-157,16,Would you rather grow old together in a small town or travel the world endlessly?,multiple_choice,"[ 'Grow old together in a small town', 'Travel the world endlessly' ]",
-158,16,Would you rather write your love story in a diary or capture it in photos?,multiple_choice,"[ 'Write your love story in a diary', 'Capture it in photos' ]",
-159,16,Would you rather go stargazing together or watch the sunrise together?,multiple_choice,"[ 'Go stargazing together', 'Watch the sunrise together' ]",
-160,16,Would you rather have matching outfits or matching tattoos with your partner?,multiple_choice,"[ 'Matching outfits', 'Matching tattoos with your partner' ]",
-161,17,Would you rather laugh so hard you snort in public or hiccup every time you try to flirt?,multiple_choice,"[ 'Laugh so hard you snort in public', 'Hiccup every time you try to flirt' ]",
-162,17,Would you rather forget your partner’s birthday every year or accidentally celebrate it twice a year?,multiple_choice,"[ 'Forget your partner’s birthday every year', 'Accidentally celebrate it twice a year' ]",
-163,17,Would you rather have me prank you every morning or tuck you in like a baby every night?,multiple_choice,"[ 'Have me prank you every morning', 'Tuck you in like a baby every night' ]",
-164,17,Would you rather laugh uncontrollably at serious moments or cry at hilarious jokes?,multiple_choice,"[ 'Laugh uncontrollably at serious moments', 'Cry at hilarious jokes' ]",
-165,17,Would you rather wear clown shoes to every romantic date or wear a cape and pretend to be a superhero?,multiple_choice,"[ 'Wear clown shoes to every romantic date', 'Wear a cape and pretend to be a superhero' ]",
-166,17,Would you rather swap faces with me for a week or swap voices with me for a week?,multiple_choice,"[ 'Swap faces with me for a week', 'Swap voices with me for a week' ]",
-167,17,Would you rather have me cut your hair blindfolded or let me pick your outfit every day for a week?,multiple_choice,"[ 'Have me cut your hair blindfolded', 'Let me pick your outfit every day for a week' ]",
-168,17,Would you rather have to whisper everything to me in public or shout everything at home?,multiple_choice,"[ 'Whisper everything to me in public', 'Shout everything at home' ]",
-169,17,Would you rather share one giant t-shirt forever or wear each other’s clothes for a month?,multiple_choice,"[ 'Share one giant t-shirt forever', 'Wear each other’s clothes for a month' ]",
-170,17,Would you rather get caught dancing in the shower by me or get caught singing super loudly in the car?,multiple_choice,"[ 'Get caught dancing in the shower by me', 'Get caught singing super loudly in the car' ]",
-171,18,Would you rather know all of your partner’s past secrets or never know any of them at all?,multiple_choice,"[ 'Know all of your partner’s past secrets', 'Never know any of them at all' ]",
-172,18,Would you rather relive your best memory with your partner once a year or create a brand-new memory every day but forget the old ones?,multiple_choice,"[ 'Relive your best memory with your partner once a year', 'Create a brand-new memory every day but forget the old ones' ]",
-173,18,Would you rather sacrifice your biggest dream for your partner or ask them to sacrifice theirs for you?,multiple_choice,"[ 'Sacrifice your biggest dream for your partner', 'Ask them to sacrifice theirs for you' ]",
-174,18,Would you rather your partner see your biggest strength or your deepest weakness first?,multiple_choice,"[ 'Your partner see your biggest strength first', 'Your partner see your deepest weakness first' ]",
-175,18,"Would you rather always tell the complete truth to your partner, even if it hurts, or protect them with small lies?",multiple_choice,"[ 'Always tell the complete truth to your partner, even if it hurts', 'Protect them with small lies' ]",
-176,18,"Would you rather face every challenge in life together but constantly struggle, or live an easy life but apart from each other?",multiple_choice,"[ 'Face every challenge in life together but constantly struggle', 'Live an easy life but apart from each other' ]",
-177,18,Would you rather your partner always know when you’re sad or always know when you’re lying?,multiple_choice,"[ 'Your partner always know when you’re sad', 'Your partner always know when you’re lying' ]",
-178,18,"Would you rather fall in love once and never again, or fall in love many times but never have lasting stability?",multiple_choice,"[ 'Fall in love once and never again', 'Fall in love many times but never have lasting stability' ]",
-179,18,Would you rather have your relationship tested by distance or tested by time apart in silence?,multiple_choice,"[ 'Have your relationship tested by distance', 'Have your relationship tested by time apart in silence' ]",
-180,18,Would you rather change one mistake from your past together or see one guaranteed success in your future together?,multiple_choice,"[ 'Change one mistake from your past together', 'See one guaranteed success in your future together' ]",
-181,19,Would you rather build your dream house in the city or in the countryside?,multiple_choice,"[ 'Build your dream house in the city', 'Build your dream house in the countryside' ]",
-182,19,Would you rather have a small cozy wedding or a big grand wedding?,multiple_choice,"[ 'Have a small cozy wedding', 'Have a big grand wedding' ]",
-183,19,Would you rather travel the world together or settle in one dream place?,multiple_choice,"[ 'Travel the world together', 'Settle in one dream place' ]",
-184,19,Would you rather adopt a pet first or have kids first?,multiple_choice,"[ 'Adopt a pet first', 'Have kids first' ]",
-185,19,Would you rather retire early and live simply or retire later and live luxuriously?,multiple_choice,"[ 'Retire early and live simply', 'Retire later and live luxuriously' ]",
-186,19,Would you rather be famous together or stay private but successful?,multiple_choice,"[ 'Be famous together', 'Stay private but successful' ]",
-187,19,Would you rather achieve career success first or relationship milestones first?,multiple_choice,"[ 'Achieve career success first', 'Achieve relationship milestones first' ]",
-188,19,Would you rather spend your future traveling for work or staying close to family?,multiple_choice,"[ 'Spend your future traveling for work', 'Stay close to family' ]",
-189,19,Would you rather raise kids in your hometown or in a completely new city?,multiple_choice,"[ 'Raise kids in your hometown', 'Raise kids in a completely new city' ]",
-190,19,Would you rather see the future or keep it a mystery?,multiple_choice,"[ 'See the future', 'Keep it a mystery' ]",
-191,20,Would you rather give me a forehead kiss in public or whisper something romantic in my ear?,multiple_choice,"[ 'Give me a forehead kiss in public', 'Whisper something romantic in my ear' ]",
-192,20,Would you rather dance with me in the middle of a crowded street or sing me a song in front of friends?,multiple_choice,"[ 'Dance with me in the middle of a crowded street', 'Sing me a song in front of friends' ]",
-193,20,Would you rather hold my hand for the next hour or carry me piggyback for five minutes?,multiple_choice,"[ 'Hold my hand for the next hour', 'Carry me piggyback for five minutes' ]",
-194,20,Would you rather post a cute couple selfie right now or write me a cheesy love caption online?,multiple_choice,"[ 'Post a cute couple selfie right now', 'Write me a cheesy love caption online' ]",
-195,20,Would you rather let me go through your phone for 10 minutes or give me your social media passwords for a day?,multiple_choice,"[ 'Let me go through your phone for 10 minutes', 'Give me your social media passwords for a day' ]",
-196,20,Would you rather do a silly TikTok dance with me or write me a short love poem?,multiple_choice,"[ 'Do a silly TikTok dance with me', 'Write me a short love poem' ]",
-197,20,Would you rather dance in the rain with me or watch the sunset while holding hands?,multiple_choice,"[ 'Dance in the rain with me', 'Watch the sunset while holding hands' ]",
-198,20,Would you rather let me draw something silly on your face with makeup or paint your nails in my favorite color?,multiple_choice,"[ 'Let me draw something silly on your face with makeup', 'Paint your nails in my favorite color' ]",
-199,20,Would you rather kiss me on the forehead 10 times in a row or give me one long slow kiss?,multiple_choice,"[ 'Kiss me on the forehead 10 times in a row', 'Give me one long slow kiss' ]",
-200,20,Would you rather let me take a funny video of you and post it or do a romantic reel together?,multiple_choice,"[ 'Let me take a funny video of you and post it', 'Do a romantic reel together' ]",
+151,16,Would you rather go on a candlelight dinner or a cozy movie night at home?,multiple_choice_Emoji,"['Candlelight dinner', 'Cozy movie night at home']","['🕯️','🎬']"
+152,16,Would you rather fall asleep every night holding my hand or wake up every morning to my hug?,multiple_choice_Emoji,"['Fall asleep every night holding my hand', 'Wake up every morning to my hug']","['🤝','🤗']"
+153,16,Would you rather cuddle under the stars or dance together in the rain?,multiple_choice_Emoji,"[ 'Cuddle under the stars', 'Dance together in the rain' ]","['🌌','💃']"
+154,16,Would you rather hold hands everywhere you go or share secret glances in public?,multiple_choice_Emoji,"[ 'Hold hands everywhere you go', 'Share secret glances in public' ]","['🤝','👀']"
+155,16,Would you rather have breakfast in bed made by your partner or cook dinner together?,multiple_choice_Emoji,"[ 'Breakfast in bed made by your partner', 'Cook dinner together' ]","['🍳','🍝']"
+156,16,Would you rather spend Valentine’s Day traveling or at home with a special setup?,multiple_choice_Emoji,"[ 'Spend Valentine’s Day traveling', 'At home with a special setup' ]","['✈️','🏠']"
+157,16,Would you rather grow old together in a small town or travel the world endlessly?,multiple_choice_Emoji,"[ 'Grow old together in a small town', 'Travel the world endlessly' ]","['🏡','🌍']"
+158,16,Would you rather write your love story in a diary or capture it in photos?,multiple_choice_Emoji,"[ 'Write your love story in a diary', 'Capture it in photos' ]","['📓','📸']"
+159,16,Would you rather go stargazing together or watch the sunrise together?,multiple_choice_Emoji,"[ 'Go stargazing together', 'Watch the sunrise together' ]","['🌠','🌅']"
+160,16,Would you rather have matching outfits or matching tattoos with your partner?,multiple_choice_Emoji,"[ 'Matching outfits', 'Matching tattoos with your partner' ]","['👗','🖋️']"
+161,17,Would you rather laugh so hard you snort in public or hiccup every time you try to flirt?,multiple_choice_Emoji,"[ 'Laugh so hard you snort in public', 'Hiccup every time you try to flirt' ]","['🤣', '😳']"
+162,17,Would you rather forget your partner’s birthday every year or accidentally celebrate it twice a year?,multiple_choice_Emoji,"[ 'Forget your partner’s birthday every year', 'Accidentally celebrate it twice a year' ]","['🎂❌', '🎂🎂']"
+163,17,Would you rather have me prank you every morning or tuck you in like a baby every night?,multiple_choice_Emoji,"[ 'Have me prank you every morning', 'Tuck you in like a baby every night' ]","['🤡📞', '👶🛏️']"
+164,17,Would you rather laugh uncontrollably at serious moments or cry at hilarious jokes?,multiple_choice_Emoji,"[ 'Laugh uncontrollably at serious moments', 'Cry at hilarious jokes' ]","['😂🚫', '🤣😭']"
+165,17,Would you rather wear clown shoes to every romantic date or wear a cape and pretend to be a superhero?,multiple_choice_Emoji,"[ 'Wear clown shoes to every romantic date', 'Wear a cape and pretend to be a superhero' ]","['👟🤡', '🦸‍♂️🦸‍♀️']"
+166,17,Would you rather swap faces with me for a week or swap voices with me for a week?,multiple_choice_Emoji,"[ 'Swap faces with me for a week', 'Swap voices with me for a week' ]","['😵‍💫👥', '🎤🔄']"
+167,17,Would you rather have me cut your hair blindfolded or let me pick your outfit every day for a week?,multiple_choice_Emoji,"[ 'Have me cut your hair blindfolded', 'Let me pick your outfit every day for a week' ]","['✂️🙈', '👗📅']"
+168,17,Would you rather have to whisper everything to me in public or shout everything at home?,multiple_choice_Emoji,"[ 'Whisper everything to me in public', 'Shout everything at home' ]","['🤫👥', '📢🏠']"
+169,17,Would you rather share one giant t-shirt forever or wear each other’s clothes for a month?,multiple_choice_Emoji,"[ 'Share one giant t-shirt forever', 'Wear each other’s clothes for a month' ]","['👕👥', '👚🔄']"
+170,17,Would you rather get caught dancing in the shower by me or get caught singing super loudly in the car?,multiple_choice_Emoji,"[ 'Get caught dancing in the shower by me', 'Get caught singing super loudly in the car' ]","['🚿💃', '🚗🎤']"
+171,18,Would you rather know all of your partner’s past secrets or never know any of them at all?,multiple_choice_Emoji,"[ 'Know all of your partner’s past secrets', 'Never know any of them at all' ]","['📖','🙈']"
+172,18,Would you rather relive your best memory with your partner once a year or create a brand-new memory every day but forget the old ones?,multiple_choice_Emoji,"[ 'Relive your best memory with your partner once a year', 'Create a brand-new memory every day but forget the old ones' ]","['💭','📸']"
+173,18,Would you rather sacrifice your biggest dream for your partner or ask them to sacrifice theirs for you?,multiple_choice_Emoji,"[ 'Sacrifice your biggest dream for your partner', 'Ask them to sacrifice theirs for you' ]","['💔','🙏']"
+174,18,Would you rather your partner see your biggest strength or your deepest weakness first?,multiple_choice_Emoji,"[ 'Your partner see your biggest strength first', 'Your partner see your deepest weakness first' ]","['💪','😔']"
+175,18,"Would you rather always tell the complete truth to your partner, even if it hurts, or protect them with small lies?",multiple_choice_Emoji,"[ 'Always tell the complete truth to your partner, even if it hurts', 'Protect them with small lies' ]","['🗣️','🤐']"
+176,18,"Would you rather face every challenge in life together but constantly struggle, or live an easy life but apart from each other?",multiple_choice_Emoji,"[ 'Face every challenge in life together but constantly struggle', 'Live an easy life but apart from each other' ]","['🛡️🤝','🌴💔']"
+177,18,Would you rather your partner always know when you’re sad or always know when you’re lying?,multiple_choice_Emoji,"[ 'Your partner always know when you’re sad', 'Your partner always know when you’re lying' ]","['😢','🤥']"
+178,18,"Would you rather fall in love once and never again, or fall in love many times but never have lasting stability?",multiple_choice_Emoji,"[ 'Fall in love once and never again', 'Fall in love many times but never have lasting stability' ]","['❤️','💔']"
+179,18,Would you rather have your relationship tested by distance or tested by time apart in silence?,multiple_choice_Emoji,"[ 'Have your relationship tested by distance', 'Have your relationship tested by time apart in silence' ]","['✈️','⏳']"
+180,18,Would you rather change one mistake from your past together or see one guaranteed success in your future together?,multiple_choice_Emoji,"[ 'Change one mistake from your past together', 'See one guaranteed success in your future together' ]","['⏪','🔮']"
+181,19,Would you rather build your dream house in the city or in the countryside?,multiple_choice_Emoji,"[ 'Build your dream house in the city', 'Build your dream house in the countryside' ]","['🏙️','🌳']"
+182,19,Would you rather have a small cozy wedding or a big grand wedding?,multiple_choice_Emoji,"[ 'Have a small cozy wedding', 'Have a big grand wedding' ]","['💍','🎉']"
+183,19,Would you rather travel the world together or settle in one dream place?,multiple_choice_Emoji,"[ 'Travel the world together', 'Settle in one dream place' ]","['🌍','🏡']"
+184,19,Would you rather adopt a pet first or have kids first?,multiple_choice_Emoji,"[ 'Adopt a pet first', 'Have kids first' ]","['🐶','👶']"
+185,19,Would you rather retire early and live simply or retire later and live luxuriously?,multiple_choice_Emoji,"[ 'Retire early and live simply', 'Retire later and live luxuriously' ]","['🌅','💎']"
+186,19,Would you rather be famous together or stay private but successful?,multiple_choice_Emoji,"[ 'Be famous together', 'Stay private but successful' ]","['🌟','🔒']"
+187,19,Would you rather achieve career success first or relationship milestones first?,multiple_choice_Emoji,"[ 'Achieve career success first', 'Achieve relationship milestones first' ]","['💼','❤️']"
+188,19,Would you rather spend your future traveling for work or staying close to family?,multiple_choice_Emoji,"[ 'Spend your future traveling for work', 'Stay close to family' ]","['✈️','🏠']"
+189,19,Would you rather raise kids in your hometown or in a completely new city?,multiple_choice_Emoji,"[ 'Raise kids in your hometown', 'Raise kids in a completely new city' ]","['🏘️','🌆']"
+190,19,Would you rather see the future or keep it a mystery?,multiple_choice_Emoji,"[ 'See the future', 'Keep it a mystery' ]","['🔮','❓']"
+191,20,Would you rather give me a forehead kiss in public or whisper something romantic in my ear?,multiple_choice_Emoji,"[ 'Give me a forehead kiss in public', 'Whisper something romantic in my ear' ]","['💋','🗣️']"
+192,20,Would you rather dance with me in the middle of a crowded street or sing me a song in front of friends?,multiple_choice_Emoji,"[ 'Dance with me in the middle of a crowded street', 'Sing me a song in front of friends' ]","['🕺','🎤']"
+193,20,Would you rather hold my hand for the next hour or carry me piggyback for five minutes?,multiple_choice_Emoji,"[ 'Hold my hand for the next hour', 'Carry me piggyback for five minutes' ]","['🤝','🏋️']"
+194,20,Would you rather post a cute couple selfie right now or write me a cheesy love caption online?,multiple_choice_Emoji,"[ 'Post a cute couple selfie right now', 'Write me a cheesy love caption online' ]","['🤳','💌']"
+195,20,Would you rather let me go through your phone for 10 minutes or give me your social media passwords for a day?,multiple_choice_Emoji,"[ 'Let me go through your phone for 10 minutes', 'Give me your social media passwords for a day' ]","['📱','🔑']"
+196,20,Would you rather do a silly TikTok dance with me or write me a short love poem?,multiple_choice_Emoji,"[ 'Do a silly TikTok dance with me', 'Write me a short love poem' ]","['🎶','✍️']"
+197,20,Would you rather dance in the rain with me or watch the sunset while holding hands?,multiple_choice_Emoji,"[ 'Dance in the rain with me', 'Watch the sunset while holding hands' ]","['🌧️','🌅']"
+198,20,Would you rather let me draw something silly on your face with makeup or paint your nails in my favorite color?,multiple_choice_Emoji,"[ 'Let me draw something silly on your face with makeup', 'Paint your nails in my favorite color' ]","['🎨','💅']"
+199,20,Would you rather kiss me on the forehead 10 times in a row or give me one long slow kiss?,multiple_choice_Emoji,"[ 'Kiss me on the forehead 10 times in a row', 'Give me one long slow kiss' ]","['💏','💋']"
+200,20,Would you rather let me take a funny video of you and post it or do a romantic reel together?,multiple_choice_Emoji,"[ 'Let me take a funny video of you and post it', 'Do a romantic reel together' ]","['📹','🎞️']"
 201,21,What quality do you value most in yourself?,multiple_choice,"['Kindness', 'Honesty', 'Ambition', 'Write Your Custom Answer']",
 202,21,Which principle guides your decisions the most?,multiple_choice,"['Integrity', 'Compassion', 'Courage', 'Write Your Custom Answer']",
 203,21,What motivates you to get out of bed every morning?,multiple_choice,"['Purpose', 'Success', 'Connection with others', 'Write Your Custom Answer']",
@@ -849,3 +849,368 @@ id,subTopicId,questionText,questionType,optionText,optionImg
 848,85,What’s your opinion on having a TV in the bedroom—yes or no?,user_text,,
 849,85,Do you like keeping the home spotless or do you not mind a little mess?,user_text,,
 850,85,"If we designed a dream home together, what room would you want to focus on most?",user_text,,
+851,86,How was your day today?,,,
+852,86,Did anything exciting happen at work?,,,
+853,86,Are you feeling tired or energetic right now?,,,
+854,86,What part of your day made you smile?,,,
+855,86,Did you face any challenges today?,,,
+856,86,Have you had time to relax today?,,,
+857,86,What’s the first thing you did when you woke up?,,,
+858,86,Did you get everything done that you planned today?,,,
+859,86,How busy was your day on a scale of 1–10?,,,
+860,86,Did you enjoy your morning routine today?,,,
+861,86,Have you eaten anything delicious today?,,,
+862,86,Did you spend time outside today?,,,
+863,86,Did you exercise or move your body today?,,,
+864,86,Have you had any “me time” today?,,,
+865,86,Did you drink enough water today?,,,
+866,86,Have you felt productive today?,,,
+867,86,Did you have a moment of peace today?,,,
+868,86,What’s one thing that made your day better?,,,
+869,86,Did you talk to someone interesting today?,,,
+870,86,Did anything annoy or frustrate you today?,,,
+871,86,Have you been mindful or present today?,,,
+872,86,Did you listen to music or watch something enjoyable today?,,,
+873,86,Did you laugh at something today?,,,
+874,86,Did you feel stressed at any point today?,,,
+875,86,What’s one small win you had today?,,,
+876,86,Did you learn something new today?,,,
+877,86,Have you checked on your goals today?,,,
+878,86,Did you feel grateful for something today?,,,
+879,86,What’s one habit you practiced today that you’re proud of?,,,
+880,86,"If you could redo one part of your day, what would it be?",,,
+881,86,How are you feeling right now?,,,
+882,86,What emotion have you felt the most today?,,,
+883,86,Is there something on your mind that you haven’t shared with me?,,,
+884,86,When do you feel the happiest with me?,,,
+885,86,Do you ever feel overwhelmed in our relationship?,,,
+886,86,What’s something that makes you feel loved instantly?,,,
+887,86,Have you felt appreciated lately?,,,
+888,86,Is there anything that’s been bothering you emotionally?,,,
+889,86,Do you feel comfortable expressing sadness to me?,,,
+890,86,What’s one thing that always cheers you up?,,,
+891,86,Do you ever feel anxious about us?,,,
+892,86,When do you feel most secure with me?,,,
+893,86,How do you feel when we spend time apart?,,,
+894,86,What’s something that makes you feel proud of us?,,,
+895,86,Have I done something recently that hurt your feelings?,,,
+896,86,Do you feel listened to in our conversations?,,,
+897,86,When do you feel most connected to me?,,,
+898,86,Is there a fear you haven’t told me about?,,,
+899,86,Do you feel emotionally supported by me?,,,
+900,86,When was the last time you felt truly relaxed with me?,,,
+901,86,Do you ever feel misunderstood by me?,,,
+902,86,What emotion do you wish you could feel more often?,,,
+903,86,How do you feel about the way we handle conflicts?,,,
+904,86,Have you felt excited about our future together?,,,
+905,86,Do you feel comfortable being vulnerable with me?,,,
+906,86,When do you feel most confident around me?,,,
+907,86,Is there a moment in our relationship that still makes you emotional?,,,
+908,86,Do you feel content with how we express our feelings?,,,
+909,86,What’s something small I do that brightens your day emotionally?,,,
+910,86,Is there a feeling you wish I understood better?,,,
+911,86,Do you remember the first time we kissed?,,,
+912,86,What’s your favorite way I show affection?,,,
+913,86,Which romantic gesture from me do you cherish the most?,,,
+914,86,How do you feel when we cuddle?,,,
+915,86,What’s your favorite memory of us being intimate?,,,
+916,86,Is there a place you love when we hold hands?,,,
+917,86,Do you like when I surprise you with small romantic gestures?,,,
+918,86,What song reminds you of us and why?,,,
+919,86,"Do you enjoy slow, passionate kisses or playful pecks more?",,,
+920,86,What’s something romantic you’ve always wanted us to do together?,,,
+921,86,Do you like whispering sweet things in each other’s ears?,,,
+922,86,How do you feel when I compliment your looks or body?,,,
+923,86,Do you enjoy spontaneous hugs or planned date nights more?,,,
+924,86,Which part of my personality makes you feel closest to me?,,,
+925,86,Do you prefer romantic nights at home or going out for a special date?,,,
+926,86,What’s one thing I do that instantly makes you feel loved?,,,
+927,86,"Do you feel more connected through touch, words, or acts of service?",,,
+928,86,Have I ever made you feel butterflies in your stomach recently?,,,
+929,86,What’s your favorite way for us to spend time together alone?,,,
+930,86,Is there a romantic fantasy or idea you’ve been wanting to share with me?,,,
+931,86,"Do you see us living in the city, suburbs, or countryside in the future?",,,
+932,86,What’s one personal goal you want to achieve in the next year?,,,
+933,86,How do you imagine our life together in five years?,,,
+934,86,Is there a dream career or project you’ve always wanted to pursue?,,,
+935,86,"Do you want to have children, and if so, when?",,,
+936,86,How important is financial stability to you in the next few years?,,,
+937,86,Do you see us traveling more or staying rooted in one place?,,,
+938,86,What’s a skill you want to learn together as a couple?,,,
+939,86,Do you want to start a business or side project in the future?,,,
+940,86,How do you feel about buying a house or moving to a new place?,,,
+941,86,Are there any habits you want to improve for your personal growth?,,,
+942,86,Where do you see yourself living when you retire?,,,
+943,86,Do you want to continue living close to family or explore living far away?,,,
+944,86,What’s one thing you hope we accomplish together as a couple?,,,
+945,86,Do you want to make major career changes in the future?,,,
+946,86,How do you envision our ideal work-life balance?,,,
+947,86,Do you want to pursue higher education or certifications later in life?,,,
+948,86,Is there a personal challenge you hope to overcome soon?,,,
+949,86,What’s one bucket-list item you want us to do together?,,,
+950,86,How important is it for you to leave a legacy or long-term impact?,,,
+951,86,How can I make you feel more supported today?,,,
+952,86,Do you feel I listen to you when you need to talk?,,,
+953,86,What’s one way I can make your day easier this week?,,,
+954,86,"When you’re upset, do you prefer advice or just someone to listen?",,,
+955,86,Do you feel comfortable sharing your fears with me?,,,
+956,86,Is there a habit of mine that makes you feel loved or cared for?,,,
+957,86,How do you like to celebrate small victories together?,,,
+958,86,What’s one thing I do that makes you feel emotionally safe?,,,
+959,86,Do you feel we have enough quality time together?,,,
+960,86,Is there something I can do to cheer you up when you’re down?,,,
+961,86,Do you feel I understand your personal goals and dreams?,,,
+962,86,"When you’re stressed, what’s the best way I can support you?",,,
+963,86,Do you feel included in my important life decisions?,,,
+964,86,Is there a way I can better show appreciation for you?,,,
+965,86,Do you feel we can talk about anything without judgment?,,,
+966,86,"When we face problems, do you feel I’m on your side?",,,
+967,86,Do you feel I respect your boundaries and personal space?,,,
+968,86,Is there a way I can help you feel more confident in yourself?,,,
+969,86,Do you feel I celebrate your successes as much as you’d like?,,,
+970,86,Is there a time I helped you that made a big difference in your life?,,,
+971,86,Do you like it when I cheer you up with kisses?,,,
+972,86,"When you’re stressed, do you want cuddles or playful teasing?",,,
+973,86,Can I help you relax tonight… in a fun way?,,,
+974,86,Do you enjoy it when I whisper sweet things to boost your mood?,,,
+975,86,Should I be your personal cheerleader… with extra hugs?,,,
+976,86,Do you like it when I make you laugh when you’re upset?,,,
+977,86,"When you need support, do you want a massage or more flirty attention?",,,
+978,86,Do you secretly love it when I flirt to lift your spirits?,,,
+979,86,Can I distract you from your worries… my way?,,,
+980,86,Do you feel more confident when I compliment you… intimately?,,,
+981,86,Should I text you naughty encouragements when you’re stressed?,,,
+982,86,Do you enjoy it when I hold you close and whisper playful secrets?,,,
+983,86,"When you’re down, do you like surprise kisses or teasing tickles more?",,,
+984,86,Do you want me to cheer you on… with extra flirtiness?,,,
+985,86,Do you secretly enjoy my little mischievous ways to support you?,,,
+986,86,"When you need a boost, do you like it more when it’s sweet or spicy?",,,
+987,86,Do you like it when I combine comfort with a little playful naughtiness?,,,
+988,86,Do you enjoy it when I turn our serious talks into flirty moments?,,,
+989,86,"Should I support you with hugs, kisses, or both?",,,
+990,86,Do you feel our connection deepens when I mix care with playful flirting?,,,
+991,86,How do you feel about spending holidays with your family?,,,
+992,86,Is there a family tradition you want us to start together?,,,
+993,86,Do you think we should spend more time with my parents or yours?,,,
+994,86,How do you feel about maintaining friendships after marriage/long-term relationships?,,,
+995,86,Is there someone in your family you want me to get closer to?,,,
+996,86,How do you usually feel when we visit your relatives?,,,
+997,86,Do you prefer small family gatherings or big celebrations?,,,
+998,86,What’s one thing you wish your family understood about us?,,,
+999,86,How important is family approval in our relationship for you?,,,
+1000,86,Do you feel comfortable talking to your family about our relationship?,,,
+1001,86,Would you like to have family game nights or dinners regularly?,,,
+1002,86,How do you feel about setting boundaries with family members?,,,
+1003,86,Is there a past family issue you think affects us today?,,,
+1004,86,Do you want to live closer to family in the future?,,,
+1005,86,How do you feel when family members give advice about our relationship?,,,
+1006,86,"Do you think we should have children, and how involved should family be?",,,
+1007,86,How do you feel about family holidays vs. private vacations?,,,
+1008,86,Is there a family habit or tradition you want to keep or avoid?,,,
+1009,86,Do you feel your family supports your personal choices?,,,
+1010,86,How do you think we can balance family time and “just us” time?,,,
+1011,86,"If we could wake up in any country tomorrow, where would you want it to be?",,,
+1012,86,Do you prefer a mountain getaway or a beach escape?,,,
+1013,86,What’s your dream destination that we haven’t visited yet?,,,
+1014,86,Do you enjoy road trips or flying more?,,,
+1015,86,Would you rather stay in a luxury resort or a cozy cabin?,,,
+1016,86,Which city would you love to get lost in with me?,,,
+1017,86,Do you like planning trips in detail or being spontaneous?,,,
+1018,86,What’s the most adventurous thing you’d like us to try on vacation?,,,
+1019,86,Would you rather explore local food or go sightseeing first?,,,
+1020,86,Have you ever wanted to go backpacking with me?,,,
+1021,86,Do you prefer day trips or long vacations?,,,
+1022,86,Which country’s culture fascinates you the most?,,,
+1023,86,Do you enjoy hiking trails or wandering city streets?,,,
+1024,86,What’s your idea of a perfect romantic trip?,,,
+1025,86,Would you try extreme sports like skydiving or bungee jumping with me?,,,
+1026,86,Do you prefer warm sunny places or cold snowy destinations?,,,
+1027,86,Have you ever imagined us going on a cruise together?,,,
+1028,86,Do you like camping under the stars or staying in hotels?,,,
+1029,86,What’s one travel memory with me you’ll never forget?,,,
+1030,86,Where should our next adventure be?,,,
+1031,86,What’s your ultimate comfort food?,,,
+1032,86,Do you prefer coffee or tea in the morning?,,,
+1033,86,"If we could only eat one cuisine for a week, which one would you choose?",,,
+1034,86,What’s the weirdest food you’ve ever tried?,,,
+1035,86,Do you like trying new restaurants or sticking to familiar ones?,,,
+1036,86,What’s your guilty pleasure snack?,,,
+1037,86,Do you enjoy cooking together or prefer when one of us takes charge?,,,
+1038,86,"Which meal of the day is your favorite—breakfast, lunch, or dinner?",,,
+1039,86,"If you had to give up either sweets or spicy food, which one would it be?",,,
+1040,86,Do you like experimenting with new recipes or keeping it simple?,,,
+1041,86,What’s your go-to drink when you’re relaxing?,,,
+1042,86,"Do you enjoy dining out more, or cozy home-cooked meals?",,,
+1043,86,"If we opened a restaurant together, what kind of food would we serve?",,,
+1044,86,What food instantly reminds you of childhood?,,,
+1045,86,Do you prefer fancy candlelight dinners or casual takeout nights?,,,
+1046,86,Which fruit do you think describes your personality best?,,,
+1047,86,Do you believe in eating healthy all the time or balancing with indulgence?,,,
+1048,86,What’s one food you absolutely can’t stand?,,,
+1049,86,"If we were stranded on an island, what three foods would you hope to have?",,,
+1050,86,"Do you enjoy late-night snacks, or do you prefer going to bed light?",,,
+1051,86,What’s your favorite way to spend a lazy Sunday?,,,
+1052,86,Do you enjoy staying up late or waking up early?,,,
+1053,86,Would you rather watch a movie at home or in the theater?,,,
+1054,86,"Do you prefer tea, coffee, or something else to start your day?",,,
+1055,86,Which season makes you feel the happiest?,,,
+1056,86,"Do you like surprises, or do you prefer to know things in advance?",,,
+1057,86,Would you choose a night out with friends or a quiet evening with me?,,,
+1058,86,Do you enjoy loud music or soft background tunes?,,,
+1059,86,What’s your favorite comfort food when you’re stressed?,,,
+1060,86,Do you like trying new restaurants or sticking to familiar ones?,,,
+1061,86,Are you more into reading books or watching TV shows?,,,
+1062,86,Do you prefer dressing up fancy or keeping it casual?,,,
+1063,86,Would you rather live in a big city or a quiet countryside?,,,
+1064,86,Do you like spending more on experiences or on material things?,,,
+1065,86,What’s your go-to snack when you’re craving something quick?,,,
+1066,86,Do you enjoy long road trips or short weekend getaways?,,,
+1067,86,Would you rather relax at a spa or go for an adventurous activity?,,,
+1068,86,Do you like spontaneous plans or carefully planned ones?,,,
+1069,86,Are you more comfortable in social gatherings or one-on-one time?,,,
+1070,86,"Do you prefer texting, calling, or face-to-face conversations?",,,
+1071,86,Do you like when I kiss your neck or when I bite your lip?,,,
+1072,86,"Do you prefer slow, sensual nights or quick, wild ones?",,,
+1073,86,Would you rather cuddle naked or keep it playful with clothes on?,,,
+1074,86,Do you enjoy me whispering sweet things or naughty things in your ear?,,,
+1075,86,Do you like taking the lead in bed or when I take control?,,,
+1076,86,Would you rather try something adventurous outdoors or keep it private inside?,,,
+1077,86,Do you prefer gentle teasing or straight-to-the-point passion?,,,
+1078,86,Do you enjoy long make-out sessions or going straight to the action?,,,
+1079,86,Would you rather shower together or share a hot bath?,,,
+1080,86,Do you like when I text you flirty messages during the day or when I surprise you at night?,,,
+1081,86,"Do you prefer lingerie and dressing up, or no clothes at all?",,,
+1082,86,Would you rather experiment with toys or try role-play first?,,,
+1083,86,Do you like me being dominant or submissive with you?,,,
+1084,86,Would you rather have morning intimacy or late-night passion?,,,
+1085,86,Do you like soft touches that build up slowly or rough passion right away?,,,
+1086,86,Do you enjoy eye contact during intimacy or playful teasing instead?,,,
+1087,86,Would you rather be kissed all over your body or just on your favorite spot?,,,
+1088,86,"Do you like dirty talk or silent, intense moments?",,,
+1089,86,Would you prefer a spontaneous quickie or an all-night marathon?,,,
+1090,86,Do you like when I surprise you in public with something flirty or keep it behind closed doors,,,
+1091,86,What turns you on the most about me?,,,
+1092,86,Do you like when I take control or when you do?,,,
+1093,86,Have you ever fantasized about us in a different setting?,,,
+1094,86,"Do you enjoy more slow, passionate intimacy or wild, intense moments?",,,
+1095,86,What’s the sexiest thing I’ve ever done that you can’t forget?,,,
+1096,86,Do you like more kissing or more touching when we’re together?,,,
+1097,86,Would you rather try something new in bed or perfect what we already do?,,,
+1098,86,Is there a fantasy you’ve wanted to share with me but haven’t yet?,,,
+1099,86,Do you like morning intimacy or late-night intimacy more?,,,
+1100,86,What’s the most adventurous place you’d want us to make love?,,,
+1101,86,Do you enjoy more playful teasing or going straight to passion?,,,
+1102,86,What kind of lingerie or clothing do you like seeing me in the most?,,,
+1103,86,Do you like being surprised in bed or do you prefer to know what’s coming?,,,
+1104,86,What’s one thing you wish we did more often during intimacy?,,,
+1105,86,Do you enjoy whispering dirty thoughts or do you prefer silent passion?,,,
+1106,86,Would you like me to be more romantic or more bold in bed?,,,
+1107,86,"Do you enjoy quick sessions or long, drawn-out intimacy more?",,,
+1108,86,What’s your favorite position that makes you feel closest to me?,,,
+1109,86,Do you like experimenting with toys or just keeping it natural?,,,
+1110,86,What’s something new you’d love us to explore together sexually?,,,
+1111,86,Do you like seeing me undress slowly or all at once?,,,
+1112,86,What part of my naked body do you admire the most?,,,
+1113,86,Do you prefer me completely nude or leaving something on?,,,
+1114,86,How do you feel when I catch you staring at me naked?,,,
+1115,86,Do you like sleeping naked with me or with clothes on?,,,
+1116,86,Would you rather I strip for you privately or in a playful way in front of a mirror?,,,
+1117,86,Do you like me teasing you by staying half-naked?,,,
+1118,86,What’s the sexiest way you want me to take my clothes off?,,,
+1119,86,Do you enjoy walking around the house naked with me?,,,
+1120,86,Have you ever fantasized about skinny dipping with me?,,,
+1121,86,Do you want me to surprise you by waiting naked for you?,,,
+1122,86,Which body part of yours do you love me touching when you’re nude?,,,
+1123,86,Do you enjoy being completely exposed under the lights or in the dark?,,,
+1124,86,Would you like me to undress you slowly with kisses?,,,
+1125,86,Do you prefer me naked under the sheets or on top of them?,,,
+1126,86,What’s your favorite position to admire my naked body?,,,
+1127,86,Do you enjoy playful nudity like flashing or teasing?,,,
+1128,86,Would you rather shower together naked or lounge naked in bed?,,,
+1129,86,Do you like me keeping eye contact while stripping down?,,,
+1130,86,Have you ever wanted us to spend a whole day naked together?,,,
+1131,86,"When we argue, what helps you calm down the most?",,,
+1132,86,Do you prefer I give you space or stay close when you’re upset?,,,
+1133,86,How do you feel when I raise my voice during an argument?,,,
+1134,86,Do you think we resolve conflicts quickly or let them drag on?,,,
+1135,86,What’s one thing I could do better when we disagree?,,,
+1136,86,Do you feel like I listen to your side during arguments?,,,
+1137,86,How do you usually want me to apologize after a fight?,,,
+1138,86,Is there something I do that makes small arguments worse?,,,
+1139,86,Do you think our fights make us stronger as a couple?,,,
+1140,86,Have I ever hurt you with words during an argument?,,,
+1141,86,What’s the best way for me to show I care during a conflict?,,,
+1142,86,Do you feel like we fight about the same things repeatedly?,,,
+1143,86,How important is it for you to “win” an argument?,,,
+1144,86,What’s one fight we had that you wish never happened?,,,
+1145,86,Do you think I forgive you easily after we fight?,,,
+1146,86,What’s something I could say that would instantly make things better?,,,
+1147,86,Do you believe it’s okay to go to bed angry sometimes?,,,
+1148,86,Have we gotten better at handling conflicts over time?,,,
+1149,86,What’s a fight we had that actually brought us closer?,,,
+1150,86,Do you think our communication during disagreements is healthy?,,,
+1151,86,What’s the silliest thing we’ve done together?,,,
+1152,86,Which one of us is more likely to laugh at a bad joke?,,,
+1153,86,Have you ever laughed so hard with me that you cried?,,,
+1154,86,What’s a prank you think we could pull off together?,,,
+1155,86,Do you enjoy playful teasing or do you get embarrassed easily?,,,
+1156,86,What’s the funniest nickname you’ve ever given me?,,,
+1157,86,Which of our inside jokes never fails to make you laugh?,,,
+1158,86,Have I ever done something ridiculous just to make you smile?,,,
+1159,86,"Do you prefer witty jokes or silly, random humor?",,,
+1160,86,What’s the most awkward but funny moment we’ve shared?,,,
+1161,86,"If we were in a comedy movie, which roles would we play?",,,
+1162,86,Do you think we could survive a day speaking only in jokes?,,,
+1163,86,Have you ever caught me doing something secretly funny?,,,
+1164,86,Which of our adventures turned out to be unexpectedly hilarious?,,,
+1165,86,Do you laugh more at yourself or at me?,,,
+1166,86,What’s the weirdest thing that ever made us laugh together?,,,
+1167,86,Have you ever laughed at something I didn’t think was funny?,,,
+1168,86,Which funny habit of mine do you secretly enjoy the most?,,,
+1169,86,Do you prefer sarcasm or playful silliness when joking with me?,,,
+1170,86,What’s a memory that still makes you laugh no matter how many times you think of it?,,,
+1171,86,What’s your favorite memory of us together?,,,
+1172,86,Was there a moment when you felt truly proud of our relationship?,,,
+1173,86,Do you remember the first time we said “I love you”?,,,
+1174,86,Which trip or vacation with me do you cherish the most?,,,
+1175,86,What’s the funniest thing we’ve ever done together?,,,
+1176,86,Do you remember our first date? How did it feel?,,,
+1177,86,Which anniversary of ours was the most special for you?,,,
+1178,86,Was there a moment when you realized you wanted to be with me forever?,,,
+1179,86,Do you recall a time we overcame something difficult together?,,,
+1180,86,What’s a small moment with me that always makes you smile when you think about it?,,,
+1181,86,Do you remember a gift I gave you that meant a lot?,,,
+1182,86,Which shared experience taught us the most about each other?,,,
+1183,86,Was there a day when you felt our bond was unbreakable?,,,
+1184,86,Do you remember a time I surprised you that made you really happy?,,,
+1185,86,Which past disagreement do you think made us stronger?,,,
+1186,86,Do you remember a song or movie that reminds you of us?,,,
+1187,86,What’s a childhood memory of yours that you’ve shared with me that sticks out?,,,
+1188,86,Was there a moment when you felt truly cared for by me?,,,
+1189,86,Do you remember a time when we laughed so hard together we couldn’t stop?,,,
+1190,86,Which memory of us makes you feel the most loved?,,,
+1191,86,Do you feel like you’ve grown since we first met?,,,
+1192,86,What’s one habit you’ve improved recently?,,,
+1193,86,Is there a fear you’ve managed to overcome this year?,,,
+1194,86,Do you feel more confident in yourself than a year ago?,,,
+1195,86,What’s one personal goal you’re proud of achieving?,,,
+1196,86,Is there something new you’ve learned about yourself lately?,,,
+1197,86,Have I helped you discover a strength you didn’t know you had?,,,
+1198,86,Do you feel you handle stress better than before?,,,
+1199,86,Is there a way you’ve changed for the better because of our relationship?,,,
+1200,86,Have you developed a new skill recently?,,,
+1201,86,Do you feel more patient now than you used to be?,,,
+1202,86,Is there a mindset shift you’ve experienced recently?,,,
+1203,86,Have you become more open to trying new things?,,,
+1204,86,Do you take more time for self-care than you did before?,,,
+1205,86,Is there a habit you want to break to improve yourself?,,,
+1206,86,Have you become more understanding of other people’s perspectives?,,,
+1207,86,Do you feel more emotionally intelligent now than before?,,,
+1208,86,Is there a way you’ve grown spiritually or mentally recently?,,,
+1209,86,Do you feel proud of the person you are becoming?,,,
+1210,86,Have you learned to forgive yourself for past mistakes?,,,
+1211,86,Do you reflect on your actions more than you used to?,,,
+1212,86,Is there a way you’ve become more resilient this year?,,,
+1213,86,Have you discovered something new about your passions or interests?,,,
+1214,86,Do you feel more in control of your life than before?,,,
+1215,86,Is there a personal challenge you overcame that made you stronger?,,,

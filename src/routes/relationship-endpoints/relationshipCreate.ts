@@ -59,9 +59,99 @@ export class RelationshipCreate extends OpenAPIRoute {
           error: 'One or both users not found' 
         }, 404);
       }
+
+      // Prevent self-relationship
+      if (body.user1Id === body.user2Id) {
+        return c.json({ 
+          success: false, 
+          error: 'Cannot create relationship with yourself' 
+        }, 400);
+      }
+
+      // Check if relationship already exists (in any order, including deleted ones)
+      const existingRelationship = await db.select().from(relationshipsTable).where(
+        and(
+          eq(relationshipsTable.user1Id, body.user1Id),
+          eq(relationshipsTable.user2Id, body.user2Id)
+        )
+      );
+
+      const existingRelationshipReverse = await db.select().from(relationshipsTable).where(
+        and(
+          eq(relationshipsTable.user1Id, body.user2Id),
+          eq(relationshipsTable.user2Id, body.user1Id)
+        )
+      );
+
+      // If relationship exists
+      if (existingRelationship.length > 0) {
+        const existing = existingRelationship[0];
+        if (existing.deleted) {
+          // Reconnect - update deleted to false and reset startedAt
+          const now = new Date().toISOString();
+          const reconnected = await db.update(relationshipsTable)
+            .set({ 
+              deleted: false, 
+              startedAt: now,
+              updatedAt: now
+            })
+            .where(eq(relationshipsTable.id, existing.id))
+            .returning();
+          return c.json({ 
+            success: true, 
+            relationship: reconnected[0],
+            message: 'Relationship reconnected successfully'
+          });
+        } else {
+          // Already connected
+          return c.json({ 
+            success: false, 
+            error: 'Relationship already exists',
+            relationship: existing
+          }, 409);
+        }
+      }
+
+      if (existingRelationshipReverse.length > 0) {
+        const existing = existingRelationshipReverse[0];
+        if (existing.deleted) {
+          // Reconnect - update deleted to false and reset startedAt
+          const now = new Date().toISOString();
+          const reconnected = await db.update(relationshipsTable)
+            .set({ 
+              deleted: false, 
+              startedAt: now,
+              updatedAt: now
+            })
+            .where(eq(relationshipsTable.id, existing.id))
+            .returning();
+          return c.json({ 
+            success: true, 
+            relationship: reconnected[0],
+            message: 'Relationship reconnected successfully'
+          });
+        } else {
+          // Already connected
+          return c.json({ 
+            success: false, 
+            error: 'Relationship already exists',
+            relationship: existing
+          }, 409);
+        }
+      }
       
-      const relationship = await db.insert(relationshipsTable).values(body).returning();
-      return c.json({ success: true, relationship: relationship[0] });
+      // Create new relationship if none exists
+      const now = new Date().toISOString();
+      const relationship = await db.insert(relationshipsTable).values({
+        user1Id: body.user1Id,
+        user2Id: body.user2Id,
+        startedAt: now
+      }).returning();
+      return c.json({ 
+        success: true, 
+        relationship: relationship[0],
+        message: 'Relationship created successfully'
+      });
     } catch (err) {
       return c.json({ error: 'Failed to create relationship', detail: err instanceof Error ? err.message : String(err) }, 500);
     }

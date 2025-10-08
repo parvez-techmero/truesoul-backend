@@ -41,6 +41,7 @@ export class UserProgressSubtopicDivisions extends OpenAPIRoute {
                   description: z.string().nullable(),
                   icon: z.string().nullable(),
                   color: z.string().nullable(),
+                  adult: z.boolean(),
                   topicId: z.number().nullable(),
                   categoryId: z.number().nullable(),
                   topicName: z.string().nullable(),
@@ -82,11 +83,25 @@ export class UserProgressSubtopicDivisions extends OpenAPIRoute {
     try {
       const userIdNum = parseInt(userId);
       
+      // Get user's hideContent setting
+      const [user] = await db.select({ hideContent: usersTable.hideContent })
+        .from(usersTable)
+        .where(eq(usersTable.id, userIdNum));
+      
+      if (!user) {
+        return c.json({ success: false, message: 'User not found' }, 404);
+      }
+      
       // Get user's relationship and partner info
       const relationshipInfo = await this.getUserRelationship(db, userIdNum);
       
       // Build subtopic filter conditions
       const conditions = [eq(subTopicsTable.isActive, true)];
+      
+      // Filter adult content if user has hideContent enabled
+      if (user.hideContent) {
+        conditions.push(eq(subTopicsTable.adult, false));
+      }
       
       if (topicId) {
         conditions.push(eq(subTopicsTable.topicId, parseInt(topicId)));
@@ -104,6 +119,7 @@ export class UserProgressSubtopicDivisions extends OpenAPIRoute {
           description: subTopicsTable.description,
           icon: subTopicsTable.icon,
           color: subTopicsTable.color,
+          adult: subTopicsTable.adult,
           topicId: subTopicsTable.topicId,
           categoryId: subTopicsTable.categoryId,
           sortOrder: subTopicsTable.sortOrder,

@@ -1,6 +1,6 @@
 import { OpenAPIRoute, Bool } from "chanfana";
 import { z } from "zod";
-import { subTopicsTable, questionsTable, userAnswersTable } from '../../db/schema';
+import { subTopicsTable, questionsTable, userAnswersTable, usersTable } from '../../db/schema';
 import { eq, or, and } from "drizzle-orm";
 
 export class UserProgressBySubtopic extends OpenAPIRoute {
@@ -35,14 +35,27 @@ export class UserProgressBySubtopic extends OpenAPIRoute {
     const { userId, topicId, categoryId } = query;
 
     try {
+      const userIdNum = parseInt(userId);
+      
+      // Get user's hideContent setting
+      const [user] = await db.select({ hideContent: usersTable.hideContent })
+        .from(usersTable)
+        .where(eq(usersTable.id, userIdNum));
+      
       // Build subtopic filter
       const conditions = [];
+      
+      // Filter adult content if user has hideContent enabled
+      if (user?.hideContent) {
+        conditions.push(eq(subTopicsTable.adult, false));
+      }
+      
       if (topicId) conditions.push(eq(subTopicsTable.topicId, parseInt(topicId)));
       if (categoryId) conditions.push(eq(subTopicsTable.categoryId, parseInt(categoryId)));
 
       let subTopics;
       if (conditions.length > 0) {
-        subTopics = await db.select().from(subTopicsTable).where(or(...conditions));
+        subTopics = await db.select().from(subTopicsTable).where(and(...conditions));
       } else {
         subTopics = await db.select().from(subTopicsTable);
       }

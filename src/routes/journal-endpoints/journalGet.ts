@@ -1,7 +1,7 @@
 
 import { OpenAPIRoute, Num } from "chanfana";
 import { z } from "zod";
-import { journalTable, journalCommentsTable } from '../../db/schema';
+import { journalTable, journalCommentsTable, usersTable } from '../../db/schema';
 import { eq } from 'drizzle-orm';
 
 export class JournalGet extends OpenAPIRoute {
@@ -47,7 +47,28 @@ export class JournalGet extends OpenAPIRoute {
     if (!journal.length) {
       return c.json({ success: false, message: "Journal not found" }, 404);
     }
-    const comments = await db.select().from(journalCommentsTable).where(eq(journalCommentsTable.journalId, params.id));
-    return c.json({ success: true, journal: journal[0], comments });
+    // Fetch user who created the journal
+    const user = journal[0].createdByUserId
+      ? (await db.select({
+        profileImg: usersTable.profileImg,
+        id: usersTable.id,
+        gender: usersTable.gender,
+        name: usersTable.name,
+      }).from(usersTable).where(eq(usersTable.id, journal[0].createdByUserId)))[0]
+      : null;
+    // Fetch comments and their users
+    const commentsRaw = await db.select().from(journalCommentsTable).where(eq(journalCommentsTable.journalId, params.id));
+    const commentUserIds = commentsRaw.map(c => c.userId);
+    let commentUsers = [];
+    if (commentUserIds.length) {
+      commentUsers = await db.select().from(usersTable).where((builder) => builder.in(usersTable.id, commentUserIds));
+    }
+    // Attach user info to each comment
+    const comments = commentsRaw.map(comment => ({
+      ...comment,
+      user: commentUsers.find(u => u.id === comment.userId) || null
+    }));
+    journal[0].images = journal[0].images == "[]" ? "" : journal[0].images;
+    return c.json({ success: true, data: { ...journal[0], user, comments } });
   }
 }

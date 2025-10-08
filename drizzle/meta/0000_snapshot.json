@@ -1,5 +1,5 @@
 {
-  "id": "5190c3fe-63a6-45c1-9057-b711c141ef4c",
+  "id": "0212e2ff-0ddc-400b-8178-24e0ffa44b8f",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -346,7 +346,13 @@
           "name": "relationshipId",
           "type": "integer",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
+        },
+        "createdByUserId": {
+          "name": "createdByUserId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
         },
         "type": {
           "name": "type",
@@ -372,6 +378,12 @@
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
+        },
+        "location": {
+          "name": "location",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         },
         "lat": {
           "name": "lat",
@@ -420,6 +432,19 @@
           "tableTo": "relationships",
           "columnsFrom": [
             "relationshipId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "journal_createdByUserId_users_id_fk": {
+          "name": "journal_createdByUserId_users_id_fk",
+          "tableFrom": "journal",
+          "tableTo": "users",
+          "columnsFrom": [
+            "createdByUserId"
           ],
           "columnsTo": [
             "id"
@@ -877,6 +902,12 @@
         },
         "answerText": {
           "name": "answerText",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "answerImage": {
+          "name": "answerImage",
           "type": "text",
           "primaryKey": false,
           "notNull": false

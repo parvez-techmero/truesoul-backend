@@ -1,6 +1,6 @@
 import { OpenAPIRoute, Bool } from "chanfana";
 import { z } from "zod";
-import { topicsTable, categoriesTable, subTopicsTable, questionsTable, userAnswersTable } from '../../db/schema';
+import { topicsTable, categoriesTable, subTopicsTable, questionsTable, userAnswersTable, usersTable } from '../../db/schema';
 import { eq, or, and } from "drizzle-orm";
 
 export class UserProgressByTopic extends OpenAPIRoute {
@@ -33,11 +33,25 @@ export class UserProgressByTopic extends OpenAPIRoute {
     const { userId } = query;
 
     try {
+      const userIdNum = parseInt(userId);
+      
+      // Get user's hideContent setting
+      const [user] = await db.select({ hideContent: usersTable.hideContent })
+        .from(usersTable)
+        .where(eq(usersTable.id, userIdNum));
+      
       const topics = await db.select().from(topicsTable);
       const progress = await Promise.all(
         topics.map(async (topic) => {
           // Get all subtopics for this topic
-          const subTopics = await db.select().from(subTopicsTable).where(eq(subTopicsTable.topicId, topic.id));
+          const conditions = [eq(subTopicsTable.topicId, topic.id)];
+          
+          // Filter adult content if user has hideContent enabled
+          if (user?.hideContent) {
+            conditions.push(eq(subTopicsTable.adult, false));
+          }
+          
+          const subTopics = await db.select().from(subTopicsTable).where(and(...conditions));
           const subTopicIds = subTopics.map(st => st.id);
 
           // Get all questions for these subtopics
@@ -74,6 +88,7 @@ export class UserProgressByTopic extends OpenAPIRoute {
         })
       );
 
+      progress.pop()
       return c.json({ success: true, data: progress });
     } catch (err) {
       return c.json({ error: 'Failed to fetch user progress by topic', detail: err instanceof Error ? err.message : String(err) }, 500);
@@ -111,11 +126,25 @@ export class UserProgressByCategory extends OpenAPIRoute {
     const { userId } = query;
 
     try {
+      const userIdNum = parseInt(userId);
+      
+      // Get user's hideContent setting
+      const [user] = await db.select({ hideContent: usersTable.hideContent })
+        .from(usersTable)
+        .where(eq(usersTable.id, userIdNum));
+      
       const categories = await db.select().from(categoriesTable);
       const progress = await Promise.all(
         categories.map(async (category) => {
           // Get all subtopics for this category
-          const subTopics = await db.select().from(subTopicsTable).where(eq(subTopicsTable.categoryId, category.id));
+          const conditions = [eq(subTopicsTable.categoryId, category.id)];
+          
+          // Filter adult content if user has hideContent enabled
+          if (user?.hideContent) {
+            conditions.push(eq(subTopicsTable.adult, false));
+          }
+          
+          const subTopics = await db.select().from(subTopicsTable).where(and(...conditions));
           const subTopicIds = subTopics.map(st => st.id);
 
           // Get all questions for these subtopics

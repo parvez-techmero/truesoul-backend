@@ -115,6 +115,8 @@ out
 .nuxt
 dist
 
+public
+drizzle
 # Gatsby files
 
 .cache/

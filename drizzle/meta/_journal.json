@@ -5,8 +5,29 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1758801296999,
-      "tag": "0000_modern_gamora",
+      "when": 1759469577252,
+      "tag": "0000_big_killer_shrike",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1759486218274,
+      "tag": "0001_demonic_queen_noir",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1759816967998,
+      "tag": "0002_early_chimera",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1759903251610,
+      "tag": "0003_charming_smasher",
       "breakpoints": true
     }
   ]

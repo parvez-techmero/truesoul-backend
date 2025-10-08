@@ -87,6 +87,7 @@ export const subTopicsTable = pgTable("sub_topics", {
   description: text(),
   icon: varchar({ length: 100 }),
   color: varchar({ length: 50 }),
+  adult: boolean().notNull().default(false),
   sortOrder: integer().notNull().default(0),
   isActive: boolean().notNull().default(true),
   createdAt: timestamp().notNull().defaultNow(),
@@ -124,6 +125,7 @@ export const userAnswersTable = pgTable("user_answers", {
   userId: integer().notNull().references(() => usersTable.id, { onDelete: 'cascade' }),
   questionId: integer().notNull().references(() => questionsTable.id, { onDelete: 'cascade' }),
   answerText: text(), // For text-based answers
+  answerImage: text(), // URL to image if applicable
   answerStatus: answerStatusEnum().notNull().default('complete'),
   answeredAt: timestamp().notNull().defaultNow(),
 });
@@ -131,11 +133,13 @@ export const userAnswersTable = pgTable("user_answers", {
 // Journal entries for couples
 export const journalTable = pgTable("journal", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  relationshipId: integer().notNull().references(() => relationshipsTable.id, { onDelete: 'cascade' }),
+  relationshipId: integer().references(() => relationshipsTable.id, { onDelete: 'cascade' }),
+  createdByUserId: integer().references(() => usersTable.id, { onDelete: 'cascade' }),
   type: varchar({ length: 20 }).notNull(), // "memory" or "special_day"
   title: text(),
   colorCode: varchar({ length: 50 }), // Hex color code
   dateTime: timestamp().notNull().defaultNow(),
+  location: text(),
   lat: decimal({ precision: 10, scale: 8 }),
   long: decimal({ precision: 11, scale: 8 }),
   images: text(), // Comma-separated URLs
@@ -172,6 +176,23 @@ export const deviceTokensTable = pgTable("device_tokens", {
   isActive: boolean().notNull().default(true),
   createdAt: timestamp().notNull().defaultNow(),
   updatedAt: timestamp().notNull().defaultNow(),
+});
+
+// Active random subtopics for each relationship or user
+export const activeRandomSubtopicsTable = pgTable("active_random_subtopics", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  relationshipId: integer().references(() => relationshipsTable.id, { onDelete: 'cascade' }),
+  userId: integer().references(() => usersTable.id, { onDelete: 'cascade' }),
+  subtopicIds: text().notNull(), // Comma-separated subtopic IDs
+  createdAt: timestamp().notNull().defaultNow(),
+  updatedAt: timestamp().notNull().defaultNow(),
+});
+
+// Daily app opens for streak tracking
+export const dailyAppOpensTable = pgTable("daily_app_opens", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  userId: integer().notNull().references(() => usersTable.id, { onDelete: 'cascade' }),
+  openedAt: timestamp().notNull().defaultNow(),
 });
 
 // export type Task = typeof tasks.$inferSelect;
