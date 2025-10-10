@@ -2,7 +2,7 @@
 import { OpenAPIRoute, Num } from "chanfana";
 import { z } from "zod";
 import { journalTable, journalCommentsTable, usersTable } from '../../db/schema';
-import { eq } from 'drizzle-orm';
+import { eq, inArray } from 'drizzle-orm';
 
 export class JournalGet extends OpenAPIRoute {
   schema = {
@@ -61,7 +61,7 @@ export class JournalGet extends OpenAPIRoute {
     const commentUserIds = commentsRaw.map(c => c.userId);
     let commentUsers = [];
     if (commentUserIds.length) {
-      commentUsers = await db.select().from(usersTable).where((builder) => builder.in(usersTable.id, commentUserIds));
+      commentUsers = await db.select().from(usersTable).where(inArray(usersTable.id, commentUserIds));
     }
     // Attach user info to each comment
     const comments = commentsRaw.map(comment => ({

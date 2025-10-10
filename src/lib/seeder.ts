@@ -278,7 +278,7 @@ async function seed() {
         }
     ];
 
-    // await db.insert(categoriesTable).values(categoriesData);
+    await db.insert(categoriesTable).values(categoriesData);
 
     // Seed topics based on topic.csv
     const topicsData = [
@@ -394,7 +394,7 @@ async function seed() {
         }
     ];
 
-    // await db.insert(topicsTable).values(topicsData);
+    await db.insert(topicsTable).values(topicsData);
 
     // Import required modules for CSV processing
     const fs = require('fs');

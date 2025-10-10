@@ -262,14 +262,23 @@ export class HomeGet extends OpenAPIRoute {
 
 				const dailyStreak = await getDailyStreak(userId);
 
+								const memories = await db
+					.select()
+					.from(journalTable)
+					.where(and(eq(journalTable.createdByUserId, user1.id), eq(journalTable.type, "memory")));
+				const specialDays = await db
+					.select()
+					.from(journalTable)
+					.where(and(eq(journalTable.createdByUserId, user1.id), eq(journalTable.type, "special_day")));
+
 				return c.json({
 					success: true,
 					data: {
 						user1,
 						user2: null,
 						daysTogether: null,
-						memoriesCreated: null,
-						specialDays: null,
+						memoriesCreated: memories.length,
+						specialDays: specialDays.length,
 						citiesVisited: null,
 						countriesVisited: null,
 						questionAnsweredPercentage,

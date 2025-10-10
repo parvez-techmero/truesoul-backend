@@ -52,13 +52,14 @@ export class RelationshipGet extends OpenAPIRoute {
 
   async handle(c) {
     const { query } = await this.getValidatedData<typeof this.schema>();
+    let { relationshipId, userId } = query;
     const db = c.get('db');
     try {
       // Validate that at least one parameter is provided
-      if (!query.relationshipId && !query.userId) {
-        return c.json({ 
-          success: false, 
-          message: 'Either relationshipId or userId must be provided' 
+      if (!relationshipId && !userId) {
+        return c.json({
+          success: false,
+          message: 'Either relationshipId or userId must be provided'
         }, 400);
       }
 
@@ -67,39 +68,56 @@ export class RelationshipGet extends OpenAPIRoute {
       // Get relationship by relationshipId or userId
       if (query.relationshipId) {
         [relationship] = await db.select().from(relationshipsTable).where(
-          eq(relationshipsTable.id, query.relationshipId)
+          eq(relationshipsTable.id, relationshipId)
         );
-      } else if (query.userId) {
-        [relationship] = await db.select().from(relationshipsTable).where(
-          or(
-            eq(relationshipsTable.user1Id, query.userId),
-            eq(relationshipsTable.user2Id, query.userId)
-          )
-        );
-      }
-      
-      if (!relationship) {
-        return c.json({ success: false, message: 'Relationship not found' }, 404);
+
+        // Get user1 details
+        const [user1] = await db.select().from(usersTable).where(eq(usersTable.id, relationship.user1Id));
+
+        // Get user2 details only if relationship is not deleted/disconnected
+        let user2 = null;
+        if (!relationship.deleted) {
+          [user2] = await db.select().from(usersTable).where(eq(usersTable.id, relationship.user2Id));
+        }
+
+        if (user1.id == userId) {
+          const responseData = {
+            ...relationship,
+            user1: user1,
+            user2: user2,
+            isDisconnect: relationship.deleted, // true if relationship is deleted/disconnected
+          };
+
+          return c.json({ success: true, data: responseData });
+        }
+
+        if (user2.id == userId) {
+          // Prepare response with isDisconnect flag
+          const responseData = {
+            ...relationship,
+            user1: user2,
+            user2: user1,
+            isDisconnect: relationship.deleted, // true if relationship is deleted/disconnected
+          };
+
+          return c.json({ success: true, data: responseData });
+        }
+      } else if (userId) {
+        // Get user1 details
+        const [user1] = await db.select().from(usersTable).where(eq(usersTable.id, userId));
+
+        // Prepare response with isDisconnect flag
+        const responseData = {
+          user1Id: user1.id,
+          user2Id: null,
+          user1: user1 || null,
+          user2: null,
+          isDisconnect: null, // true if relationship is deleted/disconnected
+        };
+
+        return c.json({ success: true, data: responseData });
       }
 
-      // Get user1 details
-      const [user1] = await db.select().from(usersTable).where(eq(usersTable.id, relationship.user1Id));
-      
-      // Get user2 details only if relationship is not deleted/disconnected
-      let user2 = null;
-      if (!relationship.deleted) {
-        [user2] = await db.select().from(usersTable).where(eq(usersTable.id, relationship.user2Id));
-      }
-
-      // Prepare response with isDisconnect flag
-      const responseData = {
-        ...relationship,
-        user1: user1 || null,
-        user2: user2,
-        isDisconnect: relationship.deleted, // true if relationship is deleted/disconnected
-      };
-
-      return c.json({ success: true, data: responseData });
     } catch (err) {
       return c.json({ error: 'Failed to fetch relationship', detail: err instanceof Error ? err.message : String(err) }, 500);
     }

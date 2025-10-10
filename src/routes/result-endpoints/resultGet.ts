@@ -83,8 +83,13 @@ export class ResultGetByRelationshipAndSubtopic extends OpenAPIRoute {
 				// Check if relationship is disconnected
 				const isDisconnected = relation.deleted;
 				
+				// Determine if we need to swap users based on userId
+				const shouldSwapUsers = userId && userId === relation.user2Id;
+				const actualUser1Id = shouldSwapUsers ? relation.user2Id : relation.user1Id;
+				const actualUser2Id = shouldSwapUsers ? relation.user1Id : relation.user2Id;
+				
 				// Only include both users if relationship is connected
-				const userIds = isDisconnected ? [relation.user1Id] : [relation.user1Id, relation.user2Id].filter(Boolean);
+				const userIds = isDisconnected ? [actualUser1Id] : [actualUser1Id, actualUser2Id].filter(Boolean);
 
 				const answers = await db
 					.select()
@@ -112,19 +117,19 @@ export class ResultGetByRelationshipAndSubtopic extends OpenAPIRoute {
 					questionType: q.questionType,
 					optionText: q.optionText,
 					optionImg: q.optionImg,
-					user1Answer: relation.user1Id
-						? answersMap.get(`${relation.user1Id}-${q.id}`) ?? null
+					user1Answer: actualUser1Id
+						? answersMap.get(`${actualUser1Id}-${q.id}`) ?? null
 						: null,
 					// Only include user2 data if relationship is connected
-					user2Answer: (!isDisconnected && relation.user2Id)
-						? answersMap.get(`${relation.user2Id}-${q.id}`) ?? null
+					user2Answer: (!isDisconnected && actualUser2Id)
+						? answersMap.get(`${actualUser2Id}-${q.id}`) ?? null
 						: null,
-					user1img: relation.user1Id
-						? imagesMap.get(`${relation.user1Id}-${q.id}`) ?? null
+					user1img: actualUser1Id
+						? imagesMap.get(`${actualUser1Id}-${q.id}`) ?? null
 						: null,
 					// Only include user2 data if relationship is connected
-					user2img: (!isDisconnected && relation.user2Id)
-						? imagesMap.get(`${relation.user2Id}-${q.id}`) ?? null
+					user2img: (!isDisconnected && actualUser2Id)
+						? imagesMap.get(`${actualUser2Id}-${q.id}`) ?? null
 						: null,
 				}));
 
